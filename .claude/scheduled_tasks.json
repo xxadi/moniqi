@@ -1,0 +1,11 @@
+{
+  "tasks": [
+    {
+      "id": "28f11b33",
+      "cron": "55 8 * * *",
+      "prompt": "Check the git status in the repository at E:\\neusofttoubiao\\SDYD2025ZCAQ (2)(1)(1)\\jilincosmic. If there are any uncommitted changes (modified, deleted, or new files), stage all non-sensitive changes and create a git commit with a concise descriptive message summarizing today's work. Skip if there are no changes.",
+      "createdAt": 1780881889898,
+      "recurring": true
+    }
+  ]
+}

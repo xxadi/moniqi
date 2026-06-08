@@ -33,10 +33,11 @@
         @handleCurrentChange="fetchData"
         @handleSizeChange="fetchData"
       >
-        <el-table-column slot="operate" label="操作" :min-width="180" fixed="right">
+        <el-table-column slot="operate" label="操作" :min-width="220" fixed="right">
           <template slot-scope="scope">
             <el-button type="text" icon="el-icon-view" @click="openDetail(scope.row)">详情</el-button>
             <el-button type="text" icon="el-icon-edit" @click="openEdit(scope.row)">修改</el-button>
+            <el-button type="text" icon="el-icon-delete" style="color:#F56C6C" @click="deleteRow(scope.row)">删除</el-button>
           </template>
         </el-table-column>
       </cs-pagetable>
@@ -396,6 +397,17 @@ export default {
       if (actionType === "delete") {
         this.deleteSelected();
         return;
+    deleteRow(row) {
+      this.$confirm("确定删除该记录吗？", "删除确认", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      }).then(() => {
+        this.allTableData = this.allTableData.filter((item) => item.ID !== row.ID);
+        this.fetchData();
+        this.$message.success("删除成功");
+      }).catch(() => {});
+    },
       }
       if (actionType === "import") {
         this.openImport(functionName);

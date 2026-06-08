@@ -77,6 +77,8 @@ function getActionType(name) {
   if (/^(反馈|输出|返回)/.test(name)) return "feedback";
   if (/^(发送|调度|调用|唤醒)/.test(name)) return "dispatch";
   if (/^(接收|输入)/.test(name)) return "receive";
+  // 发起审核流程：使用专用审核发起弹窗（必须在通用"发起"之前）
+  if (/^发起.*审核流程/.test(name)) return "initiate_audit";
   if (/^发起/.test(name)) return "invoke";
 
   // 第二优先级：名称中包含的操作关键词（处理"XXX结果监控"这类命名）
@@ -103,6 +105,7 @@ function getButtonIcon(name) {
   if (/^(反馈|输出|返回)/.test(name)) return "el-icon-upload2";
   if (/^(发送|调度|调用|唤醒)/.test(name)) return "el-icon-s-promotion";
   if (/^(接收|输入)/.test(name)) return "el-icon-download";
+  if (/^发起.*审核流程/.test(name)) return "el-icon-s-check";
   if (/^发起/.test(name)) return "el-icon-s-claim";
 
   if (/监控告警|异常告警|失败告警/.test(name)) return "el-icon-warning";
@@ -519,7 +522,8 @@ function createMockData(event) {
 const DIALOG_TYPES = [
   "form", "detail", "monitor", "statistics", "analysis", "alert", "audit",
   "workflow", "dispatch", "receive", "feedback", "export", "api", "dataprocess", "operation",
-  "config", "sync", "preview", "log", "report", "validate", "transform", "schedule"
+  "config", "sync", "preview", "log", "report", "validate", "transform", "schedule",
+  "initiate_audit"
 ];
 
 function assignUniqueDialogTypes(functions) {
@@ -545,6 +549,7 @@ function getPreferredDialogType(name) {
   if (/^(查询|查看|展示|跟踪|读取)/.test(name)) return "detail";
   if (/^(导出|下载)/.test(name)) return "export";
   if (/^(删除|移除)/.test(name)) return "operation";
+  if (/^(发起.*审核流程)/.test(name)) return "initiate_audit";
   if (/^(发起)/.test(name)) return "workflow";
   if (/^(反馈|输出|返回)/.test(name)) return "feedback";
   if (/^(发送|调度|调用|唤醒)/.test(name)) return "dispatch";
@@ -633,10 +638,11 @@ ${buttonsHTML}
         @handleCurrentChange="fetchData"
         @handleSizeChange="fetchData"
       >
-        <el-table-column slot="operate" label="操作" :min-width="180" fixed="right">
+        <el-table-column slot="operate" label="操作" :min-width="220" fixed="right">
           <template slot-scope="scope">
             <el-button type="text" icon="el-icon-view" @click="openDetail(scope.row)">详情</el-button>
             <el-button type="text" icon="el-icon-edit" @click="openEdit(scope.row)">修改</el-button>
+            <el-button type="text" icon="el-icon-delete" style="color:#F56C6C" @click="deleteRow(scope.row)">删除</el-button>
           </template>
         </el-table-column>
       </cs-pagetable>
@@ -911,6 +917,100 @@ ${buttonsHTML}
         <el-button type="primary" @click="fbResultVisible = false">确认</el-button>
       </span>
     </el-dialog>
+
+    <!-- 发起审核流程弹窗 -->
+    <el-dialog :title="initiateAuditTitle" :visible.sync="initiateAuditVisible" width="720px" append-to-body>
+      <el-form :model="initiateAuditForm" label-width="110px" style="margin-bottom:16px;">
+        <el-row :gutter="20">
+          <el-col :span="12">
+            <el-form-item label="审核编号">
+              <el-input v-model="initiateAuditForm.billNo" disabled></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="审核类型">
+              <el-select v-model="initiateAuditForm.auditType" style="width:100%">
+                <el-option label="合规审核" value="合规审核"></el-option>
+                <el-option label="安全审核" value="安全审核"></el-option>
+                <el-option label="数据审核" value="数据审核"></el-option>
+                <el-option label="变更审核" value="变更审核"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :gutter="20">
+          <el-col :span="12">
+            <el-form-item label="申请人">
+              <el-input v-model="initiateAuditForm.applicant" disabled></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="审核部门">
+              <el-select v-model="initiateAuditForm.dept" style="width:100%">
+                <el-option label="安全运维部" value="安全运维部"></el-option>
+                <el-option label="信息安全部" value="信息安全部"></el-option>
+                <el-option label="技术管理部" value="技术管理部"></el-option>
+                <el-option label="综合管理部" value="综合管理部"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-form-item label="审核范围">
+          <el-input v-model="initiateAuditForm.scope" placeholder="请输入审核范围描述"></el-input>
+        </el-form-item>
+        <el-form-item label="审核说明">
+          <el-input v-model="initiateAuditForm.description" type="textarea" :rows="3" placeholder="请输入审核流程发起的详细说明"></el-input>
+        </el-form-item>
+      </el-form>
+      <div style="font-size:13px;color:#606266;margin-bottom:8px;font-weight:500;">审核流程节点</div>
+      <el-steps :active="initiateAuditStep" align-center style="margin-bottom:16px;">
+        <el-step v-for="(node, idx) in initiateAuditNodes" :key="idx" :title="node.title" :description="node.approver"></el-step>
+      </el-steps>
+      <el-table :data="initiateAuditNodes" border size="mini" style="width:100%;margin-bottom:12px;">
+        <el-table-column prop="title" label="节点" width="100"></el-table-column>
+        <el-table-column prop="approver" label="审批人" width="100"></el-table-column>
+        <el-table-column prop="dept" label="部门" width="120"></el-table-column>
+        <el-table-column label="状态" width="80" align="center">
+          <template slot-scope="scope">
+            <el-tag v-if="scope.row.status === '待审批'" type="info" size="mini">待审批</el-tag>
+            <el-tag v-else-if="scope.row.status === '审批中'" type="warning" size="mini">审批中</el-tag>
+            <el-tag v-else type="success" size="mini">已完成</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column prop="remark" label="说明"></el-table-column>
+      </el-table>
+      <span slot="footer">
+        <el-button @click="initiateAuditVisible = false">取消</el-button>
+        <el-button type="primary" @click="confirmInitiateAudit" icon="el-icon-s-check">确认发起审核流程</el-button>
+      </span>
+    </el-dialog>
+
+    <!-- 逐级审批弹窗 -->
+    <el-dialog :title="approvalTitle" :visible.sync="approvalVisible" width="680px" append-to-body>
+      <el-table :data="approvalSteps" border size="mini" style="width:100%">
+        <el-table-column prop="level" label="审批层级" width="100" align="center"></el-table-column>
+        <el-table-column prop="approver" label="审批人" width="120" align="center"></el-table-column>
+        <el-table-column prop="status" label="审批状态" width="120" align="center">
+          <template slot-scope="scope">
+            <el-tag :type="scope.row.status==='已通过'?'success':scope.row.status==='已驳回'?'danger':scope.row.status==='审批中'?'':'info'" size="mini">{{ scope.row.status }}</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column prop="time" label="审批时间" width="160" align="center"></el-table-column>
+        <el-table-column prop="remark" label="审批意见"></el-table-column>
+      </el-table>
+      <el-divider></el-divider>
+      <el-form label-width="100px">
+        <el-form-item label="审批进度">
+          <el-progress :percentage="approvalProgress" :status="approvalProgress===100?'success':''" style="width:80%"></el-progress>
+        </el-form-item>
+        <el-form-item label="最终状态">
+          <el-tag :type="approvalFinalStatus==='已通过'?'success':approvalFinalStatus==='已驳回'?'danger':'warning'" size="medium">{{ approvalFinalStatus }}</el-tag>
+        </el-form-item>
+      </el-form>
+      <span slot="footer">
+        <el-button @click="approvalVisible = false">关 闭</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -1005,6 +1105,23 @@ export default {
       fbResultTitle: "结果反馈",
       fbResultFields: [],
       fbResultSuccess: false,
+      initiateAuditVisible: false,
+      initiateAuditTitle: "发起审核流程",
+      initiateAuditForm: {
+        billNo: "",
+        auditType: "合规审核",
+        applicant: "",
+        dept: "安全运维部",
+        scope: "",
+        description: "",
+      },
+      initiateAuditStep: 0,
+      initiateAuditNodes: [],
+      approvalVisible: false,
+      approvalTitle: "逐级审批",
+      approvalSteps: [],
+      approvalProgress: 0,
+      approvalFinalStatus: "",
     };
   },
   computed: {
@@ -1153,6 +1270,12 @@ export default {
           break;
         case "schedule":
           this.openScheduleDialog(functionName, S, now);
+          break;
+        case "initiate_audit":
+          this.openInitiateAuditDialog(functionName, S, now);
+          break;
+        case "approval":
+          this.openApprovalDialog(functionName, S, now);
           break;
         default:
           this.openOperationDialog(functionName, S, now);
@@ -1541,6 +1664,67 @@ export default {
       ];
       this.sendVisible = true;
     },
+    // ─── 发起审核流程弹窗 ───
+    openInitiateAuditDialog(functionName, S, now) {
+      this.initiateAuditTitle = functionName;
+      const billNo = "AUDIT-" + String(S).slice(-6);
+      const pool = ["张伟", "李娜", "王强", "赵敏", "刘洋", "陈静"];
+      const applicant = pick(pool, 5, S);
+      const nodes = [
+        { title: "发起申请", approver: applicant, dept: "安全运维部", status: "已完成", remark: "申请已提交" },
+        { title: "部门初审", approver: pick(pool, 0, S), dept: "安全运维部", status: "审批中", remark: "待部门主管审批" },
+        { title: "技术审核", approver: pick(pool, 1, S), dept: "技术管理部", status: "待审批", remark: "等待技术评审" },
+        { title: "安全审核", approver: pick(pool, 2, S), dept: "信息安全部", status: "待审批", remark: "等待安全审核" },
+        { title: "分管审批", approver: pick(pool, 3, S), dept: "运营管理部", status: "待审批", remark: "待分管领导审批" },
+        { title: "归档完成", approver: "系统自动", dept: "-", status: "待审批", remark: "全部审批通过后自动归档" },
+      ];
+      this.initiateAuditForm = {
+        billNo: billNo,
+        auditType: pick(["合规审核", "安全审核", "数据审核", "变更审核"], 5, S),
+        applicant: applicant,
+        dept: pick(["安全运维部", "信息安全部", "技术管理部", "综合管理部"], 6, S),
+        scope: functionName + "相关数据及配置",
+        description: "发起【" + functionName + "】审核流程，涉及资产范围" + pick(["核心机房", "全网资产", "指定IP段", "特定区域"], 7, S) + "，请各审批节点依次审核。",
+      };
+      this.initiateAuditNodes = nodes;
+      this.initiateAuditStep = 1;
+      this.initiateAuditVisible = true;
+    },
+    confirmInitiateAudit() {
+      const self = this;
+      this.$confirm("确定发起此审核流程？流程将按设定节点依次审批。", "确认发起", {
+        confirmButtonText: "确定发起",
+        cancelButtonText: "取消",
+        type: "warning",
+      }).then(() => {
+        this.initiateAuditNodes = this.initiateAuditNodes.map((node, i) => {
+          if (i === 0) return { ...node, status: "已完成" };
+          if (i === 1) return { ...node, status: "审批中" };
+          return { ...node, status: "待审批" };
+        });
+        this.initiateAuditStep = 2;
+        this.$message.success("审核流程已成功发起，请等待各节点审批处理");
+        this.initiateAuditVisible = false;
+      }).catch(() => {});
+    },
+    openApprovalDialog(functionName, S, now) {
+      this.approvalTitle = functionName;
+      var levels = ["部门主管", "分管领导", "安全审计", "最终审批"];
+      this.approvalSteps = levels.map(function(level, i) {
+        var status = i < 2 ? "已通过" : i === 2 ? pick(["已通过", "审批中", "已驳回"], i, S) : "待审批";
+        return {
+          level: level,
+          approver: pick(["张伟", "李娜", "王强", "赵敏", "刘洋", "陈静"], i, S),
+          status: status,
+          time: status === "待审批" ? "-" : now,
+          remark: status === "已通过" ? "同意，符合规范" : status === "已驳回" ? "资料不全，退回补充" : status === "审批中" ? "审核中..." : "-",
+        };
+      });
+      var passed = this.approvalSteps.filter(function(s) { return s.status === "已通过"; }).length;
+      this.approvalProgress = Math.round((passed / this.approvalSteps.length) * 100);
+      this.approvalFinalStatus = passed === this.approvalSteps.length ? "已通过" : this.approvalSteps.some(function(s) { return s.status === "已驳回"; }) ? "已驳回" : "审批中";
+      this.approvalVisible = true;
+    },
     openAdd(functionName) {
       this.formMode = "add";
       this.formTitle = functionName || "新增";
@@ -1804,6 +1988,17 @@ export default {
         this.fetchData();
         this.$message.success("删除成功");
       });
+    },
+    deleteRow(row) {
+      this.$confirm("确定删除该记录吗？", "删除确认", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      }).then(() => {
+        this.allTableData = this.allTableData.filter((item) => item.ID !== row.ID);
+        this.fetchData();
+        this.$message.success("删除成功");
+      }).catch(() => {});
     },
     openImport(functionName) {
       this.importTitle = functionName || "导入";
@@ -2101,15 +2296,21 @@ console.log("生成页面:", pageCount, "个");
 const routerPath = path.join(__dirname, "..", "src", "router", "modules", "examples.js");
 let routerContent = fs.readFileSync(routerPath, "utf8");
 
-// 移除旧的 JL 块（如果存在）
+// 移除旧的 JL 块（处理多次运行产生的重复）
 const marker = "// ─── JL吉林COSMIC（自动生成）───";
-if (routerContent.includes(marker)) {
+while (routerContent.includes(marker)) {
   const startIdx = routerContent.indexOf(marker);
-  const before = routerContent.substring(0, startIdx);
-  const afterMarker = routerContent.substring(startIdx);
-  const nextBlock = afterMarker.indexOf("\n    // ───", 10);
-  const endIdx = nextBlock > -1 ? startIdx + nextBlock : startIdx + afterMarker.lastIndexOf("\n    ],");
-  routerContent = before + routerContent.substring(endIdx);
+  let blockStart = startIdx;
+  while (blockStart > 0 && routerContent[blockStart] !== "{") blockStart--;
+  let depth = 0;
+  let blockEnd = blockStart;
+  for (let i = blockStart; i < routerContent.length; i++) {
+    if (routerContent[i] === "{") depth++;
+    if (routerContent[i] === "}") depth--;
+    if (depth === 0) { blockEnd = i + 1; break; }
+  }
+  routerContent = routerContent.substring(0, blockStart) + routerContent.substring(blockEnd);
+  console.log("已移除旧的 JL 路由块");
 }
 
 // 找到"资产信息上报调整"的 children 数组，在其末尾插入

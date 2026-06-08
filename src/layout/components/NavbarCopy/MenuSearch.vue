@@ -146,7 +146,9 @@ export default {
     },
     handleSelect: function (item) {
       this.$store.dispatch("app/setActiveMenuPath", item.routePath);
-      this.$router.push(item.routePath);
+      if (this.$route.path !== item.routePath) {
+        this.$router.push(item.routePath).catch(function () {});
+      }
       if (!this.$store.getters["app/sidebar"].opened) {
         this.$store.dispatch("app/toggleSideBar");
       }

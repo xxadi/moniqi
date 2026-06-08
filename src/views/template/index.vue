@@ -13,10 +13,11 @@
       <cs-pagetable pageTableRef="pageTableRef" :tableData="tableData" :tableColumns="tableColumns"
         :pageTotal="pageTotal" :page.sync="pageOptions.pageNum" :limit.sync="pageOptions.pageSize"
         @handleCurrentChange="fetchData" @handleSizeChange="fetchData">
-        <el-table-column slot="operate" label="操作" width="200" fixed="right" style="white-space: nowrap;">
+        <el-table-column slot="operate" label="操作" width="260" fixed="right" style="white-space: nowrap;">
           <template slot-scope="scope">
             <el-button type="text" icon="el-icon-edit-outline" @click="detail(scope.row)">详情</el-button>
             <el-button type="text" icon="el-icon-edit-outline" @click="exportData(scope.row)">校验数据</el-button>
+            <el-button type="text" icon="el-icon-delete" style="color:#F56C6C" @click="deleteRow(scope.row)">删除</el-button>
           </template>
         </el-table-column>
       </cs-pagetable>
@@ -186,6 +187,17 @@ export default {
     exportData() {
       // 下载本地文件
       downloadMockFile("校验数据.docx");
+    },
+    deleteRow(row) {
+      this.$confirm("确定删除该记录吗？", "删除确认", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      }).then(() => {
+        this.allTableData = this.allTableData.filter((item) => item.ID !== row.ID);
+        this.fetchData();
+        this.$message.success("删除成功");
+      }).catch(() => {});
     },
     // 导入
     handleImport() {

@@ -1,0 +1,1950 @@
+{
+  "pagesExpected": 216,
+  "triggersExpected": 2415,
+  "missingPages": [
+    "资产名称考核质量可用性指标管理"
+  ],
+  "missingRouteImports": [],
+  "suspiciousNames": [],
+  "pages": [
+    {
+      "page": "4A上报数据对比告警规则管理",
+      "user": "两级联动考核-上报数据与4A数据对比分析",
+      "triggerCount": 91,
+      "buttonCount": 37,
+      "subPageCount": 12,
+      "missingCount": 3,
+      "missingTriggers": [
+        "新增4A资产数据差异设置信息",
+        "修改4A资产数据差异设置信息",
+        "删除4A资产数据差异设置信息"
+      ]
+    },
+    {
+      "page": "资产其他指标考核准确性稽核管理",
+      "user": "工信部考核上报数据准确性指标",
+      "triggerCount": 47,
+      "buttonCount": 47,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产其他指标考核项目完整性稽核管理",
+      "user": "工信部考核上报数据完整性指标",
+      "triggerCount": 47,
+      "buttonCount": 47,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产其他指标考核质量可用性稽核管理",
+      "user": "工信部考核上报数据可用性指标",
+      "triggerCount": 42,
+      "buttonCount": 42,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "漏洞组件自动化采集及风险排查",
+      "user": "集团漏洞排查工作-涉及漏洞组件自动化采集及风险排查",
+      "triggerCount": 41,
+      "buttonCount": 41,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "一键探测邮件通知告警规则管理",
+      "user": "互联网暴露网络条线接口数据同步",
+      "triggerCount": 31,
+      "buttonCount": 31,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "上报数据清洗规则管理",
+      "user": "互联网暴露网络条线接口数据同步",
+      "triggerCount": 26,
+      "buttonCount": 26,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产类型自动化识别管理",
+      "user": "资产类型自动化识别",
+      "triggerCount": 26,
+      "buttonCount": 26,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产漏洞匹配管理",
+      "user": "集团漏洞排查工作-涉及漏洞组件自动化采集及风险排查",
+      "triggerCount": 25,
+      "buttonCount": 25,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "全端口扫描稽管理",
+      "user": "互联网暴露网络条线接口数据同步",
+      "triggerCount": 25,
+      "buttonCount": 25,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "互联网暴露面集团下发数据接口",
+      "user": "互联网暴露网络条线接口数据同步",
+      "triggerCount": 23,
+      "buttonCount": 23,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "设备厂商考核质量可用性指标管理",
+      "user": "工信部考核上报数据可用性指标",
+      "triggerCount": 21,
+      "buttonCount": 21,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "拨测周期计划管理",
+      "user": "资产连通性拨测",
+      "triggerCount": 21,
+      "buttonCount": 21,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "漏洞分析匹配管理",
+      "user": "集团漏洞排查工作-涉及漏洞组件自动化采集及风险排查",
+      "triggerCount": 20,
+      "buttonCount": 20,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "系统名称更新接口",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 17,
+      "buttonCount": 17,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产上报网络单元类型异常告警管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 17,
+      "buttonCount": 17,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产上报物理位置稽核管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 17,
+      "buttonCount": 17,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "自动化采集率信息管理",
+      "user": "自动化采集率监控",
+      "triggerCount": 17,
+      "buttonCount": 17,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产标签更新接口",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 16,
+      "buttonCount": 16,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部备案稽核管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 16,
+      "buttonCount": 16,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "远程扫描分析管理",
+      "user": "资产类型自动化识别",
+      "triggerCount": 16,
+      "buttonCount": 16,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "自动采集率稽核",
+      "user": "自动化采集率监控",
+      "triggerCount": 14,
+      "buttonCount": 14,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "CPU厂商考核准确性指标管理",
+      "user": "工信部考核上报数据准确性指标",
+      "triggerCount": 14,
+      "buttonCount": 14,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "交换芯片厂商考核准确性指标管理",
+      "user": "工信部考核上报数据准确性指标",
+      "triggerCount": 14,
+      "buttonCount": 14,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部准确化修改能力工具",
+      "user": "工信部考核上报数据准确性指标",
+      "triggerCount": 14,
+      "buttonCount": 14,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "CPU厂商考核项目完整性指标管理",
+      "user": "工信部考核上报数据完整性指标",
+      "triggerCount": 14,
+      "buttonCount": 14,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "交换芯片厂商考核项目完整性指标管理",
+      "user": "工信部考核上报数据完整性指标",
+      "triggerCount": 14,
+      "buttonCount": 14,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "CPU厂商考核质量可用性指标管理",
+      "user": "工信部考核上报数据可用性指标",
+      "triggerCount": 14,
+      "buttonCount": 14,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "交换芯片厂商考核质量可用性指标管理",
+      "user": "工信部考核上报数据可用性指标",
+      "triggerCount": 14,
+      "buttonCount": 14,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "流量分析管理",
+      "user": "资产类型自动化识别",
+      "triggerCount": 14,
+      "buttonCount": 14,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "指令下发接口管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 13,
+      "buttonCount": 6,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部资产状态管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 13,
+      "buttonCount": 7,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "自动化采集率报表管理",
+      "user": "自动化采集率监控",
+      "triggerCount": 13,
+      "buttonCount": 13,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "自动化采集率推送接口",
+      "user": "自动化采集率监控",
+      "triggerCount": 13,
+      "buttonCount": 13,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "IP类型考核项目完整性指标管理",
+      "user": "工信部考核上报数据完整性指标",
+      "triggerCount": 13,
+      "buttonCount": 13,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "IP类型考核质量可用性指标管理",
+      "user": "工信部考核上报数据可用性指标",
+      "triggerCount": 13,
+      "buttonCount": 13,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "4A登录资产信息管理",
+      "user": "资产类型自动化识别",
+      "triggerCount": 13,
+      "buttonCount": 13,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "登录采集一键拨测监控管理",
+      "user": "资产连通性拨测",
+      "triggerCount": 13,
+      "buttonCount": 13,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "IP类型考核准确性指标管理",
+      "user": "工信部考核上报数据准确性指标",
+      "triggerCount": 12,
+      "buttonCount": 12,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "远程扫描采集管理",
+      "user": "资产类型自动化识别",
+      "triggerCount": 12,
+      "buttonCount": 12,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "指令信息字段变更审批流程管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 11,
+      "buttonCount": 18,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产状态采集结果审核流程管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 11,
+      "buttonCount": 18,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部上报IP管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 11,
+      "buttonCount": 11,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部上报IP数据审批流程管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 11,
+      "buttonCount": 18,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工单处置审批流程管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 11,
+      "buttonCount": 18,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部数据上报流程管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 11,
+      "buttonCount": 17,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "IP地址资产上报流程管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 11,
+      "buttonCount": 17,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部资产补录流程管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 11,
+      "buttonCount": 17,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产变更流程管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 11,
+      "buttonCount": 17,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产备份管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 11,
+      "buttonCount": 11,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部资产清单审批流程管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 11,
+      "buttonCount": 18,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产信息上报任务审批流程管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 11,
+      "buttonCount": 18,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部资产合规审批流程管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 11,
+      "buttonCount": 18,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产上报标签异常消除审批流程管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 11,
+      "buttonCount": 18,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部资产稽核流程管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 11,
+      "buttonCount": 17,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "自动化采集率稽核流程管理",
+      "user": "自动化采集率监控",
+      "triggerCount": 11,
+      "buttonCount": 17,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产信息考核准确性指标管理",
+      "user": "工信部考核上报数据准确性指标",
+      "triggerCount": 11,
+      "buttonCount": 11,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "管理线条考核准确性指标管理",
+      "user": "工信部考核上报数据准确性指标",
+      "triggerCount": 11,
+      "buttonCount": 11,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "设备厂商考核准确性指标管理",
+      "user": "工信部考核上报数据准确性指标",
+      "triggerCount": 11,
+      "buttonCount": 11,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "内存厂商考核准确性指标管理",
+      "user": "工信部考核上报数据准确性指标",
+      "triggerCount": 11,
+      "buttonCount": 11,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部上报数据准确性审批流程管理",
+      "user": "工信部考核上报数据准确性指标",
+      "triggerCount": 11,
+      "buttonCount": 18,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "管理线条考核项目完整性指标管理",
+      "user": "工信部考核上报数据完整性指标",
+      "triggerCount": 11,
+      "buttonCount": 11,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "设备厂商考核项目完整性指标管理",
+      "user": "工信部考核上报数据完整性指标",
+      "triggerCount": 11,
+      "buttonCount": 11,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "设备品牌考核项目完整性指标管理",
+      "user": "工信部考核上报数据完整性指标",
+      "triggerCount": 11,
+      "buttonCount": 11,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "内存厂商考核项目完整性指标管理",
+      "user": "工信部考核上报数据完整性指标",
+      "triggerCount": 11,
+      "buttonCount": 11,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部上报数据完整性审批流程管理",
+      "user": "工信部考核上报数据完整性指标",
+      "triggerCount": 11,
+      "buttonCount": 18,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产IP考核质量可用性指标管理",
+      "user": "工信部考核上报数据可用性指标",
+      "triggerCount": 11,
+      "buttonCount": 11,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "内存厂商考核质量可用性指标管理",
+      "user": "工信部考核上报数据可用性指标",
+      "triggerCount": 11,
+      "buttonCount": 11,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部上报数据可用性审批流程管理",
+      "user": "工信部考核上报数据可用性指标",
+      "triggerCount": 11,
+      "buttonCount": 18,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "4A上报数据审批流程管理",
+      "user": "两级联动考核-上报数据与4A数据对比分析",
+      "triggerCount": 11,
+      "buttonCount": 18,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "4A上报指标稽核管理",
+      "user": "两级联动考核-上报数据与4A数据对比分析",
+      "triggerCount": 11,
+      "buttonCount": 11,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "4A上报指标稽核流程管理",
+      "user": "两级联动考核-上报数据与4A数据对比分析",
+      "triggerCount": 11,
+      "buttonCount": 17,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "风险排查审批流程管理",
+      "user": "集团漏洞排查工作-涉及漏洞组件自动化采集及风险排查",
+      "triggerCount": 11,
+      "buttonCount": 18,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产漏洞数据下发流程管理",
+      "user": "集团漏洞排查工作-涉及漏洞组件自动化采集及风险排查",
+      "triggerCount": 11,
+      "buttonCount": 17,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "暴露面一键探测审批流程管理",
+      "user": "互联网暴露网络条线接口数据同步",
+      "triggerCount": 11,
+      "buttonCount": 18,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "互联网暴露面风险上报流程管理",
+      "user": "互联网暴露网络条线接口数据同步",
+      "triggerCount": 11,
+      "buttonCount": 17,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "暴露面数据下发稽核流程管理",
+      "user": "互联网暴露网络条线接口数据同步",
+      "triggerCount": 11,
+      "buttonCount": 17,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "全端口扫描结果审核流程管理",
+      "user": "互联网暴露网络条线接口数据同步",
+      "triggerCount": 11,
+      "buttonCount": 18,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "告警白名单审核流程管理",
+      "user": "互联网暴露网络条线接口数据同步",
+      "triggerCount": 11,
+      "buttonCount": 18,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "网段扫描稽核流程管理",
+      "user": "互联网暴露网络条线接口数据同步",
+      "triggerCount": 11,
+      "buttonCount": 17,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "全端口扫描稽核流程管理",
+      "user": "互联网暴露网络条线接口数据同步",
+      "triggerCount": 11,
+      "buttonCount": 17,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产类型4A采集结果审批流程管理",
+      "user": "资产类型自动化识别",
+      "triggerCount": 11,
+      "buttonCount": 18,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "4A资产登录信息审核流程管理",
+      "user": "资产类型自动化识别",
+      "triggerCount": 11,
+      "buttonCount": 18,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "登录采集入库审核流程管理",
+      "user": "资产类型自动化识别",
+      "triggerCount": 11,
+      "buttonCount": 17,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "远程扫描分析结果审批流程管理",
+      "user": "资产类型自动化识别",
+      "triggerCount": 11,
+      "buttonCount": 18,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "流量分析采集结果审核流程管理",
+      "user": "资产类型自动化识别",
+      "triggerCount": 11,
+      "buttonCount": 17,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "自动化识别结果审核流程管理",
+      "user": "资产类型自动化识别",
+      "triggerCount": 11,
+      "buttonCount": 18,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产类型告警数据处理审批流程管理",
+      "user": "资产类型自动化识别",
+      "triggerCount": 11,
+      "buttonCount": 18,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "拨测任务结果审核流程管理",
+      "user": "资产连通性拨测",
+      "triggerCount": 11,
+      "buttonCount": 18,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "拨测正确率审核流程管理",
+      "user": "资产连通性拨测",
+      "triggerCount": 11,
+      "buttonCount": 18,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部查询指令审批流程管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 10,
+      "buttonCount": 16,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部管理指令下发接口管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工单处置指令管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "反馈结果数据上报管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部资产简表反馈管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "定级对象资产审批流程管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 10,
+      "buttonCount": 17,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "IP地址资产管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "IP地址变更工单管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "特定资产范围管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "特定资产范围工单变更管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "重点网络单元资产类型管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "下发指令策略信息管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "下发指令策略审批流程管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 10,
+      "buttonCount": 17,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "下发指令告警异常行为管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "下发指令异常告警处置工单管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "下发指令威胁情报管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部资产sign管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产信息上报任务管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "AssetIP管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部AssetNM告警管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产物理位置稽核工单管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "自动化采集率处置工单管理",
+      "user": "自动化采集率监控",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "自动化采集率算法管理",
+      "user": "自动化采集率监控",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部采集率轮巡任务管理",
+      "user": "自动化采集率监控",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部采集率实时性监控管理",
+      "user": "自动化采集率监控",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部资产采集质量管理",
+      "user": "自动化采集率监控",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部采集处置工单管理",
+      "user": "自动化采集率监控",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产IP考核准确性指标管理",
+      "user": "工信部考核上报数据准确性指标",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "上报数据准确性审核工单管理",
+      "user": "工信部考核上报数据准确性指标",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产IP考核项目完整性指标管理",
+      "user": "工信部考核上报数据完整性指标",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "上报数据完整性审核工单管理",
+      "user": "工信部考核上报数据完整性指标",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "数据质量可用性审核工单管理",
+      "user": "工信部考核上报数据可用性指标",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产漏洞审计流程管理",
+      "user": "集团漏洞排查工作-涉及漏洞组件自动化采集及风险排查",
+      "triggerCount": 10,
+      "buttonCount": 16,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "暴露面探测通知任务管理",
+      "user": "互联网暴露网络条线接口数据同步",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产类型4A采集管理",
+      "user": "资产类型自动化识别",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "流量分析失败模型管理",
+      "user": "资产类型自动化识别",
+      "triggerCount": 10,
+      "buttonCount": 10,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "流量告警审核流程管理",
+      "user": "资产类型自动化识别",
+      "triggerCount": 10,
+      "buttonCount": 17,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部资产标签管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 9,
+      "buttonCount": 9,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部网络单元管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 9,
+      "buttonCount": 9,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产信息结果反馈接口",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 9,
+      "buttonCount": 9,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部定级备案数据管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 9,
+      "buttonCount": 9,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "定级对象资产查询接口管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 9,
+      "buttonCount": 9,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产变更查询接口管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 9,
+      "buttonCount": 9,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部资产属性管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 9,
+      "buttonCount": 9,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "自动采集率监控管理",
+      "user": "自动化采集率监控",
+      "triggerCount": 9,
+      "buttonCount": 9,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部资产采集管理",
+      "user": "自动化采集率监控",
+      "triggerCount": 9,
+      "buttonCount": 9,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产类型考核准确性指标管理",
+      "user": "工信部考核上报数据准确性指标",
+      "triggerCount": 9,
+      "buttonCount": 9,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "设备品牌考核准确性指标管理",
+      "user": "工信部考核上报数据准确性指标",
+      "triggerCount": 9,
+      "buttonCount": 9,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产类型考核项目完整性指标管理",
+      "user": "工信部考核上报数据完整性指标",
+      "triggerCount": 9,
+      "buttonCount": 9,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产类型考核质量可用性指标管理",
+      "user": "工信部考核上报数据可用性指标",
+      "triggerCount": 9,
+      "buttonCount": 9,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产漏洞数据管理",
+      "user": "集团漏洞排查工作-涉及漏洞组件自动化采集及风险排查",
+      "triggerCount": 9,
+      "buttonCount": 9,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产漏洞自动化扫描计划管理",
+      "user": "集团漏洞排查工作-涉及漏洞组件自动化采集及风险排查",
+      "triggerCount": 9,
+      "buttonCount": 9,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "互联网暴露面一键探测任务管理",
+      "user": "互联网暴露网络条线接口数据同步",
+      "triggerCount": 9,
+      "buttonCount": 9,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "全端口扫描任务管理",
+      "user": "互联网暴露网络条线接口数据同步",
+      "triggerCount": 9,
+      "buttonCount": 9,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "告警白名单管理",
+      "user": "互联网暴露网络条线接口数据同步",
+      "triggerCount": 9,
+      "buttonCount": 9,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "网段扫描稽核管理",
+      "user": "互联网暴露网络条线接口数据同步",
+      "triggerCount": 9,
+      "buttonCount": 9,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "段内资产查询接口管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 8,
+      "buttonCount": 8,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "下发指令告警管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 8,
+      "buttonCount": 8,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产状态下发接口",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 8,
+      "buttonCount": 8,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部资产清单管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 8,
+      "buttonCount": 8,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产信息上报接口",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 8,
+      "buttonCount": 8,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部资产编号跟踪管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 8,
+      "buttonCount": 8,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产上报信息更新接口",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 8,
+      "buttonCount": 8,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部资产合规管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 8,
+      "buttonCount": 8,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产IP上报接口",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 8,
+      "buttonCount": 8,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产上报IP告警管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 8,
+      "buttonCount": 8,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部资产上报信息推送接口",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 8,
+      "buttonCount": 8,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部采集率管理",
+      "user": "自动化采集率监控",
+      "triggerCount": 8,
+      "buttonCount": 8,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部采集率识别任务管理",
+      "user": "自动化采集率监控",
+      "triggerCount": 8,
+      "buttonCount": 8,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "采集率一致性管理",
+      "user": "自动化采集率监控",
+      "triggerCount": 8,
+      "buttonCount": 8,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部采集率异常检测管理",
+      "user": "自动化采集率监控",
+      "triggerCount": 8,
+      "buttonCount": 8,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部完整化修改能力工具",
+      "user": "工信部考核上报数据完整性指标",
+      "triggerCount": 8,
+      "buttonCount": 8,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部可用化修改能力工具",
+      "user": "工信部考核上报数据可用性指标",
+      "triggerCount": 8,
+      "buttonCount": 8,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "4A登录采集任务管理",
+      "user": "资产类型自动化识别",
+      "triggerCount": 8,
+      "buttonCount": 8,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "登录采集入库管理",
+      "user": "资产类型自动化识别",
+      "triggerCount": 8,
+      "buttonCount": 9,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "流量分析采集结果汇总管理",
+      "user": "资产类型自动化识别",
+      "triggerCount": 8,
+      "buttonCount": 9,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "流量分析对比管理",
+      "user": "资产类型自动化识别",
+      "triggerCount": 8,
+      "buttonCount": 8,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "流量告警管理",
+      "user": "资产类型自动化识别",
+      "triggerCount": 8,
+      "buttonCount": 8,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产状态采集管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 7,
+      "buttonCount": 5,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产简表管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 7,
+      "buttonCount": 7,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产补录查询接口管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 7,
+      "buttonCount": 7,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产变更管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 7,
+      "buttonCount": 7,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "下发指令自动响应管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 7,
+      "buttonCount": 7,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产标签配置管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 7,
+      "buttonCount": 7,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产上报标签异常告警管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 7,
+      "buttonCount": 7,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "网络单元配置管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 7,
+      "buttonCount": 7,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产发现方式配置管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 7,
+      "buttonCount": 7,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产上报备案管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 7,
+      "buttonCount": 7,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "自动采集率对比任务管理",
+      "user": "自动化采集率监控",
+      "triggerCount": 7,
+      "buttonCount": 7,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "上报数据考核准确性指标管理",
+      "user": "工信部考核上报数据准确性指标",
+      "triggerCount": 7,
+      "buttonCount": 7,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "上报数据考核项目完整性指标管理",
+      "user": "工信部考核上报数据完整性指标",
+      "triggerCount": 7,
+      "buttonCount": 7,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "4A与工信部资产对比任务管理",
+      "user": "两级联动考核-上报数据与4A数据对比分析",
+      "triggerCount": 7,
+      "buttonCount": 7,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "4A与工信部资产差异填报管理",
+      "user": "两级联动考核-上报数据与4A数据对比分析",
+      "triggerCount": 7,
+      "buttonCount": 7,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "组件漏洞扫描任务管理",
+      "user": "集团漏洞排查工作-涉及漏洞组件自动化采集及风险排查",
+      "triggerCount": 7,
+      "buttonCount": 7,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产漏洞审计配置管理",
+      "user": "集团漏洞排查工作-涉及漏洞组件自动化采集及风险排查",
+      "triggerCount": 7,
+      "buttonCount": 7,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "暴露面风险上报数据监控",
+      "user": "互联网暴露网络条线接口数据同步",
+      "triggerCount": 7,
+      "buttonCount": 7,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "流量分析采集任务管理",
+      "user": "资产类型自动化识别",
+      "triggerCount": 7,
+      "buttonCount": 7,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "拨测任务管理",
+      "user": "资产连通性拨测",
+      "triggerCount": 7,
+      "buttonCount": 7,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "拨测正确率管理",
+      "user": "资产连通性拨测",
+      "triggerCount": 7,
+      "buttonCount": 7,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "Agent一键拨测管理",
+      "user": "资产连通性拨测",
+      "triggerCount": 7,
+      "buttonCount": 7,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "登录采集拨测任务管理",
+      "user": "资产连通性拨测",
+      "triggerCount": 7,
+      "buttonCount": 7,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部资产拨测结果管理",
+      "user": "资产连通性拨测",
+      "triggerCount": 7,
+      "buttonCount": 7,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "IP地址资产查询接口管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 6,
+      "buttonCount": 6,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "其他IP考核准确性指标管理",
+      "user": "工信部考核上报数据准确性指标",
+      "triggerCount": 6,
+      "buttonCount": 6,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产省份考核准确性指标管理",
+      "user": "工信部考核上报数据准确性指标",
+      "triggerCount": 6,
+      "buttonCount": 6,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产名称考核项目完整性指标管理",
+      "user": "工信部考核上报数据完整性指标",
+      "triggerCount": 6,
+      "buttonCount": 6,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产省份考核项目完整性指标管理",
+      "user": "工信部考核上报数据完整性指标",
+      "triggerCount": 6,
+      "buttonCount": 6,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "管理线条考核质量可用性指标管理",
+      "user": "工信部考核上报数据可用性指标",
+      "triggerCount": 6,
+      "buttonCount": 6,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产省份考核质量可用性指标管理",
+      "user": "工信部考核上报数据可用性指标",
+      "triggerCount": 6,
+      "buttonCount": 6,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产总数汇总报表",
+      "user": "互联网暴露网络条线接口数据同步",
+      "triggerCount": 6,
+      "buttonCount": 6,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "高危端口汇总报表",
+      "user": "互联网暴露网络条线接口数据同步",
+      "triggerCount": 6,
+      "buttonCount": 6,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "漏报端口汇总报表",
+      "user": "互联网暴露网络条线接口数据同步",
+      "triggerCount": 6,
+      "buttonCount": 6,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "误报端口汇总报表",
+      "user": "互联网暴露网络条线接口数据同步",
+      "triggerCount": 6,
+      "buttonCount": 6,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产类型4A采集结果审核管理",
+      "user": "资产类型自动化识别",
+      "triggerCount": 6,
+      "buttonCount": 6,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "4A同步资产汇总管理",
+      "user": "资产类型自动化识别",
+      "triggerCount": 6,
+      "buttonCount": 6,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产类型告警数据处理",
+      "user": "资产类型自动化识别",
+      "triggerCount": 6,
+      "buttonCount": 6,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "定级对象查询接口修改",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 5,
+      "buttonCount": 5,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "自动化采集率数据感知与查询",
+      "user": "自动化采集率监控",
+      "triggerCount": 5,
+      "buttonCount": 5,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "互联网暴露面风险上报接口",
+      "user": "互联网暴露网络条线接口数据同步",
+      "triggerCount": 5,
+      "buttonCount": 5,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "指令信息字段管理",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 4,
+      "buttonCount": 4,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "上报数据考核质量可用性指标管理",
+      "user": "工信部考核上报数据可用性指标",
+      "triggerCount": 4,
+      "buttonCount": 4,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产等级考核准确性指标管理",
+      "user": "工信部考核上报数据准确性指标",
+      "triggerCount": 3,
+      "buttonCount": 3,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "资产等级考核项目完整性指标管理",
+      "user": "工信部考核上报数据完整性指标",
+      "triggerCount": 3,
+      "buttonCount": 3,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "工信部指令信息下发接口",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 1,
+      "buttonCount": 1,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    },
+    {
+      "page": "查询工信部指令信息详情",
+      "user": "23年工信部接口规范改造",
+      "triggerCount": 1,
+      "buttonCount": 1,
+      "subPageCount": 0,
+      "missingCount": 0,
+      "missingTriggers": []
+    }
+  ]
+}

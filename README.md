@@ -1,59 +1,64 @@
-# "author": "xiaozhublog <zhu.qch@neusoft.com>",
-# vue2-admin-template
+# 资产安全管理平台 Mock 验收演示系统
 
-> 建议查看Vue风格指南，更优美的书写代码![文档](https://cn.vuejs.org/v2/style-guide/)
+本项目是资产安全管理平台功能点验收演示用的前端 Mock 系统，不连接真实后端，不作为生产系统交付。项目基于各省份功能点评估表生成可点击、可演示、可验收的前端页面，用于展示菜单、页面、按钮、弹窗、导入导出、审批流、接口调用、稽核校验等功能点覆盖情况。
 
-# 进入项目目录
-cd vue2-admin-template
+## 项目定位
 
-# 安装依赖
+- 纯前端演示系统：Vue 2 + Element UI。
+- 数据来源为 mock 数据、页面内置数据或生成脚本生成的数据。
+- 目标是支撑验收演示，重点关注“功能点是否覆盖、页面是否可打开、按钮是否可点击、流程是否可展示”。
+- 不要求真实后端接口、真实数据库、真实权限系统或真实业务流转。
+
+## 技术栈
+
+- Vue 2.6.14
+- Vue Router 3.5.1
+- Vuex 3.6.2
+- Element UI 2.15.6
+- xlsx，用于读取 Excel 或生成演示导入导出文件
+- ECharts，用于统计类、分析类演示页面
+
+## 常用命令
+
+```bash
 npm install
-
-# 建议不要直接使用 cnpm 安装以来，会有各种诡异的 bug。可以通过如下操作解决 npm 下载速度慢的问题
-npm install --registry=https://registry.npm.taobao.org
-
-# 启动服务
 npm run serve
-
-## 特别提示！！！请知悉。
-+ 1、开启tag多标签，同时开启keep-alive。 页面name需与router中name一致，页面name不写或者与路由不匹配不缓存，菜单暂无是否缓存配置
-+ 2、纯前端路由，配置请参考路由index.js中注释
-+ 3、按钮级权限，直接配置v-permission 对应权限标识
-+ 4、数据使用mock.js。
-
-## 功能
-- 登录/注销
-- 权限验证
-- 基础权限管理
-- Svg Sprite 图标
-- 表格,表单,详情页,模糊搜索等 二次封装
-
-
-## 目录结构
-```shell
-├── public                     // 入口文件
-├── src                        // 源代码
-│   ├── api                    // 所有请求
-│   ├── assets                 // 主题 图片等静态资源
-│   ├── components             // 全局公用组件
-│   ├── directive              // 全局指令
-│   ├── icons                  // 项目svg icons
-│   ├── router                 // 路由
-│   ├── store                  // 全局 store
-│   ├── styles                 // 全局样式
-│   ├── utils                  // 全局公用方法
-│   ├── views                  // views
-│   ├── App.vue                // 入口页面
-│   ├── main.js                // 入口js 初始化 加载组件等
-│   └── permission.js          // 权限管理
-│   └── settings.js            // 基础功能设置
-├── ..browserslistrc           // 浏览器兼容
-├── .eslintignore              // eslint 忽略项
-├── .eslintrc.js               // eslint 配置项
-├── .gitignore                 // git 忽略项
-├── babel.config.js            // babel-loader 配置
-├── jsconfig.js                // 路径引入
-└── package.json               // package.json
-└── vue.config.js              // webpack相关配置
-
+npm run build
+npm run lint
 ```
+
+默认开发服务端口为 `8888`，启动后访问：
+
+```text
+http://localhost:8888
+```
+
+## 标准工作流
+
+每个省份按以下方式接入：
+
+1. 将省份功能点评估表放到项目根目录或约定的输入目录。
+2. 读取 Excel 的 `2、功能点拆分表`。
+3. 按 `客户需求 -> 功能用户 -> 功能用户需求 -> 功能过程` 生成菜单、页面、按钮和弹窗流程。
+4. 生成或更新省份页面目录，例如 `src/views/资产信息上报调整/YN云南COSMIC/`。
+5. 更新路由文件，使页面可从菜单访问。
+6. 执行 `npm run build` 验证项目可构建。
+7. 根据演示重点补充省份演示清单和验收说明。
+
+## 文档索引
+
+- `docs/项目标准.md`：多省份 Mock 演示工程的统一标准。
+- `docs/省份接入流程.md`：新增省份时的操作步骤。
+- `docs/按钮与流程映射规范.md`：功能过程关键词到弹窗/流程的映射规则。
+- `docs/交付检查清单.md`：每次演示或交付前的检查项。
+- `docs/云南COSMIC页面生成清单.md`：云南模块的数据规模、生成口径和重新生成步骤。
+- `docs/云南COSMIC演示清单.md`：云南模块的推荐演示路径和验收口径。
+- `docs/样板页面-4A上报数据对比告警规则管理.md`：复杂功能页的功能点聚合方式和样板标准。
+- `docs/数据库国产化改造页面修改记录.md`：已有模块的局部修改记录。
+
+## 重要约定
+
+- 自动生成的页面和路由应优先通过脚本重新生成，不建议手工大面积修改。
+- 通用页面能力应沉淀到模板或生成脚本中，避免每个省份重复手写。
+- Mock 演示的边界必须在演示说明中明确：数据为模拟数据，流程为前端模拟，导入导出为演示效果。
+- 每个省份都应保留原始 Excel、生成脚本、生成清单和验收清单，保证后续可追溯、可复现。

@@ -31,10 +31,11 @@
         @handleCurrentChange="fetchData"
         @handleSizeChange="fetchData"
       >
-        <el-table-column slot="operate" label="操作" :min-width="180" fixed="right">
+        <el-table-column slot="operate" label="操作" :min-width="220" fixed="right">
           <template slot-scope="scope">
             <el-button type="text" icon="el-icon-view" @click="openDetail(scope.row)">详情</el-button>
             <el-button type="text" icon="el-icon-edit" @click="openEdit(scope.row)">修改</el-button>
+            <el-button type="text" icon="el-icon-delete" style="color:#F56C6C" @click="deleteRow(scope.row)">删除</el-button>
           </template>
         </el-table-column>
       </cs-pagetable>
@@ -307,6 +308,73 @@
         <el-button @click="fbResultVisible = false">关闭</el-button>
         <el-button v-if="!fbResultSuccess" type="warning" @click="fbResultVisible = false; $message.warning('已触发重试')">重试</el-button>
         <el-button type="primary" @click="fbResultVisible = false">确认</el-button>
+      </span>
+    </el-dialog>
+
+    <!-- 发起审核流程弹窗 -->
+    <el-dialog :title="initiateAuditTitle" :visible.sync="initiateAuditVisible" width="720px" append-to-body>
+      <el-form :model="initiateAuditForm" label-width="110px" style="margin-bottom:16px;">
+        <el-row :gutter="20">
+          <el-col :span="12">
+            <el-form-item label="审核编号">
+              <el-input v-model="initiateAuditForm.billNo" disabled></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="审核类型">
+              <el-select v-model="initiateAuditForm.auditType" style="width:100%">
+                <el-option label="合规审核" value="合规审核"></el-option>
+                <el-option label="安全审核" value="安全审核"></el-option>
+                <el-option label="数据审核" value="数据审核"></el-option>
+                <el-option label="变更审核" value="变更审核"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :gutter="20">
+          <el-col :span="12">
+            <el-form-item label="申请人">
+              <el-input v-model="initiateAuditForm.applicant" disabled></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="审核部门">
+              <el-select v-model="initiateAuditForm.dept" style="width:100%">
+                <el-option label="安全运维部" value="安全运维部"></el-option>
+                <el-option label="信息安全部" value="信息安全部"></el-option>
+                <el-option label="技术管理部" value="技术管理部"></el-option>
+                <el-option label="综合管理部" value="综合管理部"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-form-item label="审核范围">
+          <el-input v-model="initiateAuditForm.scope" placeholder="请输入审核范围描述"></el-input>
+        </el-form-item>
+        <el-form-item label="审核说明">
+          <el-input v-model="initiateAuditForm.description" type="textarea" :rows="3" placeholder="请输入审核流程发起的详细说明"></el-input>
+        </el-form-item>
+      </el-form>
+      <div style="font-size:13px;color:#606266;margin-bottom:8px;font-weight:500;">审核流程节点</div>
+      <el-steps :active="initiateAuditStep" align-center style="margin-bottom:16px;">
+        <el-step v-for="(node, idx) in initiateAuditNodes" :key="idx" :title="node.title" :description="node.approver"></el-step>
+      </el-steps>
+      <el-table :data="initiateAuditNodes" border size="mini" style="width:100%;margin-bottom:12px;">
+        <el-table-column prop="title" label="节点" width="100"></el-table-column>
+        <el-table-column prop="approver" label="审批人" width="100"></el-table-column>
+        <el-table-column prop="dept" label="部门" width="120"></el-table-column>
+        <el-table-column label="状态" width="80" align="center">
+          <template slot-scope="scope">
+            <el-tag v-if="scope.row.status === '待审批'" type="info" size="mini">待审批</el-tag>
+            <el-tag v-else-if="scope.row.status === '审批中'" type="warning" size="mini">审批中</el-tag>
+            <el-tag v-else type="success" size="mini">已完成</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column prop="remark" label="说明"></el-table-column>
+      </el-table>
+      <span slot="footer">
+        <el-button @click="initiateAuditVisible = false">取消</el-button>
+        <el-button type="primary" @click="confirmInitiateAudit" icon="el-icon-s-check">确认发起审核流程</el-button>
       </span>
     </el-dialog>
   </div>
@@ -590,6 +658,18 @@ export default {
       fbResultTitle: "结果反馈",
       fbResultFields: [],
       fbResultSuccess: false,
+      initiateAuditVisible: false,
+      initiateAuditTitle: "发起审核流程",
+      initiateAuditForm: {
+        billNo: "",
+        auditType: "合规审核",
+        applicant: "",
+        dept: "安全运维部",
+        scope: "",
+        description: "",
+      },
+      initiateAuditStep: 0,
+      initiateAuditNodes: [],
     };
   },
   computed: {
@@ -738,6 +818,9 @@ export default {
           break;
         case "schedule":
           this.openScheduleDialog(functionName, S, now);
+          break;
+        case "initiate_audit":
+          this.openInitiateAuditDialog(functionName, S, now);
           break;
         default:
           this.openOperationDialog(functionName, S, now);
@@ -1126,6 +1209,58 @@ export default {
       ];
       this.sendVisible = true;
     },
+    // ─── 发起审核流程弹窗 ───
+    openInitiateAuditDialog(functionName, S, now) {
+      this.initiateAuditTitle = functionName;
+      const billNo = "AUDIT-" + String(S).slice(-6);
+      const applicant = pick(["马超", "罗艳", "谢建华", "韩冰", "曹鹏飞"], 0, S);
+      const nodes = [
+        { title: "发起申请", approver: applicant, dept: "安全运维部", status: "已完成", remark: "申请已提交" },
+        { title: "部门初审", approver: pick(["刘建国", "陈明辉", "张伟"], 1, S), dept: "安全运维部", status: "审批中", remark: "待部门主管审批" },
+        { title: "技术审核", approver: pick(["王芳", "李强", "赵雪"], 2, S), dept: "技术管理部", status: "待审批", remark: "等待技术评审" },
+        { title: "安全审核", approver: pick(["周敏", "吴刚", "郑涛"], 3, S), dept: "信息安全部", status: "待审批", remark: "等待安全审核" },
+        { title: "分管审批", approver: pick(["高峰", "任杰", "肖琳"], 4, S), dept: "运营管理部", status: "待审批", remark: "待分管领导审批" },
+        { title: "归档完成", approver: "系统自动", dept: "-", status: "待审批", remark: "全部审批通过后自动归档" },
+      ];
+      this.initiateAuditForm = {
+        billNo: billNo,
+        auditType: pick(["合规审核", "安全审核", "数据审核", "变更审核"], 5, S),
+        applicant: applicant,
+        dept: pick(["安全运维部", "信息安全部", "技术管理部", "综合管理部"], 6, S),
+        scope: functionName + "相关数据及配置",
+        description: "发起【" + functionName + "】审核流程，涉及资产范围" + pick(["核心机房", "全网资产", "指定IP段", "特定区域"], 7, S) + "，请各审批节点依次审核。",
+      };
+      this.initiateAuditNodes = nodes;
+      this.initiateAuditStep = 1;
+      this.initiateAuditVisible = true;
+    },
+    confirmInitiateAudit() {
+      this.$confirm("确定发起此审核流程？流程将按设定节点依次审批。", "确认发起", {
+        confirmButtonText: "确定发起",
+        cancelButtonText: "取消",
+        type: "warning",
+      }).then(() => {
+        this.initiateAuditNodes = this.initiateAuditNodes.map((node, i) => {
+          if (i === 0) return { ...node, status: "已完成" };
+          if (i === 1) return { ...node, status: "审批中" };
+          return { ...node, status: "待审批" };
+        });
+        this.initiateAuditStep = 2;
+        this.$message.success("审核流程已成功发起，请等待各节点审批处理");
+        this.initiateAuditVisible = false;
+        // 添加一条审核记录到表格
+        const newRow = this.createEmptyRow();
+        const primary = this.getPrimaryNameField();
+        const status = this.getStatusField();
+        if (primary) newRow[primary.prop] = this.initiateAuditTitle;
+        if (status) newRow[status.prop] = "审批中";
+        const timeCol = this.editableColumns.find(c => /时间/.test(c.prop));
+        if (timeCol) newRow[timeCol.prop] = this.now();
+        this.allTableData.unshift(newRow);
+        this.pageTotal = this.allTableData.length;
+        this.fetchData();
+      }).catch(() => {});
+    },
     openAdd(functionName) {
       this.formMode = "add";
       this.formTitle = functionName || "新增";
@@ -1389,6 +1524,17 @@ export default {
         this.fetchData();
         this.$message.success("删除成功");
       });
+    },
+    deleteRow(row) {
+      this.$confirm("确定删除该记录吗？", "删除确认", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      }).then(() => {
+        this.allTableData = this.allTableData.filter((item) => item.ID !== row.ID);
+        this.fetchData();
+        this.$message.success("删除成功");
+      }).catch(() => {});
     },
     openImport(functionName) {
       this.importTitle = functionName || "导入";

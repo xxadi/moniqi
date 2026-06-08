@@ -63,7 +63,11 @@ export default {
       let currentPath = "";
       for (let i = 0; i < parts.length - 1; i++) {
         currentPath += "/" + parts[i];
-        this.$refs.sideMenu.open(currentPath);
+        try {
+          this.$refs.sideMenu.open(currentPath);
+        } catch (e) {
+          // 子菜单 index 可能因 path.resolve 拼接方式与路由路径不一致，跳过
+        }
       }
     },
   },
