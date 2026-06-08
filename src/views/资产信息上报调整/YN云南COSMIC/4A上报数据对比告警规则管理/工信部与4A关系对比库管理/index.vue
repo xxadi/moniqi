@@ -1,62 +1,22 @@
 <template>
   <div>
-    <cs-searchpanel
-      :searchConfig="searchConfig"
-      :searchData="searchData"
-      @handelSearch="search"
-      @handelReset="reset"
-      labelWidth="130px"
-    ></cs-searchpanel>
+    <cs-searchpanel :searchConfig="searchConfig" :searchData="searchData" @handelSearch="search" @handelReset="reset" labelWidth="100px"></cs-searchpanel>
     <div class="mt10 crud-container">
       <div class="mb10 operate-container">
         <div class="function-actions">
-          <!-- 子管理页面入口 -->
-          <el-button plain type="success" @click="navigateToSubPage('ShangBaoShuJuDuiBiGuiZeKuGuanLi', '上报数据对比规则库管理')">上报数据对比规则库管理</el-button>
-          <el-button plain type="success" @click="navigateToSubPage('4AShuJuLuRuGuiZeKuGuanLi', '4A数据录入规则库管理')">4A数据录入规则库管理</el-button>
-          <el-button plain type="success" @click="navigateToSubPage('4AShangBaoShuJuDuiBiSheZhiXinXiGuanLi', '4A上报数据对比设置信息管理')">4A上报数据对比设置信息管理</el-button>
-          <el-button plain type="success" @click="navigateToSubPage('4AShangBaoShuJuDuiBiCuoWuShiJianTongZhiGuanLi', '4A上报数据对比错误事件通知管理')">4A上报数据对比错误事件通知管理</el-button>
-          <el-button plain type="success" @click="navigateToSubPage('4AShangBaoShuJuDuiBiFangCuanGaiXinXiGuanLi', '4A上报数据对比防篡改信息管理')">4A上报数据对比防篡改信息管理</el-button>
-          <el-button plain type="success" @click="navigateToSubPage('GongXinBuYu4AShuJuDuiBiSheZhiXinXiGuanLi', '工信部与4A数据对比设置信息管理')">工信部与4A数据对比设置信息管理</el-button>
-          <el-button plain type="success" @click="navigateToSubPage('GongXinBuYu4AShuJuDuiBiFangCuanGaiXinXiGuanLi', '工信部与4A数据对比防篡改信息管理')">工信部与4A数据对比防篡改信息管理</el-button>
-          <el-button plain type="success" @click="navigateToSubPage('GongXinBuYu4AGuanXiDuiBiKuGuanLi', '工信部与4A关系对比库管理')">工信部与4A关系对比库管理</el-button>
-          <el-button plain type="success" @click="navigateToSubPage('4AYuZiChanShuJuChaYiSheZhiXinXiGuanLi', '4A与资产数据差异设置信息管理')">4A与资产数据差异设置信息管理</el-button>
-          <el-button plain type="success" @click="navigateToSubPage('4AZiChanShuJuChaYiFangCuanGaiXinXiGuanLi', '4A资产数据差异防篡改信息管理')">4A资产数据差异防篡改信息管理</el-button>
-          <el-button plain type="success" @click="navigateToSubPage('4AYuZiChanShuJuChaYiJianKongGuiZeGuanLi', '4A与资产数据差异监控规则管理')">4A与资产数据差异监控规则管理</el-button>
-          <el-button plain type="success" @click="navigateToSubPage('4AShangBaoZhiBiaoXinXiGuanLi', '4A上报指标信息管理')">4A上报指标信息管理</el-button>
-          <!-- 主表 CRUD -->
-          <!-- 监控 -->
-          <el-button plain type="success" @click="navigateToSubPage('4AShangBaoShuJuDuiBiZongHeGuanLi', '4A上报数据对比管理')">4A上报数据对比管理</el-button>
-          <el-button plain type="primary" icon="el-icon-view" @click='handleFunction("上报数据对比结果监控", "monitor_result")'>上报数据对比结果监控</el-button>
-          <el-button plain type="success" @click="navigateToSubPage('4AYuZiChanShuJuChaYiZongHeGuanLi', '4A与资产数据差异管理')">4A与资产数据差异管理</el-button>
-          <el-button plain type="success" @click="navigateToSubPage('4AShangBaoZhiBiaoJianKongGuanLi', '4A上报指标监控管理')">4A上报指标监控管理</el-button>
-          <el-button plain type="primary" icon="el-icon-view" @click='handleFunction("4A资产数据差异错误信息监控", "detail_diff")'>4A资产数据差异错误信息监控</el-button>
-          <!-- 告警/通知 -->
-          <el-button plain type="primary" icon="el-icon-warning" @click='handleFunction("上报数据对比结果监控告警", "alert_result")'>上报数据对比结果监控告警</el-button>
-          <el-button plain type="success" @click="navigateToSubPage('GongXinBuYu4AShuJuDuiBiCuoWuGuanLi', '工信部与4A数据对比错误管理')">工信部与4A数据对比错误管理</el-button>
-          <el-button plain type="primary" icon="el-icon-bell" @click='handleFunction("4A资产数据差异错误事件通知", "notify_diff")'>4A资产数据差异错误事件通知</el-button>
-          <!-- 稽核 -->
-          <!-- 统计 -->
-          <!-- 采集/预处理 -->
-          <!-- 报表/导出/推送 -->
-          <el-button plain type="success" @click="navigateToSubPage('4AZiChanShuJuChaYiHuiZongBaoBiaoGuanLi', '4A资产数据差异汇总报表管理')">4A资产数据差异汇总报表管理</el-button>
-          <el-button plain type="success" @click="navigateToSubPage('4AZiChanShuJuChaYiMingXiBaoBiaoGuanLi', '4A资产数据差异明细报表管理')">4A资产数据差异明细报表管理</el-button>
-          <el-button plain type="primary" icon="el-icon-s-promotion" @click='handleFunction("4A资产数据差异总表推送", "push_dispatch")'>4A资产数据差异总表推送</el-button>
+          <el-button plain type="primary" icon="el-icon-edit-outline" @click="handleFunction('定义工信部与4A关系对比库信息', 'form')">定义工信部与4A关系对比库信息</el-button>
+          <el-button plain type="primary" icon="el-icon-edit" @click="handleFunction('修改工信部与4A关系对比库信息', 'form')">修改工信部与4A关系对比库信息</el-button>
+          <el-button plain type="danger" icon="el-icon-delete" @click="handleFunction('删除工信部与4A关系对比库信息', 'delete')">删除工信部与4A关系对比库信息</el-button>
+          <el-button plain type="primary" icon="el-icon-view" @click="handleFunction('工信部与4A关系对比库数据获取', 'detail')">工信部与4A关系对比库数据获取</el-button>
+          <el-button plain type="primary" icon="el-icon-upload2" @click="handleFunction('工信部与4A关系对比库数据上传', 'import')">工信部与4A关系对比库数据上传</el-button>
+          <el-button plain type="primary" icon="el-icon-view" @click="handleFunction('工信部与4A关系对比库数据接口监控', 'monitor')">工信部与4A关系对比库数据接口监控</el-button>
+          <el-button plain type="primary" icon="el-icon-view" @click="handleFunction('查询工信部与4A关系对比库汇总报告详情', 'detail')">查询工信部与4A关系对比库汇总报告详情</el-button>
+          <el-button plain type="primary" icon="el-icon-view" @click="handleFunction('查询工信部与4A关系对比库明细报告详情', 'detail')">查询工信部与4A关系对比库明细报告详情</el-button>
         </div>
+        <el-button type="text" icon="el-icon-back" @click="$router.back()">返回上级</el-button>
       </div>
-      <cs-pagetable
-        pageTableRef="pageTableRef"
-        :showSelection="true"
-        :tableData="tableData"
-        :tableColumns="tableColumns"
-        :pageTotal="pageTotal"
-        :page.sync="pageOptions.pageNum"
-        :limit.sync="pageOptions.pageSize"
-        @handleSelectionChange="handleSelectionChange"
-        @handleSelectAll="handleSelectionChange"
-        @handleCurrentChange="fetchData"
-        @handleSizeChange="fetchData"
-      >
-        <el-table-column slot="operate" label="操作" :min-width="220" fixed="right">
+      <cs-pagetable pageTableRef="pageTableRef" :showSelection="true" :tableData="tableData" :tableColumns="tableColumns" :pageTotal="pageTotal" :page.sync="pageOptions.pageNum" :limit.sync="pageOptions.pageSize" @handleSelectionChange="handleSelectionChange" @handleSelectAll="handleSelectionChange" @handleCurrentChange="fetchData" @handleSizeChange="fetchData">
+        <el-table-column slot="operate" label="操作" width="260" fixed="right">
           <template slot-scope="scope">
             <el-button type="text" icon="el-icon-view" @click="openDetail(scope.row)">详情</el-button>
             <el-button type="text" icon="el-icon-edit" @click="openEdit(scope.row)">修改</el-button>
@@ -69,16 +29,9 @@
     <el-dialog :title="formTitle" :visible.sync="formVisible" width="620px" append-to-body>
       <el-form :model="formData" label-width="130px">
         <el-form-item v-for="col in editableColumns" :key="col.prop" :label="col.label">
-          <el-select v-if="isStatusField(col.prop)" v-model="formData[col.prop]" style="width: 100%">
-            <el-option label="待处理" value="待处理"></el-option>
-            <el-option label="处理中" value="处理中"></el-option>
-            <el-option label="已完成" value="已完成"></el-option>
-            <el-option label="处理失败" value="处理失败"></el-option>
-            <el-option label="已暂停" value="已暂停"></el-option>
-            <el-option label="异常" value="异常"></el-option>
+          <el-select v-if="/状态/.test(col.prop)" v-model="formData[col.prop]" style="width:100%">
+            <el-option label="启用" value="启用"></el-option><el-option label="停用" value="停用"></el-option>
           </el-select>
-          <el-input-number v-else-if="isNumberField(col.prop)" v-model="formData[col.prop]" :min="0" controls-position="right" style="width: 100%"></el-input-number>
-          <el-input v-else-if="isLongField(col.prop)" v-model="formData[col.prop]" type="textarea" :rows="3"></el-input>
           <el-input v-else v-model="formData[col.prop]"></el-input>
         </el-form-item>
       </el-form>
@@ -106,9 +59,7 @@
       <div class="bar-list">
         <div v-for="item in chartData" :key="item.name" class="bar-row">
           <span>{{ item.name }}</span>
-          <div class="bar-track">
-            <div class="bar-value" :style="{ width: item.value + '%' }"></div>
-          </div>
+          <div class="bar-track"><div class="bar-value" :style="{ width: item.value + '%' }"></div></div>
           <em>{{ item.value }}%</em>
         </div>
       </div>
@@ -117,23 +68,13 @@
     <el-dialog :title="importTitle" :visible.sync="importVisible" width="560px" append-to-body>
       <el-form label-width="110px">
         <el-form-item label="导入文件">
-          <el-upload
-            action="#"
-            :auto-upload="false"
-            :limit="1"
-            :file-list="importFileList"
-            :on-change="handleImportFileChange"
-            :on-remove="handleImportFileRemove"
-          >
+          <el-upload action="#" :auto-upload="false" :limit="1" :file-list="importFileList" :on-change="handleImportFileChange" :on-remove="handleImportFileRemove">
             <el-button type="primary" icon="el-icon-upload2">选择文件</el-button>
             <span slot="tip" class="el-upload__tip">支持 xlsx/xls 文件，系统会解析当前页面对应的数据模板</span>
           </el-upload>
         </el-form-item>
         <el-form-item label="解析进度">
           <el-progress :percentage="importProgress" :status="importProgress === 100 ? 'success' : undefined"></el-progress>
-        </el-form-item>
-        <el-form-item label="导入说明">
-          <el-input v-model="importRemark" type="textarea" :rows="3"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer">
@@ -142,11 +83,10 @@
       </span>
     </el-dialog>
 
-    <!-- 接收/处理弹窗 -->
     <el-dialog :title="receiveTitle" :visible.sync="receiveVisible" width="600px" append-to-body>
       <el-form label-width="120px">
         <el-form-item label="处理进度">
-          <el-progress :percentage="receiveProgress" :status="receiveProgress === 100 ? 'success' : undefined" style="width: 80%"></el-progress>
+          <el-progress :percentage="receiveProgress" :status="receiveProgress === 100 ? 'success' : undefined" style="width:80%"></el-progress>
         </el-form-item>
         <el-form-item v-for="item in receiveFields" :key="item.label" :label="item.label">
           <span>{{ item.value }}</span>
@@ -158,7 +98,6 @@
       </span>
     </el-dialog>
 
-    <!-- 发送/调度弹窗 -->
     <el-dialog :title="sendTitle" :visible.sync="sendVisible" width="600px" append-to-body>
       <el-form label-width="120px">
         <el-form-item v-for="item in sendFields" :key="item.label" :label="item.label">
@@ -172,20 +111,12 @@
       </span>
     </el-dialog>
 
-    <!-- 录入/配置弹窗 -->
     <el-dialog :title="configureTitle" :visible.sync="configureVisible" width="620px" append-to-body>
       <el-form :model="configureForm" label-width="130px">
         <el-form-item v-for="col in editableColumns" :key="col.prop" :label="col.label">
-          <el-select v-if="isStatusField(col.prop)" v-model="configureForm[col.prop]" style="width: 100%">
-            <el-option label="待处理" value="待处理"></el-option>
-            <el-option label="处理中" value="处理中"></el-option>
-            <el-option label="已完成" value="已完成"></el-option>
-            <el-option label="处理失败" value="处理失败"></el-option>
-            <el-option label="已暂停" value="已暂停"></el-option>
-            <el-option label="异常" value="异常"></el-option>
+          <el-select v-if="/状态/.test(col.prop)" v-model="configureForm[col.prop]" style="width:100%">
+            <el-option label="启用" value="启用"></el-option><el-option label="停用" value="停用"></el-option>
           </el-select>
-          <el-input-number v-else-if="isNumberField(col.prop)" v-model="configureForm[col.prop]" :min="0" controls-position="right" style="width: 100%"></el-input-number>
-          <el-input v-else-if="isLongField(col.prop)" v-model="configureForm[col.prop]" type="textarea" :rows="3"></el-input>
           <el-input v-else v-model="configureForm[col.prop]"></el-input>
         </el-form-item>
       </el-form>
@@ -195,7 +126,6 @@
       </span>
     </el-dialog>
 
-    <!-- 反馈/输出弹窗 -->
     <el-dialog :title="feedbackTitle" :visible.sync="feedbackVisible" width="600px" append-to-body>
       <el-form label-width="120px">
         <el-form-item v-for="item in feedbackFields" :key="item.label" :label="item.label">
@@ -208,7 +138,6 @@
       </span>
     </el-dialog>
 
-    <!-- 查询结果弹窗 -->
     <el-dialog :title="queryTitle" :visible.sync="queryVisible" width="660px" append-to-body>
       <el-table :data="queryResults" border size="mini" style="width:100%">
         <el-table-column prop="序号" label="序号" width="60" align="center"></el-table-column>
@@ -226,7 +155,6 @@
       </span>
     </el-dialog>
 
-    <!-- 接收请求监控弹窗 -->
     <el-dialog :title="recvReqTitle" :visible.sync="recvReqVisible" width="600px" append-to-body>
       <el-form label-width="100px" style="margin-bottom:12px;">
         <el-form-item label="处理进度">
@@ -236,7 +164,7 @@
           <span>{{ item.value }}</span>
         </el-form-item>
       </el-form>
-      <div style="font-size:13px;color:#606266;margin-bottom:8px;font-weight:500;">处理日志</div>
+      <div style="font-size:13px;color:#606266;margin-bottom:8px;font-weight:500;">实时日志</div>
       <el-table :data="recvReqLog" border size="mini" style="width:100%">
         <el-table-column prop="time" label="时间" width="160"></el-table-column>
         <el-table-column prop="level" label="级别" width="70" align="center">
@@ -252,7 +180,6 @@
       </span>
     </el-dialog>
 
-    <!-- 接收反馈数据弹窗 -->
     <el-dialog :title="recvFbTitle" :visible.sync="recvFbVisible" width="660px" append-to-body>
       <el-form label-width="110px" style="margin-bottom:12px;">
         <el-form-item v-for="item in recvFbFields" :key="item.label" :label="item.label">
@@ -275,45 +202,22 @@
       </span>
     </el-dialog>
 
-    <!-- 发起审核流程弹窗 -->
     <el-dialog :title="initiateAuditTitle" :visible.sync="initiateAuditVisible" width="720px" append-to-body>
       <el-form :model="initiateAuditForm" label-width="110px" style="margin-bottom:16px;">
         <el-row :gutter="20">
-          <el-col :span="12">
-            <el-form-item label="审核编号">
-              <el-input v-model="initiateAuditForm.billNo" disabled></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="审核类型">
-              <el-input v-model="initiateAuditForm.auditType" disabled></el-input>
-            </el-form-item>
-          </el-col>
+          <el-col :span="12"><el-form-item label="审核编号"><el-input v-model="initiateAuditForm.billNo" disabled></el-input></el-form-item></el-col>
+          <el-col :span="12"><el-form-item label="审核类型"><el-input v-model="initiateAuditForm.auditType" disabled></el-input></el-form-item></el-col>
         </el-row>
         <el-row :gutter="20">
-          <el-col :span="12">
-            <el-form-item label="申请人">
-              <el-input v-model="initiateAuditForm.applicant" disabled></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="申请部门">
-              <el-input v-model="initiateAuditForm.dept" disabled></el-input>
-            </el-form-item>
-          </el-col>
+          <el-col :span="12"><el-form-item label="申请人"><el-input v-model="initiateAuditForm.applicant" disabled></el-input></el-form-item></el-col>
+          <el-col :span="12"><el-form-item label="申请部门"><el-input v-model="initiateAuditForm.dept" disabled></el-input></el-form-item></el-col>
         </el-row>
-        <el-form-item label="审核范围">
-          <el-input v-model="initiateAuditForm.scope" disabled></el-input>
-        </el-form-item>
-        <el-form-item label="审核说明">
-          <el-input v-model="initiateAuditForm.description" type="textarea" :rows="2" disabled></el-input>
-        </el-form-item>
+        <el-form-item label="审核范围"><el-input v-model="initiateAuditForm.scope" disabled></el-input></el-form-item>
+        <el-form-item label="审核说明"><el-input v-model="initiateAuditForm.description" type="textarea" :rows="2" disabled></el-input></el-form-item>
       </el-form>
-
       <el-steps :active="initiateAuditStep" align-center style="margin-bottom:20px;">
         <el-step v-for="node in initiateAuditNodes" :key="node.step" :title="node.step" :description="node.status"></el-step>
       </el-steps>
-
       <el-table :data="initiateAuditNodes" border size="small" style="width:100%">
         <el-table-column prop="step" label="审核节点" width="110"></el-table-column>
         <el-table-column prop="handler" label="处理人" width="100"></el-table-column>
@@ -325,14 +229,12 @@
         </el-table-column>
         <el-table-column prop="remark" label="备注"></el-table-column>
       </el-table>
-
       <span slot="footer">
         <el-button @click="initiateAuditVisible = false">取消</el-button>
         <el-button type="primary" icon="el-icon-s-check" @click="confirmInitiateAudit">提交审核</el-button>
       </span>
     </el-dialog>
 
-    <!-- 逐级审批弹窗 -->
     <el-dialog :title="approvalTitle" :visible.sync="approvalVisible" width="680px" append-to-body>
       <el-table :data="approvalSteps" border size="mini" style="width:100%">
         <el-table-column prop="level" label="审批层级" width="100" align="center"></el-table-column>
@@ -347,12 +249,8 @@
       </el-table>
       <el-divider></el-divider>
       <el-form label-width="100px">
-        <el-form-item label="审批进度">
-          <el-progress :percentage="approvalProgress" :status="approvalProgress===100?'success':''" style="width:80%"></el-progress>
-        </el-form-item>
-        <el-form-item label="最终状态">
-          <el-tag :type="approvalFinalStatus==='已通过'?'success':approvalFinalStatus==='已驳回'?'danger':'warning'" size="medium">{{ approvalFinalStatus }}</el-tag>
-        </el-form-item>
+        <el-form-item label="审批进度"><el-progress :percentage="approvalProgress" :status="approvalProgress===100?'success':''" style="width:80%"></el-progress></el-form-item>
+        <el-form-item label="最终状态"><el-tag :type="approvalFinalStatus==='已通过'?'success':approvalFinalStatus==='已驳回'?'danger':'warning'" size="medium">{{ approvalFinalStatus }}</el-tag></el-form-item>
       </el-form>
       <span slot="footer">
         <el-button @click="approvalVisible = false">关闭</el-button>
@@ -361,12 +259,9 @@
       </span>
     </el-dialog>
 
-    <!-- 调度面板 -->
     <el-dialog :title="dispatchTitle" :visible.sync="dispatchVisible" width="660px" append-to-body>
       <el-form label-width="110px" style="margin-bottom:12px;">
-        <el-form-item label="调度策略">
-          <el-tag type="info">{{ dispatchStrategy }}</el-tag>
-        </el-form-item>
+        <el-form-item label="调度策略"><el-tag type="info">{{ dispatchStrategy }}</el-tag></el-form-item>
       </el-form>
       <el-table :data="dispatchNodes" border size="small" style="width:100%">
         <el-table-column prop="节点" label="节点"></el-table-column>
@@ -385,12 +280,9 @@
       </span>
     </el-dialog>
 
-    <!-- 流程执行面板 -->
     <el-dialog :title="invokeTitle" :visible.sync="invokeVisible" width="600px" append-to-body>
       <el-form label-width="100px">
-        <el-form-item label="执行进度">
-          <el-progress :percentage="invokeProgress" :status="invokeProgress === 100 ? 'success' : undefined" style="width:80%"></el-progress>
-        </el-form-item>
+        <el-form-item label="执行进度"><el-progress :percentage="invokeProgress" :status="invokeProgress === 100 ? 'success' : undefined" style="width:80%"></el-progress></el-form-item>
       </el-form>
       <div style="margin-top:8px;">
         <div v-for="(step, idx) in invokeSteps" :key="idx" style="display:flex;align-items:center;padding:8px 12px;border-bottom:1px solid #f0f0f0;">
@@ -406,7 +298,6 @@
       </span>
     </el-dialog>
 
-    <!-- 反馈结果详情 -->
     <el-dialog :title="fbResultTitle" :visible.sync="fbResultVisible" width="600px" append-to-body>
       <el-alert v-if="fbResultSuccess" title="执行成功" type="success" :closable="false" show-icon style="margin-bottom:16px;"></el-alert>
       <el-alert v-else title="执行异常" type="error" :closable="false" show-icon style="margin-bottom:16px;"></el-alert>
@@ -421,292 +312,70 @@
         <el-button type="primary" @click="fbResultVisible = false">确认</el-button>
       </span>
     </el-dialog>
+
+    <!-- 动态查询对话框（3种模式：table/summary/detailReport） -->
+    <el-dialog :title="queryDynTitle" :visible.sync="queryDynVisible" width="740px" append-to-body>
+      <template v-if="queryDynMode === 'table'">
+        <el-alert title="关系对比库数据查询结果" type="info" :closable="false" show-icon style="margin-bottom:16px;"></el-alert>
+        <el-table :data="queryDynData" border size="mini" style="width:100%" max-height="400">
+          <el-table-column prop="关系编号" label="关系编号" width="130"></el-table-column>
+          <el-table-column prop="关系名称" label="关系名称"></el-table-column>
+          <el-table-column prop="关联类型" label="关联类型" width="90"></el-table-column>
+          <el-table-column prop="匹配字段" label="匹配字段"></el-table-column>
+          <el-table-column prop="启用状态" label="状态" width="80" align="center">
+            <template slot-scope="s"><el-tag :type="s.row.启用状态==='启用'?'success':'info'" size="mini">{{ s.row.启用状态 }}</el-tag></template>
+          </el-table-column>
+          <el-table-column prop="更新时间" label="更新时间" width="160"></el-table-column>
+        </el-table>
+      </template>
+      <template v-else-if="queryDynMode === 'summary'">
+        <el-alert title="汇总报告统计" type="success" :closable="false" show-icon style="margin-bottom:16px;"></el-alert>
+        <div class="analysis-panel" style="display:flex;flex-wrap:wrap;gap:16px;margin-bottom:16px;">
+          <div v-for="m in queryDynMetrics" :key="m.label" class="metric-card" style="flex:1;min-width:140px;padding:16px;background:#f5f7fa;border-radius:8px;text-align:center;">
+            <span style="display:block;font-size:13px;color:#909399;">{{ m.label }}</span>
+            <strong style="display:block;font-size:24px;color:#303133;margin-top:8px;">{{ m.value }}</strong>
+          </div>
+        </div>
+      </template>
+      <template v-else-if="queryDynMode === 'detailReport'">
+        <el-alert title="明细报告数据" type="warning" :closable="false" show-icon style="margin-bottom:16px;"></el-alert>
+        <el-table :data="queryDynData" border size="mini" style="width:100%" max-height="400">
+          <el-table-column prop="关系名称" label="关系名称"></el-table-column>
+          <el-table-column prop="关联类型" label="关联类型" width="90"></el-table-column>
+          <el-table-column prop="执行次数" label="执行次数" width="90" align="center"></el-table-column>
+          <el-table-column prop="通过率" label="通过率" width="80" align="center"></el-table-column>
+          <el-table-column prop="平均耗时" label="平均耗时" width="90" align="center"></el-table-column>
+          <el-table-column prop="最近执行" label="最近执行" width="160"></el-table-column>
+          <el-table-column prop="状态" label="状态" width="80" align="center">
+            <template slot-scope="s"><el-tag :type="s.row.状态==='正常'?'success':'danger'" size="mini">{{ s.row.状态 }}</el-tag></template>
+          </el-table-column>
+        </el-table>
+      </template>
+      <span slot="footer"><el-button type="primary" @click="queryDynVisible = false">关闭</el-button></span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import { exportXLSX, filterData } from "@/utils/index";
+import { exportXLSX, filterData, getActionType, getButtonIcon } from "@/utils/index";
 
-const initialRows = [
-  {
-    "ID": 1,
-    "上报数据对比ID": "J-79959",
-    "上报数据对比编号": "J-79959",
-    "上报数据对比名称": "4A上报数据对比告警规则管理-1",
-    "新增上报数据对比状态": "部分完成",
-    "新增上报数据对比时间": "2026-05-09 09:47:56",
-    "上报数据对比属性": "部分完成",
-    "上报数据对比创建时间": "2026-05-09 09:47:56",
-    "上报数据对比所属部门": "信息安全部",
-    "上报数据对比负责人": "赵六",
-    "上报数据对比类型": "部分完成",
-    "上报数据对比规则": "部分完成",
-    "上报数据对比规则库ID": "J-79959"
-  },
-  {
-    "ID": 2,
-    "上报数据对比ID": "J-87878",
-    "上报数据对比编号": "J-87878",
-    "上报数据对比名称": "4A上报数据对比告警规则管理-2",
-    "新增上报数据对比状态": "已启用",
-    "新增上报数据对比时间": "2026-05-08 09:12:18",
-    "上报数据对比属性": "已启用",
-    "上报数据对比创建时间": "2026-05-08 09:12:18",
-    "上报数据对比所属部门": "系统运维部",
-    "上报数据对比负责人": "system",
-    "上报数据对比类型": "已启用",
-    "上报数据对比规则": "已启用",
-    "上报数据对比规则库ID": "J-87878"
-  },
-  {
-    "ID": 3,
-    "上报数据对比ID": "J-95797",
-    "上报数据对比编号": "J-95797",
-    "上报数据对比名称": "4A上报数据对比告警规则管理-3",
-    "新增上报数据对比状态": "已停用",
-    "新增上报数据对比时间": "2026-05-08 09:35:44",
-    "上报数据对比属性": "已停用",
-    "上报数据对比创建时间": "2026-05-08 09:35:44",
-    "上报数据对比所属部门": "数据管理部",
-    "上报数据对比负责人": "admin",
-    "上报数据对比类型": "已停用",
-    "上报数据对比规则": "已停用",
-    "上报数据对比规则库ID": "J-95797"
-  },
-  {
-    "ID": 4,
-    "上报数据对比ID": "J-103716",
-    "上报数据对比编号": "J-103716",
-    "上报数据对比名称": "4A上报数据对比告警规则管理-4",
-    "新增上报数据对比状态": "正常",
-    "新增上报数据对比时间": "2026-05-08 10:08:06",
-    "上报数据对比属性": "正常",
-    "上报数据对比创建时间": "2026-05-08 10:08:06",
-    "上报数据对比所属部门": "安全运维部",
-    "上报数据对比负责人": "张三",
-    "上报数据对比类型": "正常",
-    "上报数据对比规则": "正常",
-    "上报数据对比规则库ID": "J-103716"
-  },
-  {
-    "ID": 5,
-    "上报数据对比ID": "J-111635",
-    "上报数据对比编号": "J-111635",
-    "上报数据对比名称": "4A上报数据对比告警规则管理-5",
-    "新增上报数据对比状态": "异常",
-    "新增上报数据对比时间": "2026-05-08 10:42:31",
-    "上报数据对比属性": "异常",
-    "上报数据对比创建时间": "2026-05-08 10:42:31",
-    "上报数据对比所属部门": "网络管理部",
-    "上报数据对比负责人": "李四",
-    "上报数据对比类型": "异常",
-    "上报数据对比规则": "异常",
-    "上报数据对比规则库ID": "J-111635"
-  },
-  {
-    "ID": 6,
-    "上报数据对比ID": "J-119554",
-    "上报数据对比编号": "J-119554",
-    "上报数据对比名称": "4A上报数据对比告警规则管理-6",
-    "新增上报数据对比状态": "超时",
-    "新增上报数据对比时间": "2026-05-08 11:16:09",
-    "上报数据对比属性": "超时",
-    "上报数据对比创建时间": "2026-05-08 11:16:09",
-    "上报数据对比所属部门": "资产管理部",
-    "上报数据对比负责人": "王五",
-    "上报数据对比类型": "超时",
-    "上报数据对比规则": "超时",
-    "上报数据对比规则库ID": "J-119554"
-  },
-  {
-    "ID": 7,
-    "上报数据对比ID": "J-127473",
-    "上报数据对比编号": "J-127473",
-    "上报数据对比名称": "4A上报数据对比告警规则管理-7",
-    "新增上报数据对比状态": "已取消",
-    "新增上报数据对比时间": "2026-05-08 14:03:52",
-    "上报数据对比属性": "已取消",
-    "上报数据对比创建时间": "2026-05-08 14:03:52",
-    "上报数据对比所属部门": "信息安全部",
-    "上报数据对比负责人": "赵六",
-    "上报数据对比类型": "已取消",
-    "上报数据对比规则": "已取消",
-    "上报数据对比规则库ID": "J-127473"
-  },
-  {
-    "ID": 8,
-    "上报数据对比ID": "J-135392",
-    "上报数据对比编号": "J-135392",
-    "上报数据对比名称": "4A上报数据对比告警规则管理-8",
-    "新增上报数据对比状态": "已驳回",
-    "新增上报数据对比时间": "2026-05-08 15:21:37",
-    "上报数据对比属性": "已驳回",
-    "上报数据对比创建时间": "2026-05-08 15:21:37",
-    "上报数据对比所属部门": "系统运维部",
-    "上报数据对比负责人": "system",
-    "上报数据对比类型": "已驳回",
-    "上报数据对比规则": "已驳回",
-    "上报数据对比规则库ID": "J-135392"
-  },
-  {
-    "ID": 9,
-    "上报数据对比ID": "J-143311",
-    "上报数据对比编号": "J-143311",
-    "上报数据对比名称": "4A上报数据对比告警规则管理-9",
-    "新增上报数据对比状态": "待审核",
-    "新增上报数据对比时间": "2026-05-08 16:08:25",
-    "上报数据对比属性": "待审核",
-    "上报数据对比创建时间": "2026-05-08 16:08:25",
-    "上报数据对比所属部门": "数据管理部",
-    "上报数据对比负责人": "admin",
-    "上报数据对比类型": "待审核",
-    "上报数据对比规则": "待审核",
-    "上报数据对比规则库ID": "J-143311"
-  },
-  {
-    "ID": 10,
-    "上报数据对比ID": "J-151230",
-    "上报数据对比编号": "J-151230",
-    "上报数据对比名称": "4A上报数据对比告警规则管理-10",
-    "新增上报数据对比状态": "已处理",
-    "新增上报数据对比时间": "2026-05-09 08:33:11",
-    "上报数据对比属性": "已处理",
-    "上报数据对比创建时间": "2026-05-09 08:33:11",
-    "上报数据对比所属部门": "安全运维部",
-    "上报数据对比负责人": "张三",
-    "上报数据对比类型": "已处理",
-    "上报数据对比规则": "已处理",
-    "上报数据对比规则库ID": "J-151230"
-  }
+const rows = [
+  { ID: 1, 关系编号: "GX-REL-001", 关系名称: "工信部资产与4A账号映射", 关联类型: "一对多", 匹配字段: "资产编号→账号ID", 启用状态: "启用", 更新时间: "2026-06-01 10:00:00" },
+  { ID: 2, 关系编号: "GX-REL-002", 关系名称: "工信部资源与4A权限映射", 关联类型: "多对多", 匹配字段: "资源编号→权限ID", 启用状态: "启用", 更新时间: "2026-06-02 14:30:00" },
+  { ID: 3, 关系编号: "GX-REL-003", 关系名称: "工信部组织与4A角色映射", 关联类型: "一对一", 匹配字段: "组织编码→角色ID", 启用状态: "停用", 更新时间: "2026-06-03 09:15:00" },
+  { ID: 4, 关系编号: "GX-REL-004", 关系名称: "工信部人员与4A账号映射", 关联类型: "一对一", 匹配字段: "人员编号→账号ID", 启用状态: "启用", 更新时间: "2026-06-04 16:20:00" },
+  { ID: 5, 关系编号: "GX-REL-005", 关系名称: "工信部应用与4A系统映射", 关联类型: "多对一", 匹配字段: "应用ID→系统ID", 启用状态: "启用", 更新时间: "2026-06-05 08:45:00" },
 ];
-const tableColumns = [
-  {
-    "prop": "ID",
-    "label": "ID",
-    "type": "text",
-    "width": 80
-  },
-  {
-    "prop": "上报数据对比ID",
-    "label": "上报数据对比ID",
-    "type": "text",
-    "search": true,
-    "showTooltip": true
-  },
-  {
-    "prop": "上报数据对比编号",
-    "label": "上报数据对比编号",
-    "type": "text",
-    "search": true,
-    "showTooltip": true
-  },
-  {
-    "prop": "上报数据对比名称",
-    "label": "上报数据对比名称",
-    "type": "text",
-    "search": true,
-    "showTooltip": true
-  },
-  {
-    "prop": "新增上报数据对比状态",
-    "label": "新增上报数据对比状态",
-    "type": "text",
-    "search": true,
-    "showTooltip": true
-  },
-  {
-    "prop": "新增上报数据对比时间",
-    "label": "新增上报数据对比时间",
-    "type": "text",
-    "search": false,
-    "showTooltip": true,
-    "width": 170
-  },
-  {
-    "prop": "上报数据对比属性",
-    "label": "上报数据对比属性",
-    "type": "text",
-    "search": false,
-    "showTooltip": true
-  },
-  {
-    "prop": "上报数据对比创建时间",
-    "label": "上报数据对比创建时间",
-    "type": "text",
-    "search": false,
-    "showTooltip": true,
-    "width": 170
-  },
-  {
-    "prop": "上报数据对比所属部门",
-    "label": "上报数据对比所属部门",
-    "type": "text",
-    "search": false,
-    "showTooltip": true
-  },
-  {
-    "prop": "上报数据对比负责人",
-    "label": "上报数据对比负责人",
-    "type": "text",
-    "search": false,
-    "showTooltip": true
-  },
-  {
-    "prop": "上报数据对比类型",
-    "label": "上报数据对比类型",
-    "type": "text",
-    "search": true,
-    "showTooltip": true
-  },
-  {
-    "prop": "上报数据对比规则",
-    "label": "上报数据对比规则",
-    "type": "text",
-    "search": false,
-    "showTooltip": true
-  },
-  {
-    "prop": "上报数据对比规则库ID",
-    "label": "上报数据对比规则库ID",
-    "type": "text",
-    "search": true,
-    "showTooltip": true
-  },
-  {
-    "slot": "operate",
-    "label": "操作"
-  }
+const cols = [
+  { prop: "关系编号", label: "关系编号", type: "text", search: true },
+  { prop: "关系名称", label: "关系名称", type: "text", search: true },
+  { prop: "关联类型", label: "关联类型", type: "select", options: [{ value: "一对一", label: "一对一" }, { value: "一对多", label: "一对多" }, { value: "多对一", label: "多对一" }, { value: "多对多", label: "多对多" }], search: true },
+  { prop: "匹配字段", label: "匹配字段", type: "text" },
+  { prop: "启用状态", label: "启用状态", type: "select", options: [{ value: "启用", label: "启用" }, { value: "停用", label: "停用" }], search: true },
+  { prop: "更新时间", label: "更新时间", type: "text", width: 170 },
+  { slot: "operate", label: "操作" },
 ];
-const defaultRow = {
-  "ID": "",
-  "上报数据对比ID": "",
-  "上报数据对比编号": "",
-  "上报数据对比名称": "",
-  "新增上报数据对比状态": "",
-  "新增上报数据对比时间": "",
-  "上报数据对比属性": "",
-  "上报数据对比创建时间": "",
-  "上报数据对比所属部门": "",
-  "上报数据对比负责人": "",
-  "上报数据对比类型": "",
-  "上报数据对比规则": "",
-  "上报数据对比规则库ID": ""
-};
-const importTemplateRow = {
-  "上报数据对比ID": "",
-  "上报数据对比编号": "",
-  "上报数据对比名称": "",
-  "新增上报数据对比状态": "",
-  "新增上报数据对比时间": "",
-  "上报数据对比属性": "",
-  "上报数据对比创建时间": "",
-  "上报数据对比所属部门": "",
-  "上报数据对比负责人": "",
-  "上报数据对比类型": "",
-  "上报数据对比规则": "",
-  "上报数据对比规则库ID": "",
-  "导入来源": "4A上报数据对比告警规则管理导入模板.xlsx"
-};
+const defaultRow = { 关系编号: "", 关系名称: "", 关联类型: "一对一", 匹配字段: "", 启用状态: "启用", 更新时间: "" };
 
 function pageHash(str) {
   let h = 0;
@@ -715,62 +384,18 @@ function pageHash(str) {
 }
 const pick = (items, index, seed) => items[(seed + index) % items.length];
 
-function getActionType(name) {
-  if (/接收.*请求|接收.*处理/.test(name)) return "receive_request";
-  if (/接收.*反馈|接收.*信息|接收.*结果/.test(name)) return "receive_feedback";
-  if (/接收/.test(name)) return "receive";
-  if (/发送/.test(name)) return "send";
-  if (/录入|配置|新增|创建|保存|建立|修改/.test(name)) return "configure";
-  if (/调用.*流程|调用.*处理/.test(name)) return "invoke";
-  if (/调用/.test(name)) return "send";
-  if (/反馈.*结果|返回.*结果/.test(name)) return "feedback_result";
-  if (/反馈|返回|输出/.test(name)) return "feedback";
-  if (/^调度|唤醒/.test(name)) return "dispatch";
-  if (/调度(?!模块)/.test(name)) return "dispatch";
-  if (/查询|读取|展示|监控|跟踪/.test(name)) return "query";
-  if (/导出|下载/.test(name)) return "export";
-  if (/删除|移除/.test(name)) return "delete";
-  if (/分析|统计|报表/.test(name)) return "analysis";
-  if (/导入|上传/.test(name)) return "import";
-  return "operation";
-}
-
-function getButtonIcon(name) {
-  if (/接收.*请求/.test(name)) return "el-icon-download";
-  if (/接收.*反馈|接收.*信息/.test(name)) return "el-icon-document-checked";
-  if (/接收/.test(name)) return "el-icon-download";
-  if (/发送/.test(name)) return "el-icon-s-promotion";
-  if (/录入|配置|新增|创建|保存|建立/.test(name)) return "el-icon-edit-outline";
-  if (/修改/.test(name)) return "el-icon-edit";
-  if (/调用.*流程/.test(name)) return "el-icon-s-claim";
-  if (/调用/.test(name)) return "el-icon-s-promotion";
-  if (/反馈.*结果/.test(name)) return "el-icon-finished";
-  if (/反馈|返回|输出/.test(name)) return "el-icon-upload2";
-  if (/^调度|唤醒/.test(name)) return "el-icon-s-opportunity";
-  if (/调度(?!模块)/.test(name)) return "el-icon-s-opportunity";
-  if (/查询|读取|展示|监控|跟踪/.test(name)) return "el-icon-view";
-  if (/导出|下载/.test(name)) return "el-icon-download";
-  if (/删除|移除/.test(name)) return "el-icon-delete";
-  if (/分析|统计|报表/.test(name)) return "el-icon-data-analysis";
-  if (/导入|上传/.test(name)) return "el-icon-upload2";
-  return "el-icon-s-operation";
-}
-
 export default {
-  name: "YNPage6145",
+  name: "4AYN_GongXinBuYu4AGuanXiDuiBiKuGuanLi",
   data() {
     return {
       searchData: {},
       searchConfig: [],
-      allTableData: initialRows.map((item) => ({ ...item })),
+      allTableData: rows.map((item) => ({ ...item })),
       tableData: [],
       selectedRows: [],
-      tableColumns,
+      tableColumns: cols,
       pageTotal: 0,
-      pageOptions: {
-        pageNum: 1,
-        pageSize: 10,
-      },
+      pageOptions: { pageNum: 1, pageSize: 10 },
       activeFunction: "",
       activeActionType: "",
       formVisible: false,
@@ -832,17 +457,14 @@ export default {
       fbResultTitle: "结果反馈",
       fbResultFields: [],
       fbResultSuccess: false,
-      // 发起审核流程弹窗
+      queryDynVisible: false,
+      queryDynTitle: "",
+      queryDynMode: "table",
+      queryDynData: [],
+      queryDynMetrics: [],
       initiateAuditVisible: false,
       initiateAuditTitle: "",
-      initiateAuditForm: {
-        billNo: "",
-        auditType: "",
-        applicant: "",
-        dept: "",
-        scope: "",
-        description: "",
-      },
+      initiateAuditForm: { billNo: "", auditType: "", applicant: "", dept: "", scope: "", description: "" },
       initiateAuditStep: 0,
       initiateAuditNodes: [],
       approvalVisible: false,
@@ -923,47 +545,10 @@ export default {
     handleSelectionChange(selection) {
       this.selectedRows = selection || [];
     },
-    handleFunction(functionName, extraType) {
+    handleFunction(functionName, type) {
       this.activeFunction = functionName;
-      this.activeActionType = extraType;
-
-      // 如果传入了显式类型，直接使用
-      if (extraType) {
-        // 处理删除操作
-        if (/^delete/.test(extraType)) {
-          if (!this.selectedRows.length) { this.$message.warning("请先选择要删除的记录"); return; }
-          this.$confirm("确定要执行【" + functionName + "】删除选中的 " + this.selectedRows.length + " 条记录吗？", "提示", { type: "warning" }).then(() => {
-            const ids = new Set(this.selectedRows.map((r) => r.ID));
-            this.allTableData = this.allTableData.filter((item) => !ids.has(item.ID));
-            this.fetchData();
-            this.$message.success("删除成功，共删除 " + ids.size + " 条记录");
-          }).catch(() => {});
-          return;
-        }
-        // 处理导出操作
-        if (/^export/.test(extraType)) {
-          const data = this.selectedRows.length ? this.selectedRows : this.tableData;
-          exportXLSX(data, functionName);
-          this.$message.success("导出成功");
-          return;
-        }
-        // 处理导入操作
-        if (/^import/.test(extraType)) {
-          this.importTitle = functionName || "导入";
-          this.importFunctionName = functionName;
-          this.importFileList = [];
-          this.importProgress = 0;
-          this.importVisible = true;
-          return;
-        }
-        this.openFunctionDialog(functionName, extraType);
-        return;
-      }
-
-      // 没有显式类型时通过 getActionType 自动推导
-      const actionType = getActionType(functionName);
-      this.activeActionType = actionType;
-      if (actionType === "delete") {
+      this.activeActionType = type;
+      if (type === "delete") {
         if (!this.selectedRows.length) { this.$message.warning("请先选择要删除的记录"); return; }
         this.$confirm("确定要执行【" + functionName + "】删除选中的 " + this.selectedRows.length + " 条记录吗？", "提示", { type: "warning" }).then(() => {
           const ids = new Set(this.selectedRows.map((r) => r.ID));
@@ -973,13 +558,13 @@ export default {
         }).catch(() => {});
         return;
       }
-      if (actionType === "export") {
+      if (type === "export") {
         const data = this.selectedRows.length ? this.selectedRows : this.tableData;
         exportXLSX(data, functionName);
         this.$message.success("导出成功");
         return;
       }
-      if (actionType === "import") {
+      if (type === "import") {
         this.importTitle = functionName || "导入";
         this.importFunctionName = functionName;
         this.importFileList = [];
@@ -987,116 +572,66 @@ export default {
         this.importVisible = true;
         return;
       }
-      const dialogTypeMap = {
-        "configure": "form", "receive_request": "receive", "receive_feedback": "receive",
-        "receive": "receive", "send": "dispatch", "invoke": "workflow",
-        "feedback_result": "feedback", "feedback": "feedback", "dispatch": "dispatch",
-        "query": "detail", "analysis": "analysis", "operation": "operation",
-      };
-      this.openFunctionDialog(functionName, dialogTypeMap[actionType] || "operation");
+      // 查询类按钮 → 各自独立对话框内容
+      if (type === 'detail') {
+        if (/关系对比库数据获取/.test(functionName)) {
+          this.queryDynTitle = functionName;
+          this.queryDynMode = 'table';
+          this.queryDynData = this.allTableData.map(r => ({...r}));
+          this.queryDynVisible = true;
+          return;
+        }
+        if (/查询.*汇总/.test(functionName)) {
+          this.queryDynTitle = functionName;
+          this.queryDynMode = 'summary';
+          const enabled = this.allTableData.filter(r => r.启用状态 === '启用').length;
+          const disabled = this.allTableData.filter(r => r.启用状态 === '停用').length;
+          this.queryDynMetrics = [
+            { label: '关系总数', value: this.allTableData.length },
+            { label: '启用关系', value: enabled },
+            { label: '停用关系', value: disabled },
+            { label: '匹配率', value: '97.8%' },
+            { label: '准确率', value: '99.5%' },
+          ];
+          this.queryDynVisible = true;
+          return;
+        }
+        if (/查询.*明细/.test(functionName)) {
+          this.queryDynTitle = functionName;
+          this.queryDynMode = 'detailReport';
+          this.queryDynData = this.allTableData.map((r, i) => ({
+            '关系名称': r.关系名称,
+            '关联类型': r.关联类型,
+            '执行次数': [65, 142, 38, 195, 82][i % 5],
+            '通过率': ['96%', '98%', '91%', '97%', '99%'][i % 5],
+            '平均耗时': ['42ms', '88ms', '25ms', '165ms', '52ms'][i % 5],
+            '最近执行': '2026-06-0' + (7 - i) + ' 09:30:00',
+            '状态': ['正常', '正常', '异常', '正常', '正常'][i % 5],
+          }));
+          this.queryDynVisible = true;
+          return;
+        }
+      }
+      this.openFunctionDialog(functionName, type);
     },
     openFunctionDialog(functionName, type) {
       const S = pageHash(functionName);
       const now = this.now();
-
-      // 将 compound 类型（如 monitor_4a、alert_diff）映射到基础弹窗类型
-      const prefixMap = {
-        'monitor': 'monitor',
-        'alert': 'alert',
-        'err_monitor': 'monitor',
-        'err_notify': 'alert',
-        'notify': 'feedback',
-        'audit': 'audit',
-        'stats': 'statistics',
-        'collect': 'dataprocess',
-        'preprocess': 'dataprocess',
-        'add': 'form',
-        'define': 'form',
-        'modify': 'form',
-        'query': 'detail',
-        'detail': 'detail',
-        'get': 'detail',
-        'push': 'dispatch',
-        'config': 'config',
-      };
-      const match = type.match(/^(.+)_([a-z0-9]+)$/);
-      const resolvedType = (match && prefixMap[match[1]]) || type;
-
-      switch (resolvedType) {
-        case "form":
-          this.openFormDialog(functionName, S, now);
-          break;
-        case "detail":
-          this.openDetailDialog(functionName, S, now);
-          break;
-        case "monitor":
-          this.openMonitorDialog(functionName, S, now);
-          break;
-        case "statistics":
-          this.openStatisticsDialog(functionName, S, now);
-          break;
-        case "analysis":
-          this.openAnalysisDialog(functionName, S, now);
-          break;
-        case "alert":
-          this.openAlertDialog(functionName, S, now);
-          break;
-        case "audit":
-          this.openAuditDialog(functionName, S, now);
-          break;
-        case "workflow":
-          this.openWorkflowDialog(functionName, S, now);
-          break;
-        case "dispatch":
-          this.openDispatchDialog(functionName, S, now);
-          break;
-        case "receive":
-          this.openReceiveDialog(functionName, S, now);
-          break;
-        case "feedback":
-          this.openFeedbackDialog(functionName, S, now);
-          break;
-        case "export":
-          this.openExportDialog(functionName, S, now);
-          break;
-        case "api":
-          this.openApiDialog(functionName, S, now);
-          break;
-        case "dataprocess":
-          this.openDataProcessDialog(functionName, S, now);
-          break;
-        case "config":
-          this.openConfigDialog(functionName, S, now);
-          break;
-        case "sync":
-          this.openSyncDialog(functionName, S, now);
-          break;
-        case "preview":
-          this.openPreviewDialog(functionName, S, now);
-          break;
-        case "log":
-          this.openLogDialog(functionName, S, now);
-          break;
-        case "report":
-          this.openReportDialog(functionName, S, now);
-          break;
-        case "validate":
-          this.openValidateDialog(functionName, S, now);
-          break;
-        case "transform":
-          this.openTransformDialog(functionName, S, now);
-          break;
-        case "schedule":
-          this.openScheduleDialog(functionName, S, now);
-          break;
-        case "initiate_audit":
-          this.openInitiateAuditDialog(functionName, S, now);
-          break;
-        case "approval":
-          this.openApprovalDialog(functionName, S, now);
-          break;
-        default:
-          this.openOperationDialog(functionName, S, now);
+      switch (type) {
+        case "form": this.openFormDialog(functionName, S, now); break;
+        case "detail": this.openDetailDialog(functionName, S, now); break;
+        case "monitor": this.openMonitorDialog(functionName, S, now); break;
+        case "statistics": this.openStatisticsDialog(functionName, S, now); break;
+        case "analysis": this.openAnalysisDialog(functionName, S, now); break;
+        case "alert": this.openAlertDialog(functionName, S, now); break;
+        case "audit": this.openAuditDialog(functionName, S, now); break;
+        case "workflow": this.openWorkflowDialog(functionName, S, now); break;
+        case "dispatch": this.openDispatchDialog(functionName, S, now); break;
+        case "receive": this.openReceiveDialog(functionName, S, now); break;
+        case "feedback": this.openFeedbackDialog(functionName, S, now); break;
+        case "initiate_audit": this.openInitiateAuditDialog(functionName, S, now); break;
+        case "approval": this.openApprovalDialog(functionName, S, now); break;
+        default: this.openOperationDialog(functionName, S, now); break;
       }
     },
     openFormDialog(functionName, S, now) {
@@ -1280,51 +815,6 @@ export default {
       this.fbResultSuccess = /成功|200|202/.test(this.fbResultFields[3].value);
       this.fbResultVisible = true;
     },
-    openExportDialog(functionName, S, now) {
-      this.detailTitle = functionName;
-      this.detailFields = [
-        { label: "导出任务", value: functionName },
-        { label: "导出编号", value: "EXP-" + String(S).slice(-6) },
-        { label: "导出格式", value: pick(["Excel (.xlsx)", "CSV (.csv)", "JSON (.json)", "PDF (.pdf)"], 0, S) },
-        { label: "数据范围", value: pick(["全量数据", "当前筛选", "最近7天", "最近30天"], 1, S) },
-        { label: "预计耗时", value: pick(["约2秒", "约5秒", "约15秒", "约30秒"], 2, S) },
-        { label: "文件大小", value: pick(["12KB", "48KB", "256KB", "1.2MB"], 3, S) },
-        { label: "导出状态", value: "等待确认" },
-        { label: "操作时间", value: now },
-      ];
-      this.detailVisible = true;
-    },
-    openApiDialog(functionName, S, now) {
-      this.recvReqTitle = functionName;
-      this.recvReqStats = [
-        { label: "接口地址", value: "/api/" + String(S).slice(-6) + "/" + pick(["query", "submit", "sync", "check"], 0, S) },
-        { label: "请求方式", value: pick(["GET", "POST", "PUT", "DELETE"], 1, S) },
-        { label: "响应时间", value: pick(["12ms", "28ms", "56ms", "120ms"], 2, S) + "" },
-        { label: "成功率", value: pick(["99.8%", "99.5%", "98.9%", "97.2%"], 3, S) },
-        { label: "今日调用", value: pick([128, 256, 512, 1024], 4, S) + "" },
-        { label: "限流状态", value: pick(["正常", "接近阈值", "已触发限流"], 5, S) },
-      ];
-      this.recvReqProgress = pick([85, 92, 97, 100], 0, S);
-      this.recvReqLog = [
-        { time: now, level: "INFO", msg: functionName + " 接口就绪" },
-        { time: now, level: "INFO", msg: "收到请求，处理中..." },
-        { time: now, level: pick(["INFO", "WARN"], 4, S), msg: pick(["请求处理完成", "响应超时", "参数校验失败", "接口限流触发"], 5, S) },
-      ];
-      this.recvReqVisible = true;
-    },
-    openDataProcessDialog(functionName, S, now) {
-      this.invokeTitle = functionName;
-      this.invokeSteps = [
-        { step: "数据采集", status: pick(["已完成", "进行中", "等待中"], 0, S), time: pick(["128ms", "256ms", "-"], 1, S) + "" },
-        { step: "格式转换", status: pick(["已完成", "进行中", "等待中"], 2, S), time: pick(["56ms", "128ms", "-"], 3, S) + "" },
-        { step: "数据校验", status: pick(["已完成", "进行中", "等待中"], 4, S), time: pick(["23ms", "56ms", "-"], 5, S) + "" },
-        { step: "数据清洗", status: pick(["已完成", "进行中", "等待中"], 6, S), time: pick(["86ms", "186ms", "-"], 7, S) + "" },
-        { step: "结果写入", status: pick(["已完成", "进行中", "等待中"], 8, S), time: pick(["18ms", "35ms", "-"], 9, S) + "" },
-      ];
-      this.invokeCurrentStep = this.invokeSteps.findIndex(s => s.status === "进行中") + 1;
-      this.invokeProgress = Math.round((this.invokeSteps.filter(s => s.status === "已完成").length / this.invokeSteps.length) * 100);
-      this.invokeVisible = true;
-    },
     openOperationDialog(functionName, S, now) {
       this.detailTitle = functionName;
       this.detailFields = [
@@ -1338,126 +828,6 @@ export default {
         { label: "备注", value: functionName + "的操作执行" },
       ];
       this.detailVisible = true;
-    },
-    openConfigDialog(functionName, S, now) {
-      this.configureTitle = functionName;
-      this.configureForm = {
-        配置名称: functionName,
-        配置编号: "CFG-" + String(S).slice(-6),
-        配置类型: pick(["系统配置", "网络配置", "安全配置", "性能配置"], 0, S),
-        环境: pick(["生产环境", "测试环境", "开发环境", "预发布环境"], 1, S),
-        生效范围: pick(["全局生效", "模块生效", "节点生效", "会话生效"], 2, S),
-        配置值: pick(["enabled=true", "timeout=30s", "max_retries=3", "batch_size=100"], 3, S),
-        修改原因: pick(["性能优化", "故障修复", "安全加固", "功能调整"], 4, S),
-        修改人: pick(["系统管理员", "运维工程师", "安全管理员"], 5, S),
-        修改时间: now,
-      };
-      this.configureVisible = true;
-    },
-    openSyncDialog(functionName, S, now) {
-      this.recvReqTitle = functionName;
-      this.recvReqStats = [
-        { label: "同步源", value: pick(["主数据库", "备份数据库", "远程节点", "外部系统"], 0, S) },
-        { label: "同步目标", value: pick(["本地缓存", "从数据库", "文件系统", "消息队列"], 1, S) },
-        { label: "同步状态", value: pick(["已完成", "同步中", "等待中", "失败"], 2, S) },
-        { label: "已同步记录", value: pick([1280, 2560, 5120, 10240], 3, S) + "" },
-        { label: "冲突记录", value: pick([0, 2, 8, 15], 4, S) + "" },
-        { label: "同步耗时", value: pick(["1.2s", "3.5s", "8.7s", "25.3s"], 5, S) },
-      ];
-      this.recvReqProgress = pick([65, 78, 89, 100], 0, S);
-      this.recvReqLog = [
-        { time: now, level: "INFO", msg: functionName + " 同步任务启动" },
-        { time: now, level: "INFO", msg: "正在同步数据，进度 " + pick(["45%", "67%", "89%"], 1, S) },
-        { time: now, level: pick(["INFO", "WARN"], 4, S), msg: pick(["同步完成", "发现数据冲突", "部分记录跳过", "同步速度下降"], 5, S) },
-      ];
-      this.recvReqVisible = true;
-    },
-    openPreviewDialog(functionName, S, now) {
-      this.detailTitle = functionName;
-      this.detailFields = [
-        { label: "预览对象", value: functionName },
-        { label: "预览编号", value: "PRV-" + String(S).slice(-6) },
-        { label: "数据类型", value: pick(["结构化数据", "半结构化数据", "非结构化数据", "混合数据"], 0, S) },
-        { label: "记录总数", value: pick([128, 256, 512, 1024], 1, S) + "条" },
-        { label: "预览范围", value: pick(["前100条", "随机抽样", "最近更新", "异常记录"], 2, S) },
-        { label: "数据大小", value: pick(["12KB", "48KB", "256KB", "1.2MB"], 3, S) },
-        { label: "加载耗时", value: pick(["0.2s", "0.5s", "1.2s", "3.8s"], 4, S) },
-        { label: "预览时间", value: now },
-      ];
-      this.detailVisible = true;
-    },
-    openLogDialog(functionName, S, now) {
-      this.recvReqTitle = functionName;
-      this.recvReqStats = [
-        { label: "日志级别", value: pick(["INFO", "WARN", "ERROR", "DEBUG"], 0, S) },
-        { label: "日志总数", value: pick([1280, 2560, 5120, 10240], 1, S) + "" },
-        { label: "错误数", value: pick([0, 3, 12, 28], 2, S) + "" },
-        { label: "警告数", value: pick([5, 12, 28, 56], 3, S) + "" },
-        { label: "时间范围", value: pick(["最近1小时", "最近24小时", "最近7天", "最近30天"], 4, S) },
-        { label: "日志来源", value: pick(["应用日志", "系统日志", "安全日志", "审计日志"], 5, S) },
-      ];
-      this.recvReqProgress = pick([85, 92, 97, 100], 0, S);
-      this.recvReqLog = [
-        { time: now, level: "INFO", msg: functionName + " 日志查询启动" },
-        { time: now, level: "INFO", msg: "匹配到 " + pick([128, 256, 512], 1, S) + " 条日志" },
-        { time: now, level: pick(["INFO", "WARN"], 4, S), msg: pick(["日志导出完成", "发现异常模式", "日志量超过阈值", "查询超时"], 5, S) },
-      ];
-      this.recvReqVisible = true;
-    },
-    openReportDialog(functionName, S, now) {
-      this.analysisTitle = functionName;
-      this.analysisMetrics = [
-        { label: "报表类型", value: pick(["日报", "周报", "月报", "季报"], 0, S) },
-        { label: "数据维度", value: pick(["按模块", "按时间", "按类型", "综合维度"], 1, S) },
-        { label: "生成状态", value: pick(["已完成", "生成中", "等待中", "失败"], 2, S) },
-        { label: "报表页数", value: pick([5, 12, 28, 56], 3, S) + "页" },
-      ];
-      this.analysisBars = [
-        { name: "数据完整性", value: pick([85, 92, 97, 100], 0, S) },
-        { name: "图表覆盖率", value: pick([78, 85, 92, 98], 1, S) },
-        { name: "格式规范性", value: pick([90, 95, 98, 100], 2, S) },
-        { name: "生成耗时", value: pick([65, 78, 85, 92], 3, S) },
-      ];
-      this.analysisVisible = true;
-    },
-    openValidateDialog(functionName, S, now) {
-      this.queryTitle = functionName;
-      const count = (S % 3) + 3;
-      this.queryResults = Array.from({ length: count }).map((_, i) => ({
-        序号: i + 1,
-        数据项: pick(["完整性校验", "一致性校验", "准确性校验", "时效性校验", "合规性校验"], i, S),
-        结果数量: pick([12, 28, 56, 128], i, S),
-        查询耗时: pick(["12ms", "28ms", "56ms", "128ms"], i, S) + "",
-        状态: pick(["通过", "不通过", "部分通过", "待校验"], i, S),
-      }));
-      this.queryVisible = true;
-    },
-    openTransformDialog(functionName, S, now) {
-      this.invokeTitle = functionName;
-      this.invokeSteps = [
-        { step: "数据解析", status: pick(["已完成", "进行中", "等待中"], 0, S), time: pick(["128ms", "256ms", "-"], 1, S) + "" },
-        { step: "格式转换", status: pick(["已完成", "进行中", "等待中"], 2, S), time: pick(["56ms", "128ms", "-"], 3, S) + "" },
-        { step: "数据映射", status: pick(["已完成", "进行中", "等待中"], 4, S), time: pick(["23ms", "56ms", "-"], 5, S) + "" },
-        { step: "数据验证", status: pick(["已完成", "进行中", "等待中"], 6, S), time: pick(["18ms", "35ms", "-"], 7, S) + "" },
-        { step: "结果输出", status: pick(["已完成", "进行中", "等待中"], 8, S), time: pick(["12ms", "28ms", "-"], 9, S) + "" },
-      ];
-      this.invokeCurrentStep = this.invokeSteps.findIndex(s => s.status === "进行中") + 1;
-      this.invokeProgress = Math.round((this.invokeSteps.filter(s => s.status === "已完成").length / this.invokeSteps.length) * 100);
-      this.invokeVisible = true;
-    },
-    openScheduleDialog(functionName, S, now) {
-      this.configureTitle = functionName;
-      this.configureForm = {
-        任务名称: functionName,
-        调度编号: "SCH-" + String(S).slice(-6),
-        调度类型: pick(["定时调度", "事件触发", "条件触发", "手动触发"], 0, S),
-        执行频率: pick(["每天", "每周", "每月", "每小时"], 1, S),
-        下次执行: now,
-        执行节点: pick(["主节点", "备节点", "边缘节点", "任意节点"], 2, S),
-        超时时间: pick(["30s", "60s", "120s", "300s"], 3, S),
-        重试策略: pick(["不重试", "重试1次", "重试3次", "无限重试"], 4, S),
-      };
-      this.configureVisible = true;
     },
     openEdit(row) {
       this.formMode = "edit";
@@ -1538,6 +908,7 @@ export default {
     },
     openInitiateAuditDialog(functionName, S, now) {
       this.initiateAuditTitle = functionName;
+      const pool = ["张伟", "李娜", "王强", "赵敏", "刘洋", "陈静"];
       this.initiateAuditForm = {
         billNo: "AUDIT-" + String(S).slice(-6),
         auditType: pick(["安全审计", "合规审计", "系统审计", "数据审计"], 0, S),
@@ -1547,10 +918,8 @@ export default {
         description: functionName + "的审核申请，请相关部门审批。",
       };
       this.initiateAuditStep = 1;
-      const pool = ["张伟", "李娜", "王强", "赵敏", "刘洋", "陈静"];
-      const applicant = pick(pool, 5, S);
       this.initiateAuditNodes = [
-        { step: "发起申请", handler: applicant, time: now, status: "已完成", remark: "已提交审核申请" },
+        { step: "发起申请", handler: pick(pool, 5, S), time: now, status: "已完成", remark: "已提交审核申请" },
         { step: "部门初审", handler: pick(pool, 0, S), time: now, status: "进行中", remark: "初审中，请等待" },
         { step: "技术审核", handler: pick(pool, 1, S), time: "-", status: "待处理", remark: "等待技术审核" },
         { step: "安全审核", handler: pick(pool, 2, S), time: "-", status: "待处理", remark: "等待安全审核通过" },
@@ -1560,7 +929,6 @@ export default {
       this.initiateAuditVisible = true;
     },
     confirmInitiateAudit() {
-      const self = this;
       this.$confirm("确认提交【" + this.initiateAuditTitle + "】审核申请？", "提示", {
         confirmButtonText: "确认提交",
         cancelButtonText: "取消",
@@ -1624,10 +992,6 @@ export default {
         this.approvalProgress = Math.round((passed / steps.length) * 100);
         this.$message.success("审批" + action + "成功");
       }).catch(function() {});
-    },
-    navigateToSubPage(path, title) {
-      const base = "4AShangBaoShuJuDuiBiGaoJingGuiZeGuanLi";
-      this.$router.push({ path: "/ziChanXinXiShangBaoTiaoZheng/YNYunNanCOSMIC/" + base + "/" + path });
     },
   },
 };
