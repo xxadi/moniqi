@@ -395,6 +395,56 @@ export function generateDefaultData(columns, rowCount = Math.floor(Math.random()
 }
 
 /**
+ * 根据功能名称获取操作类型
+ * @param {string} name - 功能名称
+ * @returns {string} - 操作类型标识
+ */
+export function getActionType(name) {
+  if (/接收.*请求|接收.*处理/.test(name)) return "receive_request";
+  if (/接收.*反馈|接收.*信息|接收.*结果/.test(name)) return "receive_feedback";
+  if (/接收/.test(name)) return "receive";
+  if (/发送/.test(name)) return "send";
+  if (/录入|配置|新增|创建|保存|建立|修改/.test(name)) return "configure";
+  if (/调用.*流程|调用.*处理/.test(name)) return "invoke";
+  if (/反馈.*结果|返回.*结果/.test(name)) return "feedback_result";
+  if (/反馈|返回|输出/.test(name)) return "feedback";
+  if (/^调度|唤醒/.test(name)) return "dispatch";
+  if (/调度(?!模块)/.test(name)) return "dispatch";
+  if (/查询|读取|展示|监控|跟踪/.test(name)) return "query";
+  if (/导出|下载/.test(name)) return "export";
+  if (/删除|移除/.test(name)) return "delete";
+  if (/分析|统计|报表/.test(name)) return "analysis";
+  if (/导入|上传/.test(name)) return "import";
+  return "operation";
+}
+
+/**
+ * 根据功能名称获取按钮图标
+ * @param {string} name - 功能名称
+ * @returns {string} - Element UI 图标类名
+ */
+export function getButtonIcon(name) {
+  if (/接收.*请求/.test(name)) return "el-icon-download";
+  if (/接收.*反馈|接收.*信息/.test(name)) return "el-icon-document-checked";
+  if (/接收/.test(name)) return "el-icon-download";
+  if (/发送/.test(name)) return "el-icon-s-promotion";
+  if (/录入|配置|新增|创建|保存|建立/.test(name)) return "el-icon-edit-outline";
+  if (/修改/.test(name)) return "el-icon-edit";
+  if (/调用.*流程/.test(name)) return "el-icon-s-claim";
+  if (/调用/.test(name)) return "el-icon-s-promotion";
+  if (/反馈.*结果/.test(name)) return "el-icon-finished";
+  if (/反馈|返回|输出/.test(name)) return "el-icon-upload2";
+  if (/^调度|唤醒/.test(name)) return "el-icon-s-opportunity";
+  if (/调度(?!模块)/.test(name)) return "el-icon-s-opportunity";
+  if (/查询|读取|展示|监控|跟踪/.test(name)) return "el-icon-view";
+  if (/导出|下载/.test(name)) return "el-icon-download";
+  if (/删除|移除/.test(name)) return "el-icon-delete";
+  if (/分析|统计|报表/.test(name)) return "el-icon-data-analysis";
+  if (/导入|上传/.test(name)) return "el-icon-upload2";
+  return "el-icon-s-operation";
+}
+
+/**
  * 根据列配置生成单行默认数据（用于新增表单预填充）
  * @param {Array} columns - 表格列配置数组
  * @returns {Object} - 默认数据行

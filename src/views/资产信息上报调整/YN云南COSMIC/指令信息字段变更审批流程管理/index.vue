@@ -526,6 +526,42 @@
         <el-button type="primary" icon="el-icon-s-check" @click="confirmAssign">确认指派</el-button>
       </span>
     </el-dialog>
+
+    <!-- 流程通知弹窗 -->
+    <el-dialog :title="notifyTitle" :visible.sync="notifyVisible" width="680px" append-to-body>
+      <el-alert :title="notifyAlertInfo.title" :type="notifyAlertInfo.type" :description="notifyAlertInfo.description" show-icon :closable="false" style="margin-bottom:16px;"></el-alert>
+      <div style="font-size:13px;color:#606266;margin-bottom:8px;font-weight:500;">通知记录</div>
+      <el-table :data="notifyHistory" border size="mini" style="width:100%;margin-bottom:16px;">
+        <el-table-column prop="time" label="通知时间" width="160"></el-table-column>
+        <el-table-column prop="method" label="通知方式" width="100"></el-table-column>
+        <el-table-column prop="target" label="通知对象" width="120"></el-table-column>
+        <el-table-column prop="content" label="通知内容"></el-table-column>
+        <el-table-column prop="status" label="状态" width="80" align="center">
+          <template slot-scope="scope">
+            <el-tag :type="scope.row.status === '已发送' ? 'success' : scope.row.status === '发送失败' ? 'danger' : 'warning'" size="mini">{{ scope.row.status }}</el-tag>
+          </template>
+        </el-table-column>
+      </el-table>
+      <el-divider></el-divider>
+      <div style="font-size:13px;color:#606266;margin-bottom:8px;font-weight:500;">发送通知</div>
+      <el-form :model="notifyForm" label-width="90px">
+        <el-form-item label="通知方式">
+          <el-select v-model="notifyForm.notifyMethod" style="width:100%">
+            <el-option label="站内信" value="站内信"></el-option>
+            <el-option label="邮件" value="邮件"></el-option>
+            <el-option label="短信" value="短信"></el-option>
+            <el-option label="企业微信" value="企业微信"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="通知内容">
+          <el-input v-model="notifyForm.notifyContent" type="textarea" :rows="3" placeholder="请输入通知内容"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer">
+        <el-button @click="notifyVisible = false">关闭</el-button>
+        <el-button type="primary" icon="el-icon-bell" @click="sendNotify">发送通知</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -825,6 +861,7 @@ function getActionType(name) {
   if (/流程图/.test(name)) return "flowchart";
   if (/逐级审批/.test(name)) return "approval";
   if (/驳回|拒绝/.test(name)) return "reject";
+  if (/流程通知/.test(name)) return "notify";
   if (/通知/.test(name)) return "alert";
   return "operation";
 }
@@ -954,6 +991,12 @@ export default {
         time: "",
       },
       personPool: ["张伟", "李娜", "王强", "赵敏", "刘洋", "陈静", "张三", "李四"],
+      // 流程通知弹窗
+      notifyVisible: false,
+      notifyTitle: "",
+      notifyAlertInfo: { title: "", type: "warning", description: "" },
+      notifyHistory: [],
+      notifyForm: { notifyMethod: "站内信", notifyContent: "" },
     };
   },
   computed: {
@@ -1082,6 +1125,7 @@ export default {
         "preview": "preview",
         "flowchart": "flowchart",
         "alert": "alert",
+        "notify": "notify",
         "reject": "reject",
         "operation": "operation",
       };
@@ -1110,6 +1154,9 @@ export default {
           break;
         case "alert":
           this.openAlertDialog(functionName, S, now);
+          break;
+        case "notify":
+          this.openNotifyDialog(functionName, S, now);
           break;
         case "audit":
           this.openAuditDialog(functionName, S, now);
@@ -1794,6 +1841,39 @@ export default {
       }).then(() => {
         this.rejectVisible = false;
         this.$message.success("已驳回，退回上一级处理");
+      }).catch(() => {});
+    },
+    openNotifyDialog(functionName, S, now) {
+      this.notifyTitle = functionName;
+      this.notifyAlertInfo = {
+        title: "审批流程通知提醒",
+        type: "warning",
+        description: functionName + " — 当前有新的审批流程需要处理，请相关人员及时处理。",
+      };
+      const pool = ["张伟", "李娜", "王强", "赵敏", "刘洋", "陈静"];
+      this.notifyHistory = [
+        { time: now, method: "站内信", target: pick(pool, 0, S), content: "您有一个审批请求待处理", status: "已发送" },
+        { time: now, method: "邮件", target: pick(pool, 1, S), content: "审批流程已进入下一节点", status: "已发送" },
+        { time: now, method: "短信", target: pick(pool, 2, S), content: "请及时处理审批申请", status: pick(["已发送", "发送失败"], 0, S) },
+      ];
+      this.notifyForm = {
+        notifyMethod: "站内信",
+        notifyContent: "请尽快处理【" + functionName + "】相关审批",
+      };
+      this.notifyVisible = true;
+    },
+    sendNotify() {
+      this.$confirm("确认发送通知？", "提示", {
+        confirmButtonText: "确认", cancelButtonText: "取消", type: "info",
+      }).then(() => {
+        this.notifyHistory.unshift({
+          time: this.now(),
+          method: this.notifyForm.notifyMethod,
+          target: "全体审批人",
+          content: this.notifyForm.notifyContent,
+          status: "已发送",
+        });
+        this.$message.success("通知已发送");
       }).catch(() => {});
     },
   },

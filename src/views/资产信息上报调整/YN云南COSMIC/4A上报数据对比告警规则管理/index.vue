@@ -10,6 +10,8 @@
     <div class="mt10 crud-container">
       <div class="mb10 operate-container">
         <div class="function-actions">
+          <!-- 主表 CRUD -->
+          <el-button plain type="primary" icon="el-icon-edit-outline" @click='handleFunction("新增上报数据对比规则", "add_new")'>新增上报数据对比规则</el-button>
           <!-- 子管理页面入口 -->
           <el-button plain type="success" @click="navigateToSubPage('ShangBaoShuJuDuiBiGuiZeKuGuanLi', '上报数据对比规则库管理')">上报数据对比规则库管理</el-button>
           <el-button plain type="success" @click="navigateToSubPage('4AShuJuLuRuGuiZeKuGuanLi', '4A数据录入规则库管理')">4A数据录入规则库管理</el-button>
@@ -23,7 +25,6 @@
           <el-button plain type="success" @click="navigateToSubPage('4AZiChanShuJuChaYiFangCuanGaiXinXiGuanLi', '4A资产数据差异防篡改信息管理')">4A资产数据差异防篡改信息管理</el-button>
           <el-button plain type="success" @click="navigateToSubPage('4AYuZiChanShuJuChaYiJianKongGuiZeGuanLi', '4A与资产数据差异监控规则管理')">4A与资产数据差异监控规则管理</el-button>
           <el-button plain type="success" @click="navigateToSubPage('4AShangBaoZhiBiaoXinXiGuanLi', '4A上报指标信息管理')">4A上报指标信息管理</el-button>
-          <!-- 主表 CRUD -->
           <!-- 监控 -->
           <el-button plain type="success" @click="navigateToSubPage('4AShangBaoShuJuDuiBiZongHeGuanLi', '4A上报数据对比管理')">4A上报数据对比管理</el-button>
           <el-button plain type="primary" icon="el-icon-view" @click='handleFunction("上报数据对比结果监控", "monitor_result")'>上报数据对比结果监控</el-button>

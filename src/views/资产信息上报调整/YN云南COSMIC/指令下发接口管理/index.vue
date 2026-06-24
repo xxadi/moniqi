@@ -11,18 +11,13 @@
       <div class="mb10 operate-container">
         <div class="function-actions">
           <el-button plain type="primary" icon="el-icon-edit-outline" @click='handleFunction("新增指令下发设置信息", "form")'>新增指令下发设置信息</el-button>
-          <el-button plain type="primary" icon="el-icon-edit" @click='handleFunction("修改指令下发设置信息", "config")'>修改指令下发设置信息</el-button>
+          <el-button plain type="primary" icon="el-icon-edit" @click='handleFunction("修改指令下发设置信息", "modify_setting")'>修改指令下发设置信息</el-button>
           <el-button plain type="danger" icon="el-icon-delete" @click='deleteByName("删除指令下发设置信息")'>删除指令下发设置信息</el-button>
           <el-button plain type="primary" icon="el-icon-view" @click='handleFunction("指令下发接口错误信息监控", "log")'>指令下发接口错误信息监控</el-button>
-          <el-button plain type="primary" icon="el-icon-bell" @click='handleFunction("指令下发接口错误事件通知", "api")'>指令下发接口错误事件通知</el-button>
-          <el-button plain type="primary" icon="el-icon-bell" @click='handleFunction("指令下发接口错误事件通知删除", "operation")'>指令下发接口错误事件通知删除</el-button>
-          <el-button plain type="primary" icon="el-icon-bell" @click='handleFunction("指令下发接口错误事件通知查询", "detail")'>指令下发接口错误事件通知查询</el-button>
-          <el-button plain type="primary" icon="el-icon-edit-outline" @click='handleFunction("新增指令下发接口防篡改信息", "form")'>新增指令下发接口防篡改信息</el-button>
-          <el-button plain type="primary" icon="el-icon-edit" @click='handleFunction("修改指令下发接口防篡改信息", "config")'>修改指令下发接口防篡改信息</el-button>
-          <el-button plain type="danger" icon="el-icon-delete" @click='deleteByName("删除指令下发接口防篡改信息")'>删除指令下发接口防篡改信息</el-button>
-          <el-button plain type="primary" icon="el-icon-edit-outline" @click='handleFunction("新增工信部指令信息", "form")'>新增工信部指令信息</el-button>
-          <el-button plain type="primary" icon="el-icon-edit" @click='handleFunction("修改工信部指令信息", "config")'>修改工信部指令信息</el-button>
-          <el-button plain type="danger" icon="el-icon-delete" @click='deleteByName("删除工信部指令信息")'>删除工信部指令信息</el-button>
+          <el-button plain type="primary" icon="el-icon-bell" @click='handleFunction("指令下发接口错误事件通知", "error_notify")'>指令下发接口错误事件通知</el-button>
+          <el-button plain type="primary" icon="el-icon-warning" @click="navigateToSubPage('ZhiLingXiaFaJieKouCuoWuShiJianGuanLi')">指令下发接口错误事件管理</el-button>
+          <el-button plain type="primary" icon="el-icon-shield" @click="navigateToSubPage('ZhiLingXiaFaJieKouFangCuanGaiXinXiGuanLi')">指令下发接口防篡改信息管理</el-button>
+          <el-button plain type="primary" icon="el-icon-document" @click="navigateToSubPage('GongXinBuZhiLingXinXiGuanLi')">工信部指令信息管理</el-button>
         </div>
       </div>
       <cs-pagetable
@@ -385,6 +380,42 @@
         <el-button @click="invokeVisible = false">关闭</el-button>
         <el-button v-if="invokeProgress < 100" type="warning" @click="invokeVisible = false; $message.warning('已暂停执行')">暂停</el-button>
         <el-button type="primary" @click="invokeVisible = false; $message.success('流程已确认完成')">确认完成</el-button>
+      </span>
+    </el-dialog>
+
+    <!-- 修改指令下发设置信息弹窗 -->
+    <el-dialog :title="modifyTitle" :visible.sync="modifyVisible" width="620px" append-to-body>
+      <el-form :model="modifyForm" label-width="130px">
+        <el-form-item label="当前设置">
+          <el-alert title="当前设置信息" :description="modifyAlert" type="info" :closable="false" show-icon></el-alert>
+        </el-form-item>
+        <el-form-item v-for="col in editableColumns" :key="col.prop" :label="col.label">
+          <el-input v-model="modifyForm[col.prop]"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer">
+        <el-button @click="modifyVisible = false">取消</el-button>
+        <el-button type="primary" @click="submitModify">确定修改</el-button>
+      </span>
+    </el-dialog>
+
+    <!-- 指令下发接口错误事件通知弹窗 -->
+    <el-dialog :title="errNotifyTitle" :visible.sync="errNotifyVisible" width="650px" append-to-body>
+      <el-alert title="错误事件通知" :description="errNotifyAlert" type="warning" :closable="false" show-icon style="margin-bottom:16px;"></el-alert>
+      <el-table :data="errNotifyList" border size="mini" style="width:100%">
+        <el-table-column prop="eventId" label="事件编号" width="120"></el-table-column>
+        <el-table-column prop="eventType" label="事件类型" width="100"></el-table-column>
+        <el-table-column prop="eventTime" label="发生时间" width="160"></el-table-column>
+        <el-table-column prop="status" label="通知状态" width="100" align="center">
+          <template slot-scope="scope">
+            <el-tag :type="scope.row.status==='已通知'?'success':scope.row.status==='待通知'?'warning':'danger'" size="mini">{{ scope.row.status }}</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column prop="remark" label="备注"></el-table-column>
+      </el-table>
+      <span slot="footer">
+        <el-button @click="errNotifyVisible = false">关闭</el-button>
+        <el-button type="primary" @click="confirmErrNotify">确认通知</el-button>
       </span>
     </el-dialog>
 
@@ -779,6 +810,16 @@ export default {
       approvalFinalStatus: "",
       approvalForm: { billNo: "", applicant: "", status: "", currentStatus: "", remark: "" },
       approvalStateMap: {},
+      // 修改指令下发设置信息弹窗
+      modifyVisible: false,
+      modifyTitle: "",
+      modifyForm: {},
+      modifyAlert: "",
+      // 指令下发接口错误事件通知弹窗
+      errNotifyVisible: false,
+      errNotifyTitle: "",
+      errNotifyAlert: "",
+      errNotifyList: [],
     };
   },
   computed: {
@@ -849,6 +890,10 @@ export default {
     },
     handleSelectionChange(selection) {
       this.selectedRows = selection || [];
+    },
+    navigateToSubPage(path) {
+      const base = "ZhiLingXiaFaJieKouGuanLi";
+      this.$router.push({ path: "/ziChanXinXiShangBaoTiaoZheng/YNYunNanCOSMIC/" + base + "/" + path });
     },
     handleFunction(functionName, dialogType) {
       this.activeFunction = functionName;
@@ -931,6 +976,12 @@ export default {
           break;
         case "approval":
           this.openApprovalDialog(functionName, S, now);
+          break;
+        case "modify_setting":
+          this.openModifySettingDialog(functionName, S, now);
+          break;
+        case "error_notify":
+          this.openErrorNotifyDialog(functionName, S, now);
           break;
         default:
           this.openOperationDialog(functionName, S, now);
@@ -1490,6 +1541,46 @@ export default {
         this.approvalProgress = Math.round((passed / steps.length) * 100);
         this.$message.success("审批" + action + "成功");
       }).catch(function() {});
+    },
+    openModifySettingDialog(functionName, S, now) {
+      this.modifyTitle = functionName;
+      this.modifyAlert = "当前配置编号: CFG-" + String(S).slice(-6) + "，上次修改时间: " + now;
+      var row = this.selectedRows.length ? { ...this.selectedRows[0] } : this.createEmptyRow();
+      this.modifyForm = row;
+      this.modifyVisible = true;
+    },
+    submitModify() {
+      if (!this.modifyForm.ID) {
+        this.$message.warning("请先选择要修改的记录");
+        return;
+      }
+      var index = this.allTableData.findIndex(function(item) { return item.ID === this.modifyForm.ID; }.bind(this));
+      if (index !== -1) {
+        this.$set(this.allTableData, index, { ...this.modifyForm });
+        this.fetchData();
+        this.$message.success("修改成功");
+      }
+      this.modifyVisible = false;
+    },
+    openErrorNotifyDialog(functionName, S, now) {
+      this.errNotifyTitle = functionName;
+      this.errNotifyAlert = "当前有 " + (S % 5 + 3) + " 条错误事件待通知，请确认通知下发。";
+      var types = ["连接超时", "数据校验失败", "接口异常", "响应格式错误", "权限不足"];
+      this.errNotifyList = Array.from({ length: 5 }).map(function(_, i) {
+        return {
+          eventId: "ERR-" + String(S + i).slice(-6),
+          eventType: pick(types, i, S),
+          eventTime: now,
+          status: pick(["已通知", "待通知", "通知失败"], i, S),
+          remark: pick(["自动通知", "需人工确认", "已重试3次"], i, S),
+        };
+      });
+      this.errNotifyVisible = true;
+    },
+    confirmErrNotify() {
+      this.errNotifyList.forEach(function(item) { item.status = "已通知"; });
+      this.$message.success("错误事件通知已全部下发");
+      this.errNotifyVisible = false;
     },
   },
 };

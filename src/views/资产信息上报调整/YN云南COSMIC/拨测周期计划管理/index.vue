@@ -10,27 +10,15 @@
     <div class="mt10 crud-container">
       <div class="mb10 operate-container">
         <div class="function-actions">
-          <el-button plain type="primary" icon="el-icon-s-operation" @click='handleFunction("拨测周期计划信息表", "schedule")'>拨测周期计划信息表</el-button>
-          <el-button plain type="primary" icon="el-icon-edit-outline" @click='handleFunction("新增自动拨测任务设置信息", "form")'>新增自动拨测任务设置信息</el-button>
-          <el-button plain type="primary" icon="el-icon-edit" @click='handleFunction("修改自动拨测任务设置信息", "config")'>修改自动拨测任务设置信息</el-button>
-          <el-button plain type="danger" icon="el-icon-delete" @click='deleteByName("删除自动拨测任务设置信息")'>删除自动拨测任务设置信息</el-button>
-          <el-button plain type="primary" icon="el-icon-view" @click='handleFunction("自动拨测任务错误信息监控", "log")'>自动拨测任务错误信息监控</el-button>
-          <el-button plain type="primary" icon="el-icon-bell" @click='handleFunction("自动拨测任务错误事件通知", "audit")'>自动拨测任务错误事件通知</el-button>
-          <el-button plain type="primary" icon="el-icon-bell" @click='handleFunction("自动拨测任务错误事件通知删除", "operation")'>自动拨测任务错误事件通知删除</el-button>
-          <el-button plain type="primary" icon="el-icon-bell" @click='handleFunction("自动拨测任务错误事件通知查询", "detail")'>自动拨测任务错误事件通知查询</el-button>
-          <el-button plain type="primary" icon="el-icon-edit-outline" @click='handleFunction("新增拨测周期计划任务", "form")'>新增拨测周期计划任务</el-button>
-          <el-button plain type="primary" icon="el-icon-edit-outline" @click='handleFunction("新增拨测周期计划模型", "form")'>新增拨测周期计划模型</el-button>
-          <el-button plain type="primary" icon="el-icon-edit" @click='handleFunction("修改拨测周期计划模型", "config")'>修改拨测周期计划模型</el-button>
-          <el-button plain type="danger" icon="el-icon-delete" @click='deleteByName("删除拨测周期计划模型")'>删除拨测周期计划模型</el-button>
-          <el-button plain type="primary" icon="el-icon-s-operation" @click='handleFunction("拨测周期计划查询", "detail")'>拨测周期计划查询</el-button>
-          <el-button plain type="primary" icon="el-icon-s-operation" @click='handleFunction("拨测周期计划可视化展示", "detail")'>拨测周期计划可视化展示</el-button>
-          <el-button plain type="primary" icon="el-icon-s-operation" @click='handleFunction("拨测范围信息表", "operation")'>拨测范围信息表</el-button>
-          <el-button plain type="primary" icon="el-icon-edit-outline" @click='handleFunction("新增拨测范围信息", "form")'>新增拨测范围信息</el-button>
-          <el-button plain type="primary" icon="el-icon-edit-outline" @click='handleFunction("新增拨测范围模型", "form")'>新增拨测范围模型</el-button>
-          <el-button plain type="primary" icon="el-icon-edit" @click='handleFunction("修改拨测范围模型", "config")'>修改拨测范围模型</el-button>
-          <el-button plain type="danger" icon="el-icon-delete" @click='deleteByName("删除拨测范围模型")'>删除拨测范围模型</el-button>
-          <el-button plain type="primary" icon="el-icon-s-operation" @click='handleFunction("拨测范围查询", "detail")'>拨测范围查询</el-button>
-          <el-button plain type="primary" icon="el-icon-s-operation" @click='handleFunction("拨测范围可视化展示", "detail")'>拨测范围可视化展示</el-button>
+          <!-- 子管理页面导航入口（绿色） -->
+          <el-button plain type="success" icon="el-icon-s-grid" @click="navigateToSubPage('ZiDongBoCeRenWuSheZhiXinXiGuanLi')">自动拨测任务设置信息管理</el-button>
+          <el-button plain type="success" icon="el-icon-s-grid" @click="navigateToSubPage('BoCeZhouQiJiHuaXinXiGuanLi')">拨测周期计划管理</el-button>
+          <el-button plain type="success" icon="el-icon-s-grid" @click="navigateToSubPage('BoCeFanWeiXinXiGuanLi')">拨测范围信息管理</el-button>
+          <!-- 核心功能按钮（蓝色） -->
+          <el-button plain type="primary" icon="el-icon-s-operation" @click="handleFunction('拨测周期计划信息表', 'schedule')">拨测周期计划信息表</el-button>
+          <el-button plain type="primary" icon="el-icon-s-operation" @click="handleFunction('拨测范围信息表', 'operation')">拨测范围信息表</el-button>
+          <el-button plain type="primary" icon="el-icon-view" @click="handleFunction('拨测错误信息监控', 'log')">拨测错误信息监控</el-button>
+          <el-button plain type="primary" icon="el-icon-bell" @click="handleFunction('拨测错误事件通知', 'audit')">拨测错误事件通知</el-button>
         </div>
       </div>
       <cs-pagetable
@@ -841,6 +829,9 @@ export default {
     },
     handleSelectionChange(selection) {
       this.selectedRows = selection || [];
+    },
+    navigateToSubPage(subPage) {
+      this.$router.push({ path: subPage });
     },
     handleFunction(functionName, dialogType) {
       this.activeFunction = functionName;

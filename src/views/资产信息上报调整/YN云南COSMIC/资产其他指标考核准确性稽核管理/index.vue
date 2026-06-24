@@ -10,53 +10,28 @@
     <div class="mt10 crud-container">
       <div class="mb10 operate-container">
         <div class="function-actions">
-          <el-button plain type="primary" icon="el-icon-edit-outline" @click='handleFunction("新增开源框架考核准确性稽核规则", "form")'>新增开源框架考核准确性稽核规则</el-button>
-          <el-button plain type="primary" icon="el-icon-edit-outline" @click='handleFunction("新增开源框架考核准确性上传任务", "form")'>新增开源框架考核准确性上传任务</el-button>
-          <el-button plain type="danger" icon="el-icon-delete" @click='deleteByName("删除开源框架考核准确性上传任务")'>删除开源框架考核准确性上传任务</el-button>
-          <el-button plain type="primary" icon="el-icon-edit" @click='handleFunction("修改开源框架考核准确性上传任务", "config")'>修改开源框架考核准确性上传任务</el-button>
-          <el-button plain type="primary" icon="el-icon-view" @click='handleFunction("查询开源框架考核准确性上传任务", "detail")'>查询开源框架考核准确性上传任务</el-button>
-          <el-button plain type="primary" icon="el-icon-s-operation" @click='handleFunction("开源框架考核准确性上传任务启用/禁用", "form")'>开源框架考核准确性上传任务启用/禁用</el-button>
-          <el-button plain type="primary" icon="el-icon-bell" @click='handleFunction("开源框架考核准确性稽核数据上传", "form")'>开源框架考核准确性稽核数据上传</el-button>
-          <el-button plain type="primary" icon="el-icon-view" @click='handleFunction("开源框架考核准确性稽核数据接口监控", "log")'>开源框架考核准确性稽核数据接口监控</el-button>
-          <el-button plain type="primary" icon="el-icon-edit-outline" @click='handleFunction("新增开源框架数据考核准确性字典信息", "form")'>新增开源框架数据考核准确性字典信息</el-button>
-          <el-button plain type="primary" icon="el-icon-edit" @click='handleFunction("修改开源框架数据考核准确性字典信息", "config")'>修改开源框架数据考核准确性字典信息</el-button>
-          <el-button plain type="danger" icon="el-icon-delete" @click='deleteByName("删除开源框架数据考核准确性字典信息")'>删除开源框架数据考核准确性字典信息</el-button>
-          <el-button plain type="primary" icon="el-icon-edit-outline" @click='handleFunction("新增产品界面语言考核准确性稽核规则", "form")'>新增产品界面语言考核准确性稽核规则</el-button>
-          <el-button plain type="primary" icon="el-icon-edit-outline" @click='handleFunction("新增产品界面语言数据考核准确性字典信息", "form")'>新增产品界面语言数据考核准确性字典信息</el-button>
-          <el-button plain type="primary" icon="el-icon-edit" @click='handleFunction("修改产品界面语言数据考核准确性字典信息", "config")'>修改产品界面语言数据考核准确性字典信息</el-button>
-          <el-button plain type="danger" icon="el-icon-delete" @click='deleteByName("删除产品界面语言数据考核准确性字典信息")'>删除产品界面语言数据考核准确性字典信息</el-button>
-          <el-button plain type="primary" icon="el-icon-edit-outline" @click='handleFunction("新增操作系统类型数据考核准确性字典信息", "form")'>新增操作系统类型数据考核准确性字典信息</el-button>
-          <el-button plain type="primary" icon="el-icon-edit" @click='handleFunction("修改操作系统类型数据考核准确性字典信息", "config")'>修改操作系统类型数据考核准确性字典信息</el-button>
-          <el-button plain type="danger" icon="el-icon-delete" @click='deleteByName("删除操作系统类型数据考核准确性字典信息")'>删除操作系统类型数据考核准确性字典信息</el-button>
-          <el-button plain type="primary" icon="el-icon-edit-outline" @click='handleFunction("新增硬件环境数据考核准确性字典信息", "form")'>新增硬件环境数据考核准确性字典信息</el-button>
-          <el-button plain type="primary" icon="el-icon-edit" @click='handleFunction("修改硬件环境数据考核准确性字典信息", "config")'>修改硬件环境数据考核准确性字典信息</el-button>
-          <el-button plain type="danger" icon="el-icon-delete" @click='deleteByName("删除硬件环境数据考核准确性字典信息")'>删除硬件环境数据考核准确性字典信息</el-button>
-          <el-button plain type="primary" icon="el-icon-edit-outline" @click='handleFunction("新增软件环境数据考核准确性字典信息", "form")'>新增软件环境数据考核准确性字典信息</el-button>
-          <el-button plain type="primary" icon="el-icon-edit" @click='handleFunction("修改软件环境数据考核准确性字典信息", "config")'>修改软件环境数据考核准确性字典信息</el-button>
-          <el-button plain type="danger" icon="el-icon-delete" @click='deleteByName("删除软件环境数据考核准确性字典信息")'>删除软件环境数据考核准确性字典信息</el-button>
-          <el-button plain type="primary" icon="el-icon-edit-outline" @click='handleFunction("新增网络单元类型数据考核准确性字典信息", "form")'>新增网络单元类型数据考核准确性字典信息</el-button>
-          <el-button plain type="primary" icon="el-icon-edit" @click='handleFunction("修改网络单元类型数据考核准确性字典信息", "config")'>修改网络单元类型数据考核准确性字典信息</el-button>
-          <el-button plain type="danger" icon="el-icon-delete" @click='deleteByName("删除网络单元类型数据考核准确性字典信息")'>删除网络单元类型数据考核准确性字典信息</el-button>
-          <el-button plain type="primary" icon="el-icon-edit-outline" @click='handleFunction("新增定级对象名称数据考核准确性字典信息", "form")'>新增定级对象名称数据考核准确性字典信息</el-button>
-          <el-button plain type="primary" icon="el-icon-edit" @click='handleFunction("修改定级对象名称数据考核准确性字典信息", "config")'>修改定级对象名称数据考核准确性字典信息</el-button>
-          <el-button plain type="danger" icon="el-icon-delete" @click='deleteByName("删除定级对象名称数据考核准确性字典信息")'>删除定级对象名称数据考核准确性字典信息</el-button>
-          <el-button plain type="primary" icon="el-icon-edit-outline" @click='handleFunction("新增定级对象名称考核准确性上传任务", "form")'>新增定级对象名称考核准确性上传任务</el-button>
-          <el-button plain type="danger" icon="el-icon-delete" @click='deleteByName("删除定级对象名称考核准确性上传任务")'>删除定级对象名称考核准确性上传任务</el-button>
-          <el-button plain type="primary" icon="el-icon-edit" @click='handleFunction("修改定级对象名称考核准确性上传任务", "config")'>修改定级对象名称考核准确性上传任务</el-button>
-          <el-button plain type="primary" icon="el-icon-view" @click='handleFunction("查询定级对象名称考核准确性上传任务", "detail")'>查询定级对象名称考核准确性上传任务</el-button>
-          <el-button plain type="primary" icon="el-icon-s-operation" @click='handleFunction("定级对象名称考核准确性上传任务启用/禁用", "form")'>定级对象名称考核准确性上传任务启用/禁用</el-button>
-          <el-button plain type="primary" icon="el-icon-bell" @click='handleFunction("定级对象名称考核准确性稽核数据上传", "form")'>定级对象名称考核准确性稽核数据上传</el-button>
-          <el-button plain type="primary" icon="el-icon-view" @click='handleFunction("定级对象名称考核准确性稽核数据接口监控", "log")'>定级对象名称考核准确性稽核数据接口监控</el-button>
-          <el-button plain type="primary" icon="el-icon-edit-outline" @click='handleFunction("新增所属安全域数据考核准确性字典信息", "form")'>新增所属安全域数据考核准确性字典信息</el-button>
-          <el-button plain type="primary" icon="el-icon-edit" @click='handleFunction("修改所属安全域数据考核准确性字典信息", "config")'>修改所属安全域数据考核准确性字典信息</el-button>
-          <el-button plain type="danger" icon="el-icon-delete" @click='deleteByName("删除所属安全域数据考核准确性字典信息")'>删除所属安全域数据考核准确性字典信息</el-button>
-          <el-button plain type="primary" icon="el-icon-edit-outline" @click='handleFunction("新增所属安全域考核准确性上传任务", "form")'>新增所属安全域考核准确性上传任务</el-button>
-          <el-button plain type="danger" icon="el-icon-delete" @click='deleteByName("删除所属安全域考核准确性上传任务")'>删除所属安全域考核准确性上传任务</el-button>
-          <el-button plain type="primary" icon="el-icon-edit" @click='handleFunction("修改所属安全域考核准确性上传任务", "config")'>修改所属安全域考核准确性上传任务</el-button>
-          <el-button plain type="primary" icon="el-icon-view" @click='handleFunction("查询所属安全域考核准确性上传任务", "detail")'>查询所属安全域考核准确性上传任务</el-button>
-          <el-button plain type="primary" icon="el-icon-s-operation" @click='handleFunction("所属安全域考核准确性上传任务启用/禁用", "form")'>所属安全域考核准确性上传任务启用/禁用</el-button>
-          <el-button plain type="primary" icon="el-icon-bell" @click='handleFunction("所属安全域考核准确性稽核数据上传", "form")'>所属安全域考核准确性稽核数据上传</el-button>
-          <el-button plain type="primary" icon="el-icon-view" @click='handleFunction("所属安全域考核准确性稽核数据接口监控", "log")'>所属安全域考核准确性稽核数据接口监控</el-button>
+          <!-- 子管理页面导航入口（绿色） -->
+          <el-button plain type="success" icon="el-icon-s-grid" @click="navigateToSubPage('KaiYuanKuangJiaZiDianXinXiGuanLi')">开源框架数据字典信息管理</el-button>
+          <el-button plain type="success" icon="el-icon-s-grid" @click="navigateToSubPage('KaiYuanKuangJiaShangChuanRenWuGuanLi')">开源框架考核上传任务管理</el-button>
+          <el-button plain type="success" icon="el-icon-s-grid" @click="navigateToSubPage('ChanPinJieMianYuYanZiDianXinXiGuanLi')">产品界面语言数据字典信息管理</el-button>
+          <el-button plain type="success" icon="el-icon-s-grid" @click="navigateToSubPage('CaoZuoXiTongLeiXingZiDianXinXiGuanLi')">操作系统类型数据字典信息管理</el-button>
+          <el-button plain type="success" icon="el-icon-s-grid" @click="navigateToSubPage('YingJianHuanJingZiDianXinXiGuanLi')">硬件环境数据字典信息管理</el-button>
+          <el-button plain type="success" icon="el-icon-s-grid" @click="navigateToSubPage('RuanJianHuanJingZiDianXinXiGuanLi')">软件环境数据字典信息管理</el-button>
+          <el-button plain type="success" icon="el-icon-s-grid" @click="navigateToSubPage('WangLuoDanYuanLeiXingZiDianXinXiGuanLi')">网络单元类型数据字典信息管理</el-button>
+          <el-button plain type="success" icon="el-icon-s-grid" @click="navigateToSubPage('DingJiDuiXiangMingChengZiDianXinXiGuanLi')">定级对象名称数据字典信息管理</el-button>
+          <el-button plain type="success" icon="el-icon-s-grid" @click="navigateToSubPage('DingJiDuiXiangMingChengShangChuanRenWuGuanLi')">定级对象名称考核上传任务管理</el-button>
+          <el-button plain type="success" icon="el-icon-s-grid" @click="navigateToSubPage('SuoShuAnQuanYuZiDianXinXiGuanLi')">所属安全域数据字典信息管理</el-button>
+          <el-button plain type="success" icon="el-icon-s-grid" @click="navigateToSubPage('SuoShuAnQuanYuShangChuanRenWuGuanLi')">所属安全域考核上传任务管理</el-button>
+          <!-- 核心功能按钮（蓝色） -->
+          <el-button plain type="primary" icon="el-icon-edit-outline" @click="handleFunction('新增稽核规则', 'form')">新增稽核规则</el-button>
+          <el-button plain type="primary" icon="el-icon-upload2" @click="handleFunction('稽核数据上传', 'import')">稽核数据上传</el-button>
+          <el-button plain type="primary" icon="el-icon-view" @click="handleFunction('稽核数据接口监控', 'log')">稽核数据接口监控</el-button>
+          <el-button plain type="primary" icon="el-icon-s-data" @click="handleFunction('稽核统计分析', 'statistics')">稽核统计分析</el-button>
+          <el-button plain type="primary" icon="el-icon-document" @click="handleFunction('稽核报表导出', 'export')">稽核报表导出</el-button>
+          <el-button plain type="primary" icon="el-icon-s-check" @click="handleFunction('稽核审批流程', 'approval')">稽核审批流程</el-button>
+          <el-button plain type="primary" icon="el-icon-bell" @click="handleFunction('稽核结果通知', 'alert')">稽核结果通知</el-button>
+          <el-button plain type="primary" icon="el-icon-refresh" @click="handleFunction('稽核数据同步', 'sync')">稽核数据同步</el-button>
+          <el-button plain type="danger" icon="el-icon-delete" @click="handleFunction('批量删除稽核记录', 'delete')">批量删除稽核记录</el-button>
         </div>
       </div>
       <cs-pagetable
@@ -242,17 +217,25 @@
       </span>
     </el-dialog>
 
-    <!-- 接收请求监控弹窗 -->
-    <el-dialog :title="recvReqTitle" :visible.sync="recvReqVisible" width="600px" append-to-body>
+    <!-- 接口调用弹窗 -->
+    <el-dialog :title="recvReqTitle" :visible.sync="recvReqVisible" width="660px" append-to-body>
       <el-form label-width="100px" style="margin-bottom:12px;">
-        <el-form-item label="处理进度">
-          <el-progress :percentage="recvReqProgress" :status="recvReqProgress === 100 ? 'success' : undefined" style="width:80%"></el-progress>
+        <el-form-item label="请求地址">
+          <el-tag type="info" style="font-family:monospace;">{{ recvReqStats.length > 0 ? recvReqStats[0].value : '' }}</el-tag>
         </el-form-item>
-        <el-form-item v-for="item in recvReqStats" :key="item.label" :label="item.label">
-          <span>{{ item.value }}</span>
+        <el-form-item label="请求方式">
+          <el-tag :type="recvReqStats.length > 1 && recvReqStats[1].value === 'POST' ? 'success' : 'info'" size="small">{{ recvReqStats.length > 1 ? recvReqStats[1].value : '' }}</el-tag>
+        </el-form-item>
+        <el-form-item label="响应时间">
+          <span>{{ recvReqStats.length > 2 ? recvReqStats[2].value : '' }}</span>
+        </el-form-item>
+        <el-form-item label="响应状态">
+          <el-tag type="success">200 OK</el-tag>
         </el-form-item>
       </el-form>
-      <div style="font-size:13px;color:#606266;margin-bottom:8px;font-weight:500;">处理日志</div>
+      <div style="font-size:13px;color:#606266;margin-bottom:8px;font-weight:500;">响应数据</div>
+      <el-input type="textarea" :rows="4" :value="JSON.stringify({code: 200, message: 'success', data: recvReqStats}, null, 2)" readonly style="margin-bottom:12px;font-family:monospace;font-size:12px;"></el-input>
+      <div style="font-size:13px;color:#606266;margin-bottom:8px;font-weight:500;">执行日志</div>
       <el-table :data="recvReqLog" border size="mini" style="width:100%">
         <el-table-column prop="time" label="时间" width="160"></el-table-column>
         <el-table-column prop="level" label="级别" width="70" align="center">
@@ -264,30 +247,71 @@
       </el-table>
       <span slot="footer">
         <el-button @click="recvReqVisible = false">关闭</el-button>
-        <el-button type="primary" @click="recvReqVisible = false; $message.success('已确认接收')">确认接收</el-button>
+        <el-button type="primary" @click="recvReqVisible = false; $message.success('接口调用完成')">确认</el-button>
       </span>
     </el-dialog>
 
-    <!-- 接收反馈数据弹窗 -->
+    <!-- 流程通知弹窗 / 接收反馈数据弹窗（共用） -->
     <el-dialog :title="recvFbTitle" :visible.sync="recvFbVisible" width="660px" append-to-body>
-      <el-form label-width="110px" style="margin-bottom:12px;">
-        <el-form-item v-for="item in recvFbFields" :key="item.label" :label="item.label">
-          <span :style="{ color: /异常|缺失|失败/.test(item.value) ? '#F56C6C' : /完成|正常/.test(item.value) ? '#67C23A' : '' }">{{ item.value }}</span>
-        </el-form-item>
-      </el-form>
-      <div style="font-size:13px;color:#606266;margin-bottom:8px;font-weight:500;">数据预览</div>
-      <el-table :data="recvFbPreview" border size="mini" style="width:100%">
-        <el-table-column prop="字段" label="字段名" width="140"></el-table-column>
-        <el-table-column prop="值" label="值"></el-table-column>
-        <el-table-column prop="状态" label="状态" width="80" align="center">
-          <template slot-scope="scope">
-            <el-tag :type="scope.row.状态 === '正常' ? 'success' : 'danger'" size="mini">{{ scope.row.状态 }}</el-tag>
-          </template>
-        </el-table-column>
-      </el-table>
+      <!-- 通知模式 -->
+      <template v-if="recvFbDialogMode === 'notify'">
+        <el-table :data="notifyList" border size="mini" style="width:100%;margin-bottom:16px;">
+          <el-table-column prop="time" label="通知时间" width="170"></el-table-column>
+          <el-table-column prop="title" label="通知标题"></el-table-column>
+          <el-table-column prop="type" label="通知类型" width="100" align="center">
+            <template slot-scope="scope">
+              <el-tag :type="scope.row.type === '告警' ? 'danger' : scope.row.type === '提醒' ? 'warning' : 'info'" size="mini">{{ scope.row.type }}</el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column prop="status" label="状态" width="90" align="center">
+            <template slot-scope="scope">
+              <el-tag :type="scope.row.status === '已读' ? 'success' : ''" size="mini">{{ scope.row.status }}</el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column prop="receiver" label="接收人" width="90"></el-table-column>
+        </el-table>
+        <el-form :model="notifyForm" label-width="90px">
+          <el-form-item label="通知标题">
+            <el-input v-model="notifyForm.title" placeholder="请输入通知标题"></el-input>
+          </el-form-item>
+          <el-form-item label="通知类型">
+            <el-select v-model="notifyForm.type" style="width:100%">
+              <el-option label="告警" value="告警"></el-option>
+              <el-option label="提醒" value="提醒"></el-option>
+              <el-option label="系统通知" value="系统通知"></el-option>
+              <el-option label="流程通知" value="流程通知"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="接收人">
+            <el-input v-model="notifyForm.receiver" placeholder="请输入接收人"></el-input>
+          </el-form-item>
+          <el-form-item label="通知内容">
+            <el-input v-model="notifyForm.content" type="textarea" :rows="3" placeholder="请输入通知内容"></el-input>
+          </el-form-item>
+        </el-form>
+      </template>
+      <!-- 接收模式 -->
+      <template v-else>
+        <el-form label-width="110px" style="margin-bottom:12px;">
+          <el-form-item v-for="item in recvFbFields" :key="item.label" :label="item.label">
+            <span :style="{ color: /异常|缺失|失败/.test(item.value) ? '#F56C6C' : /完成|正常/.test(item.value) ? '#67C23A' : '' }">{{ item.value }}</span>
+          </el-form-item>
+        </el-form>
+        <div style="font-size:13px;color:#606266;margin-bottom:8px;font-weight:500;">数据预览</div>
+        <el-table :data="recvFbPreview" border size="mini" style="width:100%">
+          <el-table-column prop="字段" label="字段名" width="140"></el-table-column>
+          <el-table-column prop="值" label="值"></el-table-column>
+          <el-table-column prop="状态" label="状态" width="80" align="center">
+            <template slot-scope="scope">
+              <el-tag :type="scope.row.状态 === '正常' ? 'success' : 'danger'" size="mini">{{ scope.row.状态 }}</el-tag>
+            </template>
+          </el-table-column>
+        </el-table>
+      </template>
       <span slot="footer">
         <el-button @click="recvFbVisible = false">关闭</el-button>
-        <el-button type="primary" @click="recvFbVisible = false; $message.success('数据已确认接收')">确认接收</el-button>
+        <el-button v-if="recvFbDialogMode === 'notify'" type="primary" @click="sendNotify">发送通知</el-button>
+        <el-button v-else type="primary" @click="recvFbVisible = false; $message.success('数据已确认接收')">确认接收</el-button>
       </span>
     </el-dialog>
 
@@ -775,6 +799,11 @@ export default {
       },
       initiateAuditStep: 0,
       initiateAuditNodes: [],
+      notifyTitle: "",
+      notifyList: [],
+      notifyForm: { title: "", type: "系统通知", receiver: "", content: "" },
+      notifyFormVisible: false,
+      recvFbDialogMode: "receive",
       approvalVisible: false,
       approvalTitle: "逐级审批",
       approvalSteps: [],
@@ -853,9 +882,22 @@ export default {
     handleSelectionChange(selection) {
       this.selectedRows = selection || [];
     },
+    navigateToSubPage(subPage) {
+      this.$router.push({ path: subPage });
+    },
     handleFunction(functionName, dialogType) {
       this.activeFunction = functionName;
       this.activeActionType = dialogType;
+      if (dialogType === "delete") {
+        if (!this.selectedRows.length) { this.$message.warning("请先选择要删除的记录"); return; }
+        this.$confirm("确定要执行【" + functionName + "】删除选中的 " + this.selectedRows.length + " 条记录吗？", "提示", { type: "warning" }).then(() => {
+          const ids = new Set(this.selectedRows.map((r) => r.ID));
+          this.allTableData = this.allTableData.filter((item) => !ids.has(item.ID));
+          this.fetchData();
+          this.$message.success("删除成功，共删除 " + ids.size + " 条记录");
+        }).catch(() => {});
+        return;
+      }
       this.openFunctionDialog(functionName, dialogType);
     },
     openFunctionDialog(functionName, type) {
@@ -934,6 +976,9 @@ export default {
           break;
         case "approval":
           this.openApprovalDialog(functionName, S, now);
+          break;
+        case "import":
+          this.openImport(functionName);
           break;
         default:
           this.openOperationDialog(functionName, S, now);
@@ -1028,23 +1073,37 @@ export default {
     },
     openAlertDialog(functionName, S, now) {
       this.recvFbTitle = functionName;
-      this.recvFbFields = [
-        { label: "告警名称", value: functionName },
-        { label: "告警编号", value: "ALT-" + String(S).slice(-6) },
-        { label: "告警级别", value: pick(["紧急", "重要", "一般", "提示"], 0, S) },
-        { label: "告警状态", value: pick(["未处理", "处理中", "已处理", "已忽略"], 1, S) },
-        { label: "触发时间", value: now },
-        { label: "告警来源", value: pick(["系统自动检测", "人工巡检", "第三方告警", "日志分析"], 2, S) },
-        { label: "影响范围", value: pick(["单节点", "集群", "全局", "特定模块"], 3, S) },
-        { label: "处理建议", value: pick(["检查配置", "重启服务", "扩容资源", "联系管理员"], 4, S) },
-      ];
-      this.recvFbPreview = [
-        { 字段: "alert_id", 值: "A-" + String(S).slice(-6), 状态: "正常" },
-        { 字段: "severity", 值: pick(["CRITICAL", "WARNING", "INFO"], 5, S), 状态: pick(["正常", "异常"], 6, S) },
-        { 字段: "source", 值: pick(["monitor", "scanner", "agent"], 7, S), 状态: "正常" },
-        { 字段: "message", 值: pick(["阈值超标", "连接超时", "资源不足"], 8, S), 状态: "异常" },
-      ];
+      this.recvFbDialogMode = "notify";
+      var types = ["告警", "提醒", "系统通知", "流程通知"];
+      var statuses = ["未读", "已读"];
+      var receivers = ["张伟", "李娜", "王强", "赵敏", "刘洋", "陈静"];
+      var count = (S % 3) + 3;
+      this.notifyList = Array.from({ length: count }).map(function(_, i) {
+        return {
+          time: now,
+          title: functionName + "-" + pick(["结果通报", "异常提醒", "执行完成", "待处理事项", "审批通知"], i, S),
+          type: pick(types, i, S),
+          status: pick(statuses, i + 1, S),
+          receiver: pick(receivers, i + 2, S),
+        };
+      });
+      this.notifyForm = { title: functionName + "通知", type: "系统通知", receiver: "", content: "" };
       this.recvFbVisible = true;
+    },
+    sendNotify() {
+      if (!this.notifyForm.title || !this.notifyForm.receiver) {
+        this.$message.warning("请填写通知标题和接收人");
+        return;
+      }
+      this.notifyList.unshift({
+        time: this.now(),
+        title: this.notifyForm.title,
+        type: this.notifyForm.type,
+        status: "未读",
+        receiver: this.notifyForm.receiver,
+      });
+      this.notifyForm = { title: "", type: "系统通知", receiver: "", content: "" };
+      this.$message.success("通知发送成功");
     },
     openAuditDialog(functionName, S, now) {
       this.queryTitle = functionName;
@@ -1088,6 +1147,7 @@ export default {
     },
     openReceiveDialog(functionName, S, now) {
       this.recvFbTitle = functionName;
+      this.recvFbDialogMode = "receive";
       this.recvFbFields = [
         { label: "数据来源", value: pick(["主节点", "备节点", "边缘节点", "灾备节点"], 0, S) },
         { label: "数据格式", value: pick(["JSON", "Protobuf", "XML", "Avro"], 1, S) },
@@ -1121,18 +1181,7 @@ export default {
       this.fbResultVisible = true;
     },
     openExportDialog(functionName, S, now) {
-      this.detailTitle = functionName;
-      this.detailFields = [
-        { label: "导出任务", value: functionName },
-        { label: "导出编号", value: "EXP-" + String(S).slice(-6) },
-        { label: "导出格式", value: pick(["Excel (.xlsx)", "CSV (.csv)", "JSON (.json)", "PDF (.pdf)"], 0, S) },
-        { label: "数据范围", value: pick(["全量数据", "当前筛选", "最近7天", "最近30天"], 1, S) },
-        { label: "预计耗时", value: pick(["约2秒", "约5秒", "约15秒", "约30秒"], 2, S) },
-        { label: "文件大小", value: pick(["12KB", "48KB", "256KB", "1.2MB"], 3, S) },
-        { label: "导出状态", value: "等待确认" },
-        { label: "操作时间", value: now },
-      ];
-      this.detailVisible = true;
+      this.exportRows(functionName);
     },
     openApiDialog(functionName, S, now) {
       this.recvReqTitle = functionName;
@@ -1197,18 +1246,18 @@ export default {
     openSyncDialog(functionName, S, now) {
       this.recvReqTitle = functionName;
       this.recvReqStats = [
-        { label: "同步源", value: pick(["主数据库", "备份数据库", "远程节点", "外部系统"], 0, S) },
-        { label: "同步目标", value: pick(["本地缓存", "从数据库", "文件系统", "消息队列"], 1, S) },
-        { label: "同步状态", value: pick(["已完成", "同步中", "等待中", "失败"], 2, S) },
-        { label: "已同步记录", value: pick([1280, 2560, 5120, 10240], 3, S) + "" },
-        { label: "冲突记录", value: pick([0, 2, 8, 15], 4, S) + "" },
-        { label: "同步耗时", value: pick(["1.2s", "3.5s", "8.7s", "25.3s"], 5, S) },
+        { label: "接口地址", value: "/api/v1/sync/" + String(S).slice(-6) + "/" + pick(["audit", "data", "check", "push"], 0, S) },
+        { label: "请求方式", value: pick(["GET", "POST", "PUT", "DELETE"], 1, S) },
+        { label: "响应时间", value: pick(["12ms", "28ms", "56ms", "120ms"], 2, S) + "" },
+        { label: "成功率", value: pick(["99.8%", "99.5%", "98.9%", "97.2%"], 3, S) },
+        { label: "今日调用", value: pick([128, 256, 512, 1024], 4, S) + "" },
+        { label: "限流状态", value: pick(["正常", "接近阈值", "已触发限流"], 5, S) },
       ];
-      this.recvReqProgress = pick([65, 78, 89, 100], 0, S);
+      this.recvReqProgress = pick([85, 92, 97, 100], 0, S);
       this.recvReqLog = [
-        { time: now, level: "INFO", msg: functionName + " 同步任务启动" },
-        { time: now, level: "INFO", msg: "正在同步数据，进度 " + pick(["45%", "67%", "89%"], 1, S) },
-        { time: now, level: pick(["INFO", "WARN"], 4, S), msg: pick(["同步完成", "发现数据冲突", "部分记录跳过", "同步速度下降"], 5, S) },
+        { time: now, level: "INFO", msg: functionName + " 接口调用启动" },
+        { time: now, level: "INFO", msg: "请求发送成功，等待响应..." },
+        { time: now, level: pick(["INFO", "WARN"], 4, S), msg: pick(["请求处理完成", "响应超时", "参数校验失败", "接口限流触发"], 5, S) },
       ];
       this.recvReqVisible = true;
     },
@@ -1336,8 +1385,7 @@ export default {
     },
     exportRows(name) {
       const data = this.selectedRows.length ? this.selectedRows : this.tableData;
-      const columns = this.editableColumns;
-      exportXLSX(data, columns, name + ".xlsx");
+      exportXLSX(data, name);
       this.$message.success("导出成功");
     },
     openImport(functionName) {
