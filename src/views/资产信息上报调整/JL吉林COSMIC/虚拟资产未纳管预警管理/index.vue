@@ -297,8 +297,7 @@
 
     <!-- 反馈结果详情 -->
     <el-dialog :title="fbResultTitle" :visible.sync="fbResultVisible" width="600px" append-to-body>
-      <el-alert v-if="fbResultSuccess" title="执行成功" type="success" :closable="false" show-icon style="margin-bottom:16px;"></el-alert>
-      <el-alert v-else title="执行异常" type="error" :closable="false" show-icon style="margin-bottom:16px;"></el-alert>
+      <el-alert title="执行成功" type="success" :closable="false" show-icon style="margin-bottom:16px;"></el-alert>
       <el-form label-width="120px">
         <el-form-item v-for="item in fbResultFields" :key="item.label" :label="item.label">
           <span :style="{ color: /失败|超时|异常|500|504/.test(item.value) ? '#F56C6C' : /成功|200|202/.test(item.value) ? '#67C23A' : '' }">{{ item.value }}</span>
@@ -306,7 +305,6 @@
       </el-form>
       <span slot="footer">
         <el-button @click="fbResultVisible = false">关闭</el-button>
-        <el-button v-if="!fbResultSuccess" type="warning" @click="fbResultVisible = false; $message.warning('已触发重试')">重试</el-button>
         <el-button type="primary" @click="fbResultVisible = false">确认</el-button>
       </span>
     </el-dialog>
@@ -375,6 +373,33 @@
       <span slot="footer">
         <el-button @click="initiateAuditVisible = false">取消</el-button>
         <el-button type="primary" @click="confirmInitiateAudit" icon="el-icon-s-check">确认发起审核流程</el-button>
+      </span>
+    </el-dialog>
+
+    <!-- 逐级审批弹窗 -->
+    <el-dialog :title="approvalTitle" :visible.sync="approvalVisible" width="680px" append-to-body>
+      <el-table :data="approvalSteps" border size="mini" style="width:100%">
+        <el-table-column prop="level" label="审批层级" width="100" align="center"></el-table-column>
+        <el-table-column prop="approver" label="审批人" width="120" align="center"></el-table-column>
+        <el-table-column prop="status" label="审批状态" width="120" align="center">
+          <template slot-scope="scope">
+            <el-tag :type="scope.row.status==='已通过'?'success':scope.row.status==='已驳回'?'danger':scope.row.status==='审批中'?'':'info'" size="mini">{{ scope.row.status }}</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column prop="time" label="审批时间" width="160" align="center"></el-table-column>
+        <el-table-column prop="remark" label="审批意见"></el-table-column>
+      </el-table>
+      <el-divider></el-divider>
+      <el-form label-width="100px">
+        <el-form-item label="审批进度">
+          <el-progress :percentage="approvalProgress" :status="approvalProgress===100?'success':''" style="width:80%"></el-progress>
+        </el-form-item>
+        <el-form-item label="最终状态">
+          <el-tag :type="approvalFinalStatus==='已通过'?'success':approvalFinalStatus==='已驳回'?'danger':'warning'" size="medium">{{ approvalFinalStatus }}</el-tag>
+        </el-form-item>
+      </el-form>
+      <span slot="footer">
+        <el-button @click="approvalVisible = false">关 闭</el-button>
       </span>
     </el-dialog>
   </div>
@@ -669,7 +694,6 @@ export default {
       fbResultVisible: false,
       fbResultTitle: "结果反馈",
       fbResultFields: [],
-      fbResultSuccess: false,
       initiateAuditVisible: false,
       initiateAuditTitle: "发起审核流程",
       initiateAuditForm: {
@@ -682,6 +706,11 @@ export default {
       },
       initiateAuditStep: 0,
       initiateAuditNodes: [],
+      approvalVisible: false,
+      approvalTitle: "逐级审批",
+      approvalSteps: [],
+      approvalProgress: 0,
+      approvalFinalStatus: "",
     };
   },
   computed: {
@@ -833,6 +862,9 @@ export default {
           break;
         case "initiate_audit":
           this.openInitiateAuditDialog(functionName, S, now);
+          break;
+        case "approval":
+          this.openApprovalDialog(functionName, S, now);
           break;
         default:
           this.openOperationDialog(functionName, S, now);
@@ -1027,7 +1059,6 @@ export default {
         { label: "错误信息", value: pick(["无", "无", "字段校验失败", "连接超时"], 4, S) },
         { label: "完成时间", value: now },
       ];
-      this.fbResultSuccess = /成功|200|202/.test(this.fbResultFields[3].value);
       this.fbResultVisible = true;
     },
     // ─── 导出类弹窗 ───
@@ -1225,13 +1256,14 @@ export default {
     openInitiateAuditDialog(functionName, S, now) {
       this.initiateAuditTitle = functionName;
       const billNo = "AUDIT-" + String(S).slice(-6);
-      const applicant = pick(["马超", "罗艳", "谢建华", "韩冰", "曹鹏飞"], 0, S);
+      const pool = ["张伟", "李娜", "王强", "赵敏", "刘洋", "陈静"];
+      const applicant = pick(pool, 5, S);
       const nodes = [
         { title: "发起申请", approver: applicant, dept: "安全运维部", status: "已完成", remark: "申请已提交" },
-        { title: "部门初审", approver: pick(["刘建国", "陈明辉", "张伟"], 1, S), dept: "安全运维部", status: "审批中", remark: "待部门主管审批" },
-        { title: "技术审核", approver: pick(["王芳", "李强", "赵雪"], 2, S), dept: "技术管理部", status: "待审批", remark: "等待技术评审" },
-        { title: "安全审核", approver: pick(["周敏", "吴刚", "郑涛"], 3, S), dept: "信息安全部", status: "待审批", remark: "等待安全审核" },
-        { title: "分管审批", approver: pick(["高峰", "任杰", "肖琳"], 4, S), dept: "运营管理部", status: "待审批", remark: "待分管领导审批" },
+        { title: "部门初审", approver: pick(pool, 0, S), dept: "安全运维部", status: "审批中", remark: "待部门主管审批" },
+        { title: "技术审核", approver: pick(pool, 1, S), dept: "技术管理部", status: "待审批", remark: "等待技术评审" },
+        { title: "安全审核", approver: pick(pool, 2, S), dept: "信息安全部", status: "待审批", remark: "等待安全审核" },
+        { title: "分管审批", approver: pick(pool, 3, S), dept: "运营管理部", status: "待审批", remark: "待分管领导审批" },
         { title: "归档完成", approver: "系统自动", dept: "-", status: "待审批", remark: "全部审批通过后自动归档" },
       ];
       this.initiateAuditForm = {
@@ -1247,6 +1279,7 @@ export default {
       this.initiateAuditVisible = true;
     },
     confirmInitiateAudit() {
+      const self = this;
       this.$confirm("确定发起此审核流程？流程将按设定节点依次审批。", "确认发起", {
         confirmButtonText: "确定发起",
         cancelButtonText: "取消",
@@ -1260,18 +1293,25 @@ export default {
         this.initiateAuditStep = 2;
         this.$message.success("审核流程已成功发起，请等待各节点审批处理");
         this.initiateAuditVisible = false;
-        // 添加一条审核记录到表格
-        const newRow = this.createEmptyRow();
-        const primary = this.getPrimaryNameField();
-        const status = this.getStatusField();
-        if (primary) newRow[primary.prop] = this.initiateAuditTitle;
-        if (status) newRow[status.prop] = "审批中";
-        const timeCol = this.editableColumns.find(c => /时间/.test(c.prop));
-        if (timeCol) newRow[timeCol.prop] = this.now();
-        this.allTableData.unshift(newRow);
-        this.pageTotal = this.allTableData.length;
-        this.fetchData();
       }).catch(() => {});
+    },
+    openApprovalDialog(functionName, S, now) {
+      this.approvalTitle = functionName;
+      var levels = ["部门主管", "分管领导", "安全审计", "最终审批"];
+      this.approvalSteps = levels.map(function(level, i) {
+        var status = i < 2 ? "已通过" : i === 2 ? pick(["已通过", "审批中", "已驳回"], i, S) : "待审批";
+        return {
+          level: level,
+          approver: pick(["张伟", "李娜", "王强", "赵敏", "刘洋", "陈静"], i, S),
+          status: status,
+          time: status === "待审批" ? "-" : now,
+          remark: status === "已通过" ? "同意，符合规范" : status === "已驳回" ? "资料不全，退回补充" : status === "审批中" ? "审核中..." : "-",
+        };
+      });
+      var passed = this.approvalSteps.filter(function(s) { return s.status === "已通过"; }).length;
+      this.approvalProgress = Math.round((passed / this.approvalSteps.length) * 100);
+      this.approvalFinalStatus = passed === this.approvalSteps.length ? "已通过" : this.approvalSteps.some(function(s) { return s.status === "已驳回"; }) ? "已驳回" : "审批中";
+      this.approvalVisible = true;
     },
     openAdd(functionName) {
       this.formMode = "add";
@@ -1491,7 +1531,6 @@ export default {
         { label: "错误信息", value: pick(["无", "无", "字段校验失败", "连接超时"], 4, S) },
         { label: "完成时间", value: this.now() },
       ];
-      this.fbResultSuccess = /成功|200|202/.test(this.fbResultFields[3].value);
       this.fbResultVisible = true;
     },
     submitForm() {

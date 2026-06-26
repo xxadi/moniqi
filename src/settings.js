@@ -5,7 +5,7 @@ module.exports = {
    * @type {boolean} true | false
    * @description 是否显示设置
    */
-  showSettings: false,
+  showSettings: true,
 
   /**
    * @type {boolean} true | false
@@ -29,7 +29,7 @@ module.exports = {
    * @type {boolean} true | false
    * @description 是否展示logo图
    */
-  logoIcon: false,
+  logoIcon: true,
 
   /**
    * @type {boolean} true | false
@@ -59,11 +59,11 @@ module.exports = {
    * @type {boolean} true | false
    * @description 是否显示全屏按钮
    */
-  screenFull: false,
+  screenFull: true,
 
   /**
    * @type {boolean} true | false
    * @description 是否显示尺寸修改按钮
    */
-  selectSize: false,
+  selectSize: true,
 };

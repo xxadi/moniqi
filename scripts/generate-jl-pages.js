@@ -904,8 +904,7 @@ ${buttonsHTML}
 
     <!-- 反馈结果详情 -->
     <el-dialog :title="fbResultTitle" :visible.sync="fbResultVisible" width="600px" append-to-body>
-      <el-alert v-if="fbResultSuccess" title="执行成功" type="success" :closable="false" show-icon style="margin-bottom:16px;"></el-alert>
-      <el-alert v-else title="执行异常" type="error" :closable="false" show-icon style="margin-bottom:16px;"></el-alert>
+      <el-alert title="执行成功" type="success" :closable="false" show-icon style="margin-bottom:16px;"></el-alert>
       <el-form label-width="120px">
         <el-form-item v-for="item in fbResultFields" :key="item.label" :label="item.label">
           <span :style="{ color: /失败|超时|异常|500|504/.test(item.value) ? '#F56C6C' : /成功|200|202/.test(item.value) ? '#67C23A' : '' }">{{ item.value }}</span>
@@ -913,7 +912,6 @@ ${buttonsHTML}
       </el-form>
       <span slot="footer">
         <el-button @click="fbResultVisible = false">关闭</el-button>
-        <el-button v-if="!fbResultSuccess" type="warning" @click="fbResultVisible = false; $message.warning('已触发重试')">重试</el-button>
         <el-button type="primary" @click="fbResultVisible = false">确认</el-button>
       </span>
     </el-dialog>
@@ -1104,7 +1102,6 @@ export default {
       fbResultVisible: false,
       fbResultTitle: "结果反馈",
       fbResultFields: [],
-      fbResultSuccess: false,
       initiateAuditVisible: false,
       initiateAuditTitle: "发起审核流程",
       initiateAuditForm: {
@@ -1470,7 +1467,6 @@ export default {
         { label: "错误信息", value: pick(["无", "无", "字段校验失败", "连接超时"], 4, S) },
         { label: "完成时间", value: now },
       ];
-      this.fbResultSuccess = /成功|200|202/.test(this.fbResultFields[3].value);
       this.fbResultVisible = true;
     },
     // ─── 导出类弹窗 ───
@@ -1943,7 +1939,6 @@ export default {
         { label: "错误信息", value: pick(["无", "无", "字段校验失败", "连接超时"], 4, S) },
         { label: "完成时间", value: this.now() },
       ];
-      this.fbResultSuccess = /成功|200|202/.test(this.fbResultFields[3].value);
       this.fbResultVisible = true;
     },
     submitForm() {
@@ -2299,9 +2294,10 @@ let routerContent = fs.readFileSync(routerPath, "utf8");
 // 移除旧的 JL 块（处理多次运行产生的重复）
 const marker = "// ─── JL吉林COSMIC（自动生成）───";
 while (routerContent.includes(marker)) {
-  const startIdx = routerContent.indexOf(marker);
-  let blockStart = startIdx;
-  while (blockStart > 0 && routerContent[blockStart] !== "{") blockStart--;
+  const markerIdx = routerContent.indexOf(marker);
+  // 从 marker 往后找到第一个 {
+  let blockStart = markerIdx;
+  while (blockStart < routerContent.length && routerContent[blockStart] !== "{") blockStart++;
   let depth = 0;
   let blockEnd = blockStart;
   for (let i = blockStart; i < routerContent.length; i++) {
@@ -2309,9 +2305,16 @@ while (routerContent.includes(marker)) {
     if (routerContent[i] === "}") depth--;
     if (depth === 0) { blockEnd = i + 1; break; }
   }
-  routerContent = routerContent.substring(0, blockStart) + routerContent.substring(blockEnd);
+  // 包含 marker 注释行本身：找到 marker 前一行的换行符
+  let removeStart = markerIdx;
+  while (removeStart > 0 && routerContent[removeStart - 1] !== "\n") removeStart--;
+  routerContent = routerContent.substring(0, removeStart) + routerContent.substring(blockEnd);
   console.log("已移除旧的 JL 路由块");
 }
+// 清理移除后可能残留的多余逗号和空行
+routerContent = routerContent.replace(/,\s*\n(\s*\n)+/g, "\n");
+routerContent = routerContent.replace(/\[\s*,/g, "[");
+routerContent = routerContent.replace(/,\s*\]/g, "]");
 
 // 找到"资产信息上报调整"的 children 数组，在其末尾插入
 const targetName = '"资产信息上报调整"';

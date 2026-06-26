@@ -235,14 +235,14 @@ function generateRealisticValue(prop, index) {
   }
 
   // ========== 人员类 ==========
-  if (prop.includes("负责人") || prop.includes("操作人") || prop.includes("处理人")) {
-    return cycle(["张敏", "李哲", "王睿", "刘洋", "陈静"]);
+  if (prop.includes("负责人") || prop.includes("操作人") || prop.includes("处理人") || prop.includes("审核人") || prop.includes("创建人")) {
+    return cycle(["张伟", "王芳", "李娜", "刘洋", "陈静", "杨磊", "赵敏", "黄强", "周涛", "吴昊", "徐明", "孙丽", "马超", "朱军", "郭敏"]);
   }
-  if (prop === "用户名") return cycle(["zhangsan", "lizhe", "wangrui", "liuyang", "chenjing"]);
-  if (prop === "手机号") return cycle(["138****1234", "159****5678", "186****9012", "137****3456", "155****7890"]);
-  if (prop === "邮箱") return cycle(["zhangsan@example.com", "lizhe@example.com", "wangrui@example.com"]);
-  if (prop.includes("部门")) return cycle(["安全运维部", "网络安全部", "资产管理部", "技术保障部"]);
-  if (prop.includes("区域")) return cycle(["华北区域", "华东区域", "华南区域", "西南区域"]);
+  if (prop === "用户名") return cycle(["zhangwei", "wangfang", "lina", "liuyang", "chenjinglei", "yanglei", "zhaomin", "huangqiang", "zhoutao", "wuhao"]);
+  if (prop === "手机号") return cycle(["138****1234", "159****5678", "186****9012", "137****3456", "155****7890", "188****2345", "136****6789", "150****0123"]);
+  if (prop === "邮箱") return cycle(["zhangwei@example.com", "wangfang@example.com", "lina@example.com", "liuyang@example.com", "chenjing@example.com"]);
+  if (prop.includes("部门")) return cycle(["安全运维部", "网络安全部", "资产管理部", "技术保障部", "信息安全部", "运维监控部", "数据管理部"]);
+  if (prop.includes("区域")) return cycle(["华北区域", "华东区域", "华南区域", "西南区域", "华中区域", "西北区域"]);
 
   // ========== IP / 地址类 ==========
   if (prop === "扫描目标" || prop === "IP范围" || prop === "目标IP段") {
