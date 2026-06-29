@@ -413,6 +413,8 @@ export function getActionType(name) {
   if (/查询|读取|展示|监控|跟踪/.test(name)) return "query";
   if (/导出|下载/.test(name)) return "export";
   if (/删除|移除/.test(name)) return "delete";
+  if (/实时计算|流式计算|实时分析/.test(name)) return "realtime_compute";
+  if (/催办|督办|跟催/.test(name)) return "urge";
   if (/分析|统计|报表/.test(name)) return "analysis";
   if (/导入|上传/.test(name)) return "import";
   return "operation";
@@ -439,6 +441,8 @@ export function getButtonIcon(name) {
   if (/查询|读取|展示|监控|跟踪/.test(name)) return "el-icon-view";
   if (/导出|下载/.test(name)) return "el-icon-download";
   if (/删除|移除/.test(name)) return "el-icon-delete";
+  if (/实时计算|流式计算|实时分析/.test(name)) return "el-icon-time";
+  if (/催办|督办|跟催/.test(name)) return "el-icon-bell";
   if (/分析|统计|报表/.test(name)) return "el-icon-data-analysis";
   if (/导入|上传/.test(name)) return "el-icon-upload2";
   return "el-icon-s-operation";

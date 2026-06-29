@@ -522,6 +522,47 @@
       </span>
     </el-dialog>
 
+    <!-- 结果推送弹窗 -->
+    <el-dialog :title="pushTitle" :visible.sync="pushVisible" width="680px" append-to-body>
+      <el-form label-width="120px">
+        <el-form-item v-for="item in pushFields" :key="item.label" :label="item.label">
+          <span :style="{ color: /成功|完成|正常|已连接/.test(item.value) ? '#67C23A' : '' }">{{ item.value }}</span>
+        </el-form-item>
+      </el-form>
+      <div v-if="pushResult" style="margin: 16px 0; padding: 12px; background: #f0f9eb; border-radius: 4px;">
+        <div style="display: flex; gap: 24px; text-align: center;">
+          <div style="flex: 1;">
+            <div style="font-size: 24px; font-weight: bold; color: #67C23A;">{{ pushResult.successRate }}</div>
+            <div style="color: #909399; font-size: 12px;">推送成功率</div>
+          </div>
+          <div style="flex: 1;">
+            <div style="font-size: 24px; font-weight: bold; color: #409EFF;">{{ pushResult.successRecords }}</div>
+            <div style="color: #909399; font-size: 12px;">成功记录</div>
+          </div>
+          <div style="flex: 1;">
+            <div style="font-size: 24px; font-weight: bold; color: #E6A23C;">{{ pushResult.failRecords }}</div>
+            <div style="color: #909399; font-size: 12px;">失败记录</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top: 12px;">
+        <div style="font-weight: bold; margin-bottom: 8px;">推送日志</div>
+        <el-table :data="pushLog" border size="mini" max-height="200">
+          <el-table-column prop="time" label="时间" width="160"></el-table-column>
+          <el-table-column prop="level" label="级别" width="70">
+            <template slot-scope="{ row }">
+              <el-tag :type="row.level === 'ERROR' ? 'danger' : row.level === 'WARN' ? 'warning' : 'success'" size="mini">{{ row.level }}</el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column prop="message" label="日志内容"></el-table-column>
+        </el-table>
+      </div>
+      <span slot="footer">
+        <el-button @click="pushVisible = false">关闭</el-button>
+        <el-button type="primary" @click="pushVisible = false; $message.success('推送确认完成')">确认</el-button>
+      </span>
+    </el-dialog>
+
     <!-- 录入/配置弹窗 -->
     <el-dialog :title="configureTitle" :visible.sync="configureVisible" width="620px" append-to-body>
       <el-form :model="configureForm" label-width="130px">
@@ -573,6 +614,47 @@
       </el-table>
       <span slot="footer">
         <el-button @click="queryVisible = false">关闭</el-button>
+      </span>
+    </el-dialog>
+
+    <!-- 校验验证弹窗（聚合类型） -->
+    <el-dialog :title="validateTitle" :visible.sync="validateVisible" width="750px" append-to-body>
+      <el-form label-width="100px" style="margin-bottom:16px;">
+        <el-form-item label="数据源">
+          <el-tag type="info" size="small">{{ validateSource }}</el-tag>
+        </el-form-item>
+        <el-form-item label="运行状态">
+          <el-tag type="success" size="small">{{ validateStatus }}</el-tag>
+        </el-form-item>
+      </el-form>
+      <div style="display:flex;gap:12px;margin-bottom:16px;">
+        <div v-for="metric in validateMetrics" :key="metric.name" style="flex:1;background:#f5f7fa;border-radius:6px;padding:10px;text-align:center;">
+          <div style="font-size:12px;color:#909399;">{{ metric.name }}</div>
+          <div :style="{fontSize:'16px',fontWeight:'600',color:metric.status==='success'?'#67C23A':'#E6A23C',marginTop:'4px'}">{{ metric.value }}</div>
+        </div>
+      </div>
+      <div style="font-size:13px;color:#606266;margin-bottom:8px;font-weight:500;">聚合流程</div>
+      <el-steps :active="validateSteps.length" finish-status="success" align-center style="margin-bottom:16px;">
+        <el-step v-for="(step, idx) in validateSteps" :key="idx" :title="step.name" :description="step.desc" :status="step.status"></el-step>
+      </el-steps>
+      <div style="font-size:13px;color:#606266;margin-bottom:8px;font-weight:500;">聚合结果</div>
+      <el-table :data="validateResult.data" border size="mini" style="width:100%;margin-bottom:12px;">
+        <el-table-column prop="field" label="字段" width="140"></el-table-column>
+        <el-table-column prop="value" label="值"></el-table-column>
+      </el-table>
+      <div style="font-size:12px;color:#67C23A;background:#f0f9eb;padding:8px 12px;border-radius:4px;">{{ validateResult.summary }}</div>
+      <div style="font-size:13px;color:#606266;margin:16px 0 8px;font-weight:500;">运行日志</div>
+      <el-table :data="validateLog" border size="mini" style="width:100%">
+        <el-table-column prop="time" label="时间" width="160"></el-table-column>
+        <el-table-column prop="level" label="级别" width="70" align="center">
+          <template slot-scope="scope">
+            <el-tag :type="scope.row.level === 'INFO' ? 'success' : scope.row.level === 'WARN' ? 'warning' : 'danger'" size="mini">{{ scope.row.level }}</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column prop="msg" label="日志内容"></el-table-column>
+      </el-table>
+      <span slot="footer">
+        <el-button @click="validateVisible = false">关闭</el-button>
       </span>
     </el-dialog>
 
@@ -773,6 +855,50 @@
       <span slot="footer">
         <el-button @click="transformVisible = false">关闭</el-button>
         <el-button type="primary" icon="el-icon-document-copy" @click="copyTransformJson">复制JSON</el-button>
+      </span>
+    </el-dialog>
+
+    <!-- 实时计算弹窗 (realtime_compute类型) -->
+    <el-dialog :title="realtimeTitle" :visible.sync="realtimeVisible" width="750px" append-to-body>
+      <el-form label-width="100px" style="margin-bottom:16px;">
+        <el-form-item label="数据源">
+          <el-tag type="info" size="small">{{ realtimeSource }}</el-tag>
+        </el-form-item>
+        <el-form-item label="输出目标">
+          <el-tag type="success" size="small">{{ realtimeTarget }}</el-tag>
+        </el-form-item>
+        <el-form-item label="运行状态">
+          <el-tag type="success" size="small">{{ realtimeStatus }}</el-tag>
+        </el-form-item>
+      </el-form>
+      <div style="display:flex;gap:12px;margin-bottom:16px;">
+        <div v-for="metric in realtimeMetrics" :key="metric.name" style="flex:1;background:#f5f7fa;border-radius:6px;padding:10px;text-align:center;">
+          <div style="font-size:12px;color:#909399;">{{ metric.name }}</div>
+          <div :style="{fontSize:'16px',fontWeight:'600',color:metric.status==='success'?'#67C23A':'#E6A23C',marginTop:'4px'}">{{ metric.value }}</div>
+        </div>
+      </div>
+      <div style="font-size:13px;color:#606266;margin-bottom:8px;font-weight:500;">计算流程</div>
+      <el-steps :active="realtimeSteps.length" finish-status="success" align-center style="margin-bottom:16px;">
+        <el-step v-for="(step, idx) in realtimeSteps" :key="idx" :title="step.name" :description="step.desc" :status="step.status"></el-step>
+      </el-steps>
+      <div style="font-size:13px;color:#606266;margin-bottom:8px;font-weight:500;">运行结果</div>
+      <el-table :data="realtimeResult.data" border size="mini" style="width:100%;margin-bottom:12px;">
+        <el-table-column prop="field" label="字段" width="140"></el-table-column>
+        <el-table-column prop="value" label="值"></el-table-column>
+      </el-table>
+      <div style="font-size:12px;color:#67C23A;background:#f0f9eb;padding:8px 12px;border-radius:4px;">{{ realtimeResult.summary }}</div>
+      <div style="font-size:13px;color:#606266;margin:16px 0 8px;font-weight:500;">运行日志</div>
+      <el-table :data="realtimeLog" border size="mini" style="width:100%">
+        <el-table-column prop="time" label="时间" width="160"></el-table-column>
+        <el-table-column prop="level" label="级别" width="70" align="center">
+          <template slot-scope="scope">
+            <el-tag :type="scope.row.level === 'INFO' ? 'success' : scope.row.level === 'WARN' ? 'warning' : 'danger'" size="mini">{{ scope.row.level }}</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column prop="msg" label="日志内容"></el-table-column>
+      </el-table>
+      <span slot="footer">
+        <el-button @click="realtimeVisible = false">关闭</el-button>
       </span>
     </el-dialog>
 
@@ -1144,6 +1270,51 @@
       </span>
     </el-dialog>
 
+    <!-- 结果通知弹窗 -->
+    <el-dialog :title="resultNotifyTitle" :visible.sync="resultNotifyVisible" width="650px" append-to-body>
+      <el-alert :title="'任务执行' + resultNotifyResult" :type="resultNotifyResult === '成功' ? 'success' : resultNotifyResult === '失败' ? 'error' : 'warning'" :closable="false" show-icon style="margin-bottom:16px;"></el-alert>
+      <el-form label-width="100px" size="small" style="margin-bottom:16px;">
+        <el-form-item label="通知类型">
+          <el-tag>{{ resultNotifyType }}</el-tag>
+        </el-form-item>
+        <el-form-item label="任务名称">{{ resultNotifyDetail.taskName }}</el-form-item>
+        <el-form-item label="任务编号">{{ resultNotifyDetail.taskNo }}</el-form-item>
+      </el-form>
+      <div style="display:flex;gap:12px;margin-bottom:16px;">
+        <div style="flex:1;background:#f5f7fa;border-radius:6px;padding:10px;text-align:center;">
+          <div style="font-size:12px;color:#909399;">总记录数</div>
+          <div style="font-size:16px;font-weight:600;color:#303133;margin-top:4px;">{{ resultNotifyDetail.totalRecords }}</div>
+        </div>
+        <div style="flex:1;background:#f0f9eb;border-radius:6px;padding:10px;text-align:center;">
+          <div style="font-size:12px;color:#909399;">成功数</div>
+          <div style="font-size:16px;font-weight:600;color:#67C23A;margin-top:4px;">{{ resultNotifyDetail.successRecords }}</div>
+        </div>
+        <div style="flex:1;background:#fef0f0;border-radius:6px;padding:10px;text-align:center;">
+          <div style="font-size:12px;color:#909399;">失败数</div>
+          <div style="font-size:16px;font-weight:600;color:#F56C6C;margin-top:4px;">{{ resultNotifyDetail.failedRecords }}</div>
+        </div>
+      </div>
+      <el-form label-width="100px" size="small">
+        <el-form-item label="开始时间">{{ resultNotifyDetail.startTime }}</el-form-item>
+        <el-form-item label="结束时间">{{ resultNotifyDetail.endTime }}</el-form-item>
+        <el-form-item label="执行耗时">{{ resultNotifyDetail.duration }}</el-form-item>
+        <el-form-item label="处理人">{{ resultNotifyDetail.handler }}</el-form-item>
+      </el-form>
+      <div style="font-size:13px;color:#606266;margin:12px 0 8px;font-weight:500;">执行日志</div>
+      <el-table :data="resultNotifyLog" border size="mini" style="width:100%">
+        <el-table-column prop="time" label="时间" width="160"></el-table-column>
+        <el-table-column prop="level" label="级别" width="70" align="center">
+          <template slot-scope="scope">
+            <el-tag :type="scope.row.level === 'INFO' ? 'success' : scope.row.level === 'WARN' ? 'warning' : 'danger'" size="mini">{{ scope.row.level }}</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column prop="msg" label="日志内容"></el-table-column>
+      </el-table>
+      <span slot="footer">
+        <el-button @click="resultNotifyVisible = false">关闭</el-button>
+      </span>
+    </el-dialog>
+
     <!-- 流程图查看弹窗 -->
     <el-dialog :title="flowchartTitle" :visible.sync="flowchartVisible" width="750px" append-to-body>
       <div style="text-align:center;margin-bottom:12px;">
@@ -1185,6 +1356,36 @@
       <span slot="footer">
         <el-button @click="flowchartVisible = false">关闭</el-button>
         <el-button type="primary" @click="flowchartVisible = false; $message.success('流程图已刷新')">刷新</el-button>
+      </span>
+    </el-dialog>
+
+    <!-- 催办弹窗 -->
+    <el-dialog :title="urgeTitle" :visible.sync="urgeVisible" width="550px" append-to-body>
+      <el-form :model="urgeForm" label-width="100px" size="small">
+        <el-form-item label="催办对象">
+          <el-tag type="info">{{ urgeForm.target }}</el-tag>
+        </el-form-item>
+        <el-form-item label="催办类型">
+          <el-tag :type="urgeForm.urgeType === '紧急催办' ? 'danger' : urgeForm.urgeType === '超时催办' ? 'warning' : ''">{{ urgeForm.urgeType }}</el-tag>
+        </el-form-item>
+        <el-form-item label="催办原因">{{ urgeForm.reason }}</el-form-item>
+        <el-form-item label="要求时限">{{ urgeForm.deadline }}</el-form-item>
+        <el-form-item label="处理人">{{ urgeForm.handler }}</el-form-item>
+      </el-form>
+      <div style="font-size:13px;color:#606266;margin-bottom:8px;font-weight:500;">催办记录</div>
+      <el-table :data="urgeLog" border size="mini" style="width:100%;margin-bottom:12px;">
+        <el-table-column prop="time" label="时间" width="160"></el-table-column>
+        <el-table-column prop="action" label="操作" width="120"></el-table-column>
+        <el-table-column prop="operator" label="操作人" width="120"></el-table-column>
+        <el-table-column prop="result" label="结果" width="80" align="center">
+          <template slot-scope="scope">
+            <el-tag :type="scope.row.result === '成功' || scope.row.result === '已发送' || scope.row.result === '已收到' ? 'success' : 'info'" size="mini">{{ scope.row.result }}</el-tag>
+          </template>
+        </el-table-column>
+      </el-table>
+      <span slot="footer">
+        <el-button @click="urgeVisible = false">取消</el-button>
+        <el-button type="primary" @click="submitUrge">发送催办</el-button>
       </span>
     </el-dialog>
 
@@ -1498,9 +1699,9 @@ const defaultRow = {
 const importTemplateRow = {
   "发现方式": "发现方式导入值",
   "资产归属": "资产归属导入值",
-  "资产编号": "IMP-850168",
+  "资产编号": "IMP-776252",
   "资产名称": "重点网络单元类型资产管理导入记录",
-  "端口开放数": 13,
+  "端口开放数": 46,
   "执行节点": "执行节点导入值",
   "指令类型": "重点网络单元类型资产管理导入记录",
   "统计周期": "统计周期导入值",
@@ -1599,6 +1800,11 @@ export default {
       sendVisible: false,
       sendTitle: "调度发送",
       sendFields: [],
+      pushVisible: false,
+      pushTitle: "结果推送",
+      pushFields: [],
+      pushResult: null,
+      pushLog: [],
       configureVisible: false,
       configureTitle: "配置录入",
       configureForm: {},
@@ -1608,6 +1814,18 @@ export default {
       queryVisible: false,
       queryTitle: "查询结果",
       queryResults: [],
+      validateVisible: false,
+      validateTitle: "校验验证",
+      validateSource: "",
+      validateStatus: "",
+      validateTotalRecords: 0,
+      validateGroupCount: 0,
+      validateValidCount: 0,
+      validateInvalidCount: 0,
+      validateSteps: [],
+      validateMetrics: [],
+      validateResult: { summary: "", data: [] },
+      validateLog: [],
       recvReqVisible: false,
       recvReqTitle: "接收请求监控",
       recvReqStats: [],
@@ -1636,6 +1854,19 @@ export default {
       transformCost: "",
       transformSize: "",
       transformJson: "",
+      realtimeVisible: false,
+      realtimeTitle: "实时计算",
+      realtimeSource: "",
+      realtimeTarget: "",
+      realtimeThroughput: 0,
+      realtimeLatency: 0,
+      realtimeStatus: "",
+      realtimeTotalRecords: 0,
+      realtimeSuccessRate: "",
+      realtimeSteps: [],
+      realtimeMetrics: [],
+      realtimeResult: { summary: "", data: [] },
+      realtimeLog: [],
       preprocessVisible: false,
       preprocessTitle: "数据预处理",
       preprocessSource: "",
@@ -1696,11 +1927,21 @@ export default {
       flowNotifyList: [],
       flowNotifyDetail: null,
       flowNotifySendForm: { title: "", type: "审批通知", receiver: "", content: "", methods: ["系统消息"] },
+      resultNotifyVisible: false,
+      resultNotifyTitle: "结果通知",
+      resultNotifyResult: "",
+      resultNotifyType: "",
+      resultNotifyDetail: { taskName: "", taskNo: "", startTime: "", endTime: "", duration: "", totalRecords: 0, successRecords: 0, failedRecords: 0, handler: "" },
+      resultNotifyLog: [],
       flowchartVisible: false,
       flowchartTitle: "流程图查看",
       flowchartFlowNo: "",
       flowchartStatus: "",
       flowchartNodes: [],
+      urgeVisible: false,
+      urgeTitle: "催办",
+      urgeForm: { target: "", urgeType: "", reason: "", deadline: "", handler: "" },
+      urgeLog: [],
       rejectVisible: false,
       rejectTitle: "驳回/拒绝",
       rejectForm: { type: "驳回", level: "一级驳回", reason: "", comment: "", handler: "", time: "" },
@@ -1861,6 +2102,9 @@ export default {
         case "dispatch":
           this.openDispatchDialog(functionName, S, now);
           break;
+        case "push":
+          this.openPushDialog(functionName, S, now);
+          break;
         case "receive":
           this.openReceiveDialog(functionName, S, now);
           break;
@@ -1906,6 +2150,9 @@ export default {
         case "transform":
           this.openTransformDialog(functionName, S, now);
           break;
+        case "realtime_compute":
+          this.openRealtimeComputeDialog(functionName, S, now);
+          break;
         case "schedule":
           this.openScheduleDialog(functionName, S, now);
           break;
@@ -1924,8 +2171,14 @@ export default {
         case "flow_notify":
           this.openFlowNotifyDialog(functionName, S, now);
           break;
+        case "result_notify":
+          this.openResultNotifyDialog(functionName, S, now);
+          break;
         case "flowchart":
           this.openFlowchartDialog(functionName, S, now);
+          break;
+        case "urge":
+          this.openUrgeDialog(functionName, S, now);
           break;
         case "reject":
           this.openRejectDialog(functionName, S, now);
@@ -2699,6 +2952,29 @@ export default {
       this.flowNotifySendForm = { title: "", type: "审批通知", receiver: "", content: "", methods: ["系统消息"] };
       this.flowNotifyVisible = true;
     },
+    // ─── 结果通知弹窗 ───
+    openResultNotifyDialog(functionName, S, now) {
+      this.resultNotifyTitle = functionName;
+      this.resultNotifyResult = pick(["成功", "部分成功", "失败"], 0, S);
+      this.resultNotifyType = pick(["任务执行结果", "审批流程结果", "数据上报结果", "扫描任务结果"], 1, S);
+      this.resultNotifyDetail = {
+        taskName: pick(["资产扫描任务", "数据上报任务", "指令下发任务", "审批流程任务"], 2, S),
+        taskNo: "TASK-" + String(S + 1000).slice(-6),
+        startTime: now.slice(0, 11) + pick(["08:15:00", "09:30:00", "10:45:00"], 3, S),
+        endTime: now.slice(0, 11) + pick(["08:45:00", "10:00:00", "11:15:00"], 4, S),
+        duration: pick(["30分钟", "30分钟", "30分钟"], 5, S),
+        totalRecords: pick([1200, 2500, 4800], 6, S),
+        successRecords: pick([1180, 2450, 4650], 7, S),
+        failedRecords: pick([20, 50, 150], 8, S),
+        handler: pick(["安全组-王建国", "运维组-李明辉", "网络组-张晓峰"], 9, S),
+      };
+      this.resultNotifyLog = [
+        { time: now, level: "INFO", msg: this.resultNotifyDetail.taskName + " 启动执行" },
+        { time: now, level: "INFO", msg: "任务编号: " + this.resultNotifyDetail.taskNo },
+        { time: now, level: this.resultNotifyResult === "成功" ? "INFO" : this.resultNotifyResult === "失败" ? "ERROR" : "WARN", msg: "执行结果: " + this.resultNotifyResult + "，成功: " + this.resultNotifyDetail.successRecords + "，失败: " + this.resultNotifyDetail.failedRecords },
+      ];
+      this.resultNotifyVisible = true;
+    },
     // ─── 流程图查看弹窗 ───
     openFlowchartDialog(functionName, S, now) {
       this.flowchartTitle = functionName;
@@ -2731,6 +3007,33 @@ export default {
       var lastNode = this.flowchartNodes[this.flowchartNodes.length - 1];
       this.flowchartStatus = lastNode.status === "已完成" ? "已完成" : this.flowchartNodes.some(n => n.status === "异常") ? "异常" : "执行中";
       this.flowchartVisible = true;
+    },
+    // ─── 催办弹窗 ───
+    openUrgeDialog(functionName, S, now) {
+      this.urgeTitle = functionName;
+      this.urgeForm = {
+        target: pick(["资产扫描任务", "数据上报流程", "指令下发任务", "采集任务"], 0, S),
+        urgeType: pick(["普通催办", "紧急催办", "超时催办"], 1, S),
+        reason: pick([
+          "任务已超时未处理，请尽快处理",
+          "该任务优先级较高，需加急处理",
+          "下游环节等待该任务结果，请催办",
+          "临近截止时间，请加快处理进度",
+        ], 2, S),
+        deadline: pick(["2小时内完成", "今日内完成", "24小时内完成"], 3, S),
+        handler: pick(["安全组-王建国", "运维组-李明辉", "网络组-张晓峰", "系统组-刘志远"], 4, S),
+      };
+      this.urgeLog = [
+        { time: now, action: "发起催办", operator: "系统管理员", result: "成功" },
+        { time: now, action: "通知接收人", operator: "系统", result: "已发送" },
+      ];
+      this.urgeVisible = true;
+    },
+    submitUrge() {
+      var now = this.now();
+      this.urgeLog.push({ time: now, action: "催办确认", operator: this.urgeForm.handler, result: "已收到" });
+      this.$message.success("催办已发送给 " + this.urgeForm.handler);
+      this.urgeVisible = false;
     },
     // ─── 驳回/拒绝弹窗 ───
     openRejectDialog(functionName, S, now) {
@@ -2766,6 +3069,38 @@ export default {
         { label: "超时设置", value: pick(["30s", "60s", "120s", "300s"], 5, S) },
       ];
       this.sendVisible = true;
+    },
+    // ─── 推送类弹窗（无异常状态） ───
+    openPushDialog(functionName, S, now) {
+      var totalRecords = pick([1200, 2800, 5600, 8500], 0, S);
+      var successRecords = totalRecords - pick([0, 2, 5, 12], 1, S);
+      var pushFields = [
+        { label: "操作名称", value: functionName },
+        { label: "推送编号", value: "PUSH-" + String(S).slice(-6) },
+        { label: "推送目标", value: pick(["主节点 (node-01)", "备份节点 (node-02)", "汇聚节点 (node-03)"], 2, S) },
+        { label: "连接状态", value: pick(["已连接", "连接正常", "通信正常"], 3, S) },
+        { label: "推送状态", value: pick(["推送成功", "已完成", "推送完成"], 4, S) },
+        { label: "数据格式", value: pick(["JSON", "Protobuf", "XML"], 5, S) },
+        { label: "推送记录", value: successRecords + "条 / " + totalRecords + "条" },
+        { label: "推送时间", value: now },
+      ];
+      this.pushTitle = functionName;
+      this.pushFields = pushFields;
+      this.pushResult = {
+        status: pick(["推送成功", "全部完成", "推送完成"], 6, S),
+        totalRecords: totalRecords,
+        successRecords: successRecords,
+        failRecords: totalRecords - successRecords,
+        pushTime: now,
+        successRate: ((successRecords / totalRecords) * 100).toFixed(1) + "%",
+      };
+      this.pushLog = [
+        { time: now, level: "INFO", message: "开始推送任务: " + functionName },
+        { time: now, level: "INFO", message: "连接目标节点成功，开始传输数据" },
+        { time: now, level: "INFO", message: "已推送 " + successRecords + " 条记录，成功率 " + ((successRecords / totalRecords) * 100).toFixed(1) + "%" },
+        { time: now, level: "INFO", message: "推送任务完成，所有数据已成功同步" },
+      ];
+      this.pushVisible = true;
     },
     // ─── 接收类弹窗 ───
     openReceiveDialog(functionName, S, now) {
@@ -2974,18 +3309,50 @@ export default {
       ];
       this.analysisVisible = true;
     },
-    // ─── 校验验证类弹窗 ───
+    // ─── 校验验证类弹窗（聚合） ───
     openValidateDialog(functionName, S, now) {
-      this.queryTitle = functionName;
-      const count = (S % 3) + 3;
-      this.queryResults = Array.from({ length: count }).map((_, i) => ({
-        序号: i + 1,
-        数据项: pick(["格式校验", "范围校验", "一致性校验", "完整性校验", "唯一性校验"], i, S),
-        结果数量: pick([12, 28, 56, 128], i, S),
-        校验耗时: pick(["12ms", "28ms", "56ms", "128ms"], i, S) + "",
-        状态: pick(["通过", "未通过", "警告", "跳过"], i, S),
-      }));
-      this.queryVisible = true;
+      this.validateTitle = functionName;
+      this.validateSource = "登录采集";
+      this.validateStatus = "已完成";
+      var totalRecords = pick([8500, 9200, 9800, 10000], 0, S);
+      this.validateTotalRecords = totalRecords;
+      var groupCount = pick([50, 80, 120, 150], 1, S);
+      this.validateGroupCount = groupCount;
+      var invalidCount = pick([2, 5, 8, 12], 2, S);
+      this.validateInvalidCount = invalidCount;
+      var validCount = groupCount - invalidCount;
+      this.validateValidCount = validCount;
+      this.validateSteps = [
+        { name: "数据读取", desc: "从 " + this.validateSource + " 读取 " + totalRecords.toLocaleString() + " 条记录", status: "success" },
+        { name: "分组聚合", desc: "按规则分为 " + groupCount + " 组", status: "success" },
+        { name: "结果校验", desc: "有效组 " + validCount + " 个，异常组 " + invalidCount + " 个", status: invalidCount > 0 ? "warning" : "success" },
+      ];
+      this.validateMetrics = [
+        { name: "处理总量", value: totalRecords.toLocaleString() + " 条", status: "success" },
+        { name: "分组数", value: groupCount + " 组", status: "success" },
+        { name: "有效组", value: validCount + " 组", status: "success" },
+        { name: "异常组", value: invalidCount + " 组", status: invalidCount > 0 ? "warning" : "success" },
+        { name: "聚合耗时", value: pick(["1.2s", "2.8s", "4.5s", "8.3s"], 3, S), status: "success" },
+        { name: "成功率", value: (validCount / groupCount * 100).toFixed(1) + "%", status: "success" },
+      ];
+      this.validateResult = {
+        summary: "聚合任务已完成，共处理 " + totalRecords.toLocaleString() + " 条数据，分为 " + groupCount + " 组",
+        data: [
+          { field: "处理总量", value: totalRecords.toLocaleString() + " 条" },
+          { field: "有效组数", value: validCount + " 组" },
+          { field: "异常组数", value: invalidCount + " 组" },
+          { field: "成功率", value: (validCount / groupCount * 100).toFixed(1) + "%" },
+          { field: "数据源", value: this.validateSource },
+          { field: "完成时间", value: now },
+        ],
+      };
+      this.validateLog = [
+        { time: now, level: "INFO", msg: "聚合任务启动，数据源: " + this.validateSource },
+        { time: now, level: "INFO", msg: "读取 " + totalRecords.toLocaleString() + " 条记录" },
+        { time: now, level: "INFO", msg: "按规则聚合为 " + groupCount + " 组" },
+        { time: now, level: "INFO", msg: "聚合完成，有效组: " + validCount + "，异常组: " + invalidCount },
+      ];
+      this.validateVisible = true;
     },
     // ─── 数据转换类弹窗 ───
     openTransformDialog(functionName, S, now) {
@@ -3013,6 +3380,54 @@ export default {
         document.body.removeChild(ta);
         this.$message.success("JSON已复制到剪贴板");
       }
+    },
+    // ─── 实时计算类弹窗 ───
+    openRealtimeComputeDialog(functionName, S, now) {
+      this.realtimeTitle = functionName;
+      this.realtimeSource = "登录采集";
+      this.realtimeTarget = pick(["实时告警系统", "数据仓库", "监控大屏", "分析报表"], 1, S);
+      var throughput = pick([500, 800, 1200, 1500], 2, S);
+      this.realtimeThroughput = throughput;
+      var latency = pick([12, 28, 56, 120], 3, S);
+      this.realtimeLatency = latency;
+      this.realtimeStatus = "已完成";
+      var totalRecords = pick([8500, 9200, 9800, 10000], 4, S);
+      this.realtimeTotalRecords = totalRecords;
+      var successRate = pick(["99.8%", "99.9%", "99.7%", "99.95%"], 5, S);
+      this.realtimeSuccessRate = successRate;
+      this.realtimeSteps = [
+        { name: "数据接入", desc: "从 " + this.realtimeSource + " 接收实时数据流", status: "success" },
+        { name: "流式计算", desc: "执行 " + pick(["聚合统计", "窗口计算", "模式匹配", "异常检测"], 6, S), status: "success" },
+        { name: "结果输出", desc: "写入 " + this.realtimeTarget, status: "success" },
+      ];
+      this.realtimeMetrics = [
+        { name: "总处理量", value: totalRecords.toLocaleString() + " 条", status: "success" },
+        { name: "成功率", value: successRate, status: "success" },
+        { name: "平均延迟", value: latency + " ms", status: latency > 100 ? "warning" : "success" },
+        { name: "处理耗时", value: pick(["2分35秒", "4分12秒", "6分48秒", "12分03秒"], 7, S), status: "success" },
+        { name: "峰值吞吐", value: throughput + " 条/秒", status: "success" },
+        { name: "异常记录", value: pick([0, 2, 5, 12], 8, S) + " 条", status: pick([0, 2, 5, 12], 8, S) > 0 ? "warning" : "success" },
+      ];
+      this.realtimeResult = {
+        summary: "实时计算任务已完成，共处理 " + totalRecords.toLocaleString() + " 条数据",
+        data: [
+          { field: "处理总数", value: totalRecords.toLocaleString() + " 条" },
+          { field: "成功数", value: Math.round(totalRecords * 0.998).toLocaleString() + " 条" },
+          { field: "失败数", value: Math.round(totalRecords * 0.002).toLocaleString() + " 条" },
+          { field: "平均延迟", value: latency + " ms" },
+          { field: "峰值吞吐", value: throughput + " 条/秒" },
+          { field: "数据源", value: this.realtimeSource },
+          { field: "输出目标", value: this.realtimeTarget },
+          { field: "完成时间", value: now },
+        ],
+      };
+      this.realtimeLog = [
+        { time: now, level: "INFO", msg: "实时计算任务启动，数据源: " + this.realtimeSource },
+        { time: now, level: "INFO", msg: "窗口大小: " + pick(["5秒", "10秒", "30秒", "1分钟"], 9, S) + ", 滑动步长: " + pick(["1秒", "2秒", "5秒"], 10, S) },
+        { time: now, level: "INFO", msg: "计算完成，共处理 " + totalRecords.toLocaleString() + " 条记录" },
+        { time: now, level: "INFO", msg: "结果已写入 " + this.realtimeTarget + "，成功率: " + successRate },
+      ];
+      this.realtimeVisible = true;
     },
     // ─── 数据预处理类弹窗 ───
     openPreprocessDialog(functionName, S, now) {
