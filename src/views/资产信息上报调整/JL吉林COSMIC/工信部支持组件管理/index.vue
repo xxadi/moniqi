@@ -860,34 +860,16 @@
     </el-dialog>
 
     <!-- 实时计算弹窗 (realtime_compute类型) -->
-    <el-dialog :title="realtimeTitle" :visible.sync="realtimeVisible" width="750px" append-to-body>
-      <el-form label-width="100px" style="margin-bottom:16px;">
-        <el-form-item label="数据源">
-          <el-tag type="info" size="small">{{ realtimeSource }}</el-tag>
-        </el-form-item>
-        <el-form-item label="输出目标">
-          <el-tag type="success" size="small">{{ realtimeTarget }}</el-tag>
-        </el-form-item>
-        <el-form-item label="运行状态">
-          <el-tag type="success" size="small">{{ realtimeStatus }}</el-tag>
+    <el-dialog :title="realtimeTitle" :visible.sync="realtimeVisible" width="650px" append-to-body>
+      <el-form label-width="120px">
+        <el-form-item v-for="item in realtimeFields" :key="item.label" :label="item.label">
+          <span :style="{ color: /已完成|成功|正常/.test(item.value) ? '#67C23A' : '' }">{{ item.value }}</span>
         </el-form-item>
       </el-form>
-      <div style="display:flex;gap:12px;margin-bottom:16px;">
-        <div v-for="metric in realtimeMetrics" :key="metric.name" style="flex:1;background:#f5f7fa;border-radius:6px;padding:10px;text-align:center;">
-          <div style="font-size:12px;color:#909399;">{{ metric.name }}</div>
-          <div :style="{fontSize:'16px',fontWeight:'600',color:metric.status==='success'?'#67C23A':'#E6A23C',marginTop:'4px'}">{{ metric.value }}</div>
-        </div>
-      </div>
-      <div style="font-size:13px;color:#606266;margin-bottom:8px;font-weight:500;">计算流程</div>
+      <div style="font-size:13px;color:#606266;margin:16px 0 8px;font-weight:500;">计算流程</div>
       <el-steps :active="realtimeSteps.length" finish-status="success" align-center style="margin-bottom:16px;">
         <el-step v-for="(step, idx) in realtimeSteps" :key="idx" :title="step.name" :description="step.desc" :status="step.status"></el-step>
       </el-steps>
-      <div style="font-size:13px;color:#606266;margin-bottom:8px;font-weight:500;">运行结果</div>
-      <el-table :data="realtimeResult.data" border size="mini" style="width:100%;margin-bottom:12px;">
-        <el-table-column prop="field" label="字段" width="140"></el-table-column>
-        <el-table-column prop="value" label="值"></el-table-column>
-      </el-table>
-      <div style="font-size:12px;color:#67C23A;background:#f0f9eb;padding:8px 12px;border-radius:4px;">{{ realtimeResult.summary }}</div>
       <div style="font-size:13px;color:#606266;margin:16px 0 8px;font-weight:500;">运行日志</div>
       <el-table :data="realtimeLog" border size="mini" style="width:100%">
         <el-table-column prop="time" label="时间" width="160"></el-table-column>
@@ -1272,34 +1254,11 @@
     </el-dialog>
 
     <!-- 结果通知弹窗 -->
-    <el-dialog :title="resultNotifyTitle" :visible.sync="resultNotifyVisible" width="650px" append-to-body>
-      <el-alert :title="'任务执行' + resultNotifyResult" :type="resultNotifyResult === '成功' ? 'success' : resultNotifyResult === '失败' ? 'error' : 'warning'" :closable="false" show-icon style="margin-bottom:16px;"></el-alert>
-      <el-form label-width="100px" size="small" style="margin-bottom:16px;">
-        <el-form-item label="通知类型">
-          <el-tag>{{ resultNotifyType }}</el-tag>
+    <el-dialog :title="resultNotifyTitle" :visible.sync="resultNotifyVisible" width="600px" append-to-body>
+      <el-form label-width="120px">
+        <el-form-item v-for="item in resultNotifyFields" :key="item.label" :label="item.label">
+          <span :style="{ color: /成功|已完成|正常/.test(item.value) ? '#67C23A' : '' }">{{ item.value }}</span>
         </el-form-item>
-        <el-form-item label="任务名称">{{ resultNotifyDetail.taskName }}</el-form-item>
-        <el-form-item label="任务编号">{{ resultNotifyDetail.taskNo }}</el-form-item>
-      </el-form>
-      <div style="display:flex;gap:12px;margin-bottom:16px;">
-        <div style="flex:1;background:#f5f7fa;border-radius:6px;padding:10px;text-align:center;">
-          <div style="font-size:12px;color:#909399;">总记录数</div>
-          <div style="font-size:16px;font-weight:600;color:#303133;margin-top:4px;">{{ resultNotifyDetail.totalRecords }}</div>
-        </div>
-        <div style="flex:1;background:#f0f9eb;border-radius:6px;padding:10px;text-align:center;">
-          <div style="font-size:12px;color:#909399;">成功数</div>
-          <div style="font-size:16px;font-weight:600;color:#67C23A;margin-top:4px;">{{ resultNotifyDetail.successRecords }}</div>
-        </div>
-        <div style="flex:1;background:#fef0f0;border-radius:6px;padding:10px;text-align:center;">
-          <div style="font-size:12px;color:#909399;">失败数</div>
-          <div style="font-size:16px;font-weight:600;color:#F56C6C;margin-top:4px;">{{ resultNotifyDetail.failedRecords }}</div>
-        </div>
-      </div>
-      <el-form label-width="100px" size="small">
-        <el-form-item label="开始时间">{{ resultNotifyDetail.startTime }}</el-form-item>
-        <el-form-item label="结束时间">{{ resultNotifyDetail.endTime }}</el-form-item>
-        <el-form-item label="执行耗时">{{ resultNotifyDetail.duration }}</el-form-item>
-        <el-form-item label="处理人">{{ resultNotifyDetail.handler }}</el-form-item>
       </el-form>
       <div style="font-size:13px;color:#606266;margin:12px 0 8px;font-weight:500;">执行日志</div>
       <el-table :data="resultNotifyLog" border size="mini" style="width:100%">
@@ -1361,17 +1320,11 @@
     </el-dialog>
 
     <!-- 催办弹窗 -->
-    <el-dialog :title="urgeTitle" :visible.sync="urgeVisible" width="550px" append-to-body>
-      <el-form :model="urgeForm" label-width="100px" size="small">
-        <el-form-item label="催办对象">
-          <el-tag type="info">{{ urgeForm.target }}</el-tag>
+    <el-dialog :title="urgeTitle" :visible.sync="urgeVisible" width="600px" append-to-body>
+      <el-form label-width="120px">
+        <el-form-item v-for="item in urgeFields" :key="item.label" :label="item.label">
+          <span :style="{ color: /催办中|处理中/.test(item.value) ? '#E6A23C' : '' }">{{ item.value }}</span>
         </el-form-item>
-        <el-form-item label="催办类型">
-          <el-tag :type="urgeForm.urgeType === '紧急催办' ? 'danger' : urgeForm.urgeType === '超时催办' ? 'warning' : ''">{{ urgeForm.urgeType }}</el-tag>
-        </el-form-item>
-        <el-form-item label="催办原因">{{ urgeForm.reason }}</el-form-item>
-        <el-form-item label="要求时限">{{ urgeForm.deadline }}</el-form-item>
-        <el-form-item label="处理人">{{ urgeForm.handler }}</el-form-item>
       </el-form>
       <div style="font-size:13px;color:#606266;margin-bottom:8px;font-weight:500;">催办记录</div>
       <el-table :data="urgeLog" border size="mini" style="width:100%;margin-bottom:12px;">
@@ -1704,10 +1657,10 @@ const defaultRow = {
   "日志摘要": ""
 };
 const importTemplateRow = {
-  "端口开放数": 86,
+  "端口开放数": 7,
   "纳管状态": "已完成",
   "资产名称": "工信部支持组件管理导入记录",
-  "资产编号": "IMP-776410",
+  "资产编号": "IMP-741821",
   "IP地址": "IP地址导入值",
   "校验批次": "校验批次导入值",
   "日志摘要": "日志摘要导入值",
@@ -1862,16 +1815,8 @@ export default {
       transformJson: "",
       realtimeVisible: false,
       realtimeTitle: "实时计算",
-      realtimeSource: "",
-      realtimeTarget: "",
-      realtimeThroughput: 0,
-      realtimeLatency: 0,
-      realtimeStatus: "",
-      realtimeTotalRecords: 0,
-      realtimeSuccessRate: "",
+      realtimeFields: [],
       realtimeSteps: [],
-      realtimeMetrics: [],
-      realtimeResult: { summary: "", data: [] },
       realtimeLog: [],
       preprocessVisible: false,
       preprocessTitle: "数据预处理",
@@ -1935,9 +1880,7 @@ export default {
       flowNotifySendForm: { title: "", type: "审批通知", receiver: "", content: "", methods: ["系统消息"] },
       resultNotifyVisible: false,
       resultNotifyTitle: "结果通知",
-      resultNotifyResult: "",
-      resultNotifyType: "",
-      resultNotifyDetail: { taskName: "", taskNo: "", startTime: "", endTime: "", duration: "", totalRecords: 0, successRecords: 0, failedRecords: 0, handler: "" },
+      resultNotifyFields: [],
       resultNotifyLog: [],
       flowchartVisible: false,
       flowchartTitle: "流程图查看",
@@ -1946,7 +1889,8 @@ export default {
       flowchartNodes: [],
       urgeVisible: false,
       urgeTitle: "催办",
-      urgeForm: { target: "", urgeType: "", reason: "", deadline: "", handler: "" },
+      urgeForm: {},
+      urgeFields: [],
       urgeLog: [],
       rejectVisible: false,
       rejectTitle: "驳回/拒绝",
@@ -2961,23 +2905,22 @@ export default {
     // ─── 结果通知弹窗 ───
     openResultNotifyDialog(functionName, S, now) {
       this.resultNotifyTitle = functionName;
-      this.resultNotifyResult = pick(["成功", "部分成功", "失败"], 0, S);
-      this.resultNotifyType = pick(["任务执行结果", "审批流程结果", "数据上报结果", "扫描任务结果"], 1, S);
-      this.resultNotifyDetail = {
-        taskName: pick(["资产扫描任务", "数据上报任务", "指令下发任务", "审批流程任务"], 2, S),
-        taskNo: "TASK-" + String(S + 1000).slice(-6),
-        startTime: now.slice(0, 11) + pick(["08:15:00", "09:30:00", "10:45:00"], 3, S),
-        endTime: now.slice(0, 11) + pick(["08:45:00", "10:00:00", "11:15:00"], 4, S),
-        duration: pick(["30分钟", "30分钟", "30分钟"], 5, S),
-        totalRecords: pick([1200, 2500, 4800], 6, S),
-        successRecords: pick([1180, 2450, 4650], 7, S),
-        failedRecords: pick([20, 50, 150], 8, S),
-        handler: pick(["安全组-王建国", "运维组-李明辉", "网络组-张晓峰"], 9, S),
-      };
+      var fields = [];
+      this.editableColumns.forEach((col, i) => {
+        var val = "";
+        if (/名称|类型/.test(col.prop)) val = functionName;
+        else if (/状态|结果/.test(col.prop)) val = pick(["成功", "已完成", "部分成功"], i, S);
+        else if (/时间/.test(col.prop)) val = now;
+        else if (/编号|ID/i.test(col.prop)) val = "RN-" + String(S + 1000).slice(-6);
+        else if (/负责人|操作人|处理人/.test(col.prop)) val = pick(["王建国", "李明辉", "张晓峰", "刘志远"], i, S);
+        else if (/部门|组/.test(col.prop)) val = pick(["安全组", "运维组", "网络组", "系统组"], i, S);
+        else if (/数量|记录|条数/.test(col.prop)) val = pick([1200, 2500, 4800], i, S);
+        fields.push({ label: col.label, value: val });
+      });
+      this.resultNotifyFields = fields;
       this.resultNotifyLog = [
-        { time: now, level: "INFO", msg: this.resultNotifyDetail.taskName + " 启动执行" },
-        { time: now, level: "INFO", msg: "任务编号: " + this.resultNotifyDetail.taskNo },
-        { time: now, level: this.resultNotifyResult === "成功" ? "INFO" : this.resultNotifyResult === "失败" ? "ERROR" : "WARN", msg: "执行结果: " + this.resultNotifyResult + "，成功: " + this.resultNotifyDetail.successRecords + "，失败: " + this.resultNotifyDetail.failedRecords },
+        { time: now, level: "INFO", msg: functionName + " 执行完成" },
+        { time: now, level: "INFO", msg: "处理结果已生成，请查看" },
       ];
       this.resultNotifyVisible = true;
     },
@@ -3017,18 +2960,20 @@ export default {
     // ─── 催办弹窗 ───
     openUrgeDialog(functionName, S, now) {
       this.urgeTitle = functionName;
-      this.urgeForm = {
-        target: pick(["资产扫描任务", "数据上报流程", "指令下发任务", "采集任务"], 0, S),
-        urgeType: pick(["普通催办", "紧急催办", "超时催办"], 1, S),
-        reason: pick([
-          "任务已超时未处理，请尽快处理",
-          "该任务优先级较高，需加急处理",
-          "下游环节等待该任务结果，请催办",
-          "临近截止时间，请加快处理进度",
-        ], 2, S),
-        deadline: pick(["2小时内完成", "今日内完成", "24小时内完成"], 3, S),
-        handler: pick(["安全组-王建国", "运维组-李明辉", "网络组-张晓峰", "系统组-刘志远"], 4, S),
-      };
+      var fields = [];
+      this.editableColumns.forEach((col, i) => {
+        var val = "";
+        if (/名称|类型/.test(col.prop)) val = functionName;
+        else if (/状态|结果/.test(col.prop)) val = pick(["待处理", "处理中", "催办中"], i, S);
+        else if (/时间|期限|截止/.test(col.prop)) val = now;
+        else if (/编号|ID/i.test(col.prop)) val = "URG-" + String(S + 1000).slice(-6);
+        else if (/负责人|操作人|处理人/.test(col.prop)) val = pick(["王建国", "李明辉", "张晓峰", "刘志远"], i, S);
+        else if (/部门|组/.test(col.prop)) val = pick(["安全组", "运维组", "网络组", "系统组"], i, S);
+        else if (/原因|说明|备注/.test(col.prop)) val = "任务已超时未处理，请尽快处理";
+        fields.push({ label: col.label, value: val });
+      });
+      this.urgeForm = {};
+      this.urgeFields = fields;
       this.urgeLog = [
         { time: now, action: "发起催办", operator: "系统管理员", result: "成功" },
         { time: now, action: "通知接收人", operator: "系统", result: "已发送" },
@@ -3037,8 +2982,8 @@ export default {
     },
     submitUrge() {
       var now = this.now();
-      this.urgeLog.push({ time: now, action: "催办确认", operator: this.urgeForm.handler, result: "已收到" });
-      this.$message.success("催办已发送给 " + this.urgeForm.handler);
+      this.urgeLog.push({ time: now, action: "催办确认", operator: "系统管理员", result: "已收到" });
+      this.$message.success("催办已发送");
       this.urgeVisible = false;
     },
     // ─── 驳回/拒绝弹窗 ───
@@ -3078,33 +3023,23 @@ export default {
     },
     // ─── 推送类弹窗（无异常状态） ───
     openPushDialog(functionName, S, now) {
-      var totalRecords = pick([1200, 2800, 5600, 8500], 0, S);
-      var successRecords = totalRecords - pick([0, 2, 5, 12], 1, S);
-      var pushFields = [
-        { label: "操作名称", value: functionName },
-        { label: "推送编号", value: "PUSH-" + String(S).slice(-6) },
-        { label: "推送目标", value: pick(["主节点 (node-01)", "备份节点 (node-02)", "汇聚节点 (node-03)"], 2, S) },
-        { label: "连接状态", value: pick(["已连接", "连接正常", "通信正常"], 3, S) },
-        { label: "推送状态", value: pick(["推送成功", "已完成", "推送完成"], 4, S) },
-        { label: "数据格式", value: pick(["JSON", "Protobuf", "XML"], 5, S) },
-        { label: "推送记录", value: successRecords + "条 / " + totalRecords + "条" },
-        { label: "推送时间", value: now },
-      ];
       this.pushTitle = functionName;
-      this.pushFields = pushFields;
-      this.pushResult = {
-        status: pick(["推送成功", "全部完成", "推送完成"], 6, S),
-        totalRecords: totalRecords,
-        successRecords: successRecords,
-        failRecords: totalRecords - successRecords,
-        pushTime: now,
-        successRate: ((successRecords / totalRecords) * 100).toFixed(1) + "%",
-      };
+      var fields = [];
+      this.editableColumns.forEach((col, i) => {
+        var val = "";
+        if (/名称|类型/.test(col.prop)) val = functionName;
+        else if (/状态|结果/.test(col.prop)) val = pick(["推送成功", "已完成", "推送完成"], i, S);
+        else if (/时间/.test(col.prop)) val = now;
+        else if (/编号|ID/i.test(col.prop)) val = "PUSH-" + String(S + 1000).slice(-6);
+        else if (/负责人|操作人|处理人/.test(col.prop)) val = pick(["王建国", "李明辉", "张晓峰", "刘志远"], i, S);
+        else if (/部门|组/.test(col.prop)) val = pick(["安全组", "运维组", "网络组", "系统组"], i, S);
+        else if (/数量|记录|条数/.test(col.prop)) val = pick([1200, 2800, 5600], i, S);
+        fields.push({ label: col.label, value: val });
+      });
+      this.pushFields = fields;
+      this.pushResult = null;
       this.pushLog = [
-        { time: now, level: "INFO", message: "开始推送任务: " + functionName },
-        { time: now, level: "INFO", message: "连接目标节点成功，开始传输数据" },
-        { time: now, level: "INFO", message: "已推送 " + successRecords + " 条记录，成功率 " + ((successRecords / totalRecords) * 100).toFixed(1) + "%" },
-        { time: now, level: "INFO", message: "推送任务完成，所有数据已成功同步" },
+        { time: now, level: "INFO", message: functionName + " 推送完成" },
       ];
       this.pushVisible = true;
     },
@@ -3390,48 +3325,27 @@ export default {
     // ─── 实时计算类弹窗 ───
     openRealtimeComputeDialog(functionName, S, now) {
       this.realtimeTitle = functionName;
-      this.realtimeSource = "登录采集";
-      this.realtimeTarget = pick(["实时告警系统", "数据仓库", "监控大屏", "分析报表"], 1, S);
-      var throughput = pick([500, 800, 1200, 1500], 2, S);
-      this.realtimeThroughput = throughput;
-      var latency = pick([12, 28, 56, 120], 3, S);
-      this.realtimeLatency = latency;
-      this.realtimeStatus = "已完成";
-      var totalRecords = pick([8500, 9200, 9800, 10000], 4, S);
-      this.realtimeTotalRecords = totalRecords;
-      var successRate = pick(["99.8%", "99.9%", "99.7%", "99.95%"], 5, S);
-      this.realtimeSuccessRate = successRate;
+      var fields = [];
+      this.editableColumns.forEach((col, i) => {
+        var val = "";
+        if (/名称|类型/.test(col.prop)) val = functionName;
+        else if (/状态|结果/.test(col.prop)) val = "已完成";
+        else if (/时间/.test(col.prop)) val = now;
+        else if (/编号|ID/i.test(col.prop)) val = "RTC-" + String(S + 1000).slice(-6);
+        else if (/负责人|操作人|处理人/.test(col.prop)) val = pick(["王建国", "李明辉", "张晓峰", "刘志远"], i, S);
+        else if (/部门|组/.test(col.prop)) val = pick(["安全组", "运维组", "网络组", "系统组"], i, S);
+        else if (/数量|记录|条数/.test(col.prop)) val = pick([8500, 9200, 9800], i, S);
+        fields.push({ label: col.label, value: val });
+      });
+      this.realtimeFields = fields;
       this.realtimeSteps = [
-        { name: "数据接入", desc: "从 " + this.realtimeSource + " 接收实时数据流", status: "success" },
-        { name: "流式计算", desc: "执行 " + pick(["聚合统计", "窗口计算", "模式匹配", "异常检测"], 6, S), status: "success" },
-        { name: "结果输出", desc: "写入 " + this.realtimeTarget, status: "success" },
+        { name: "数据接入", desc: "从登录采集接收实时数据流", status: "success" },
+        { name: "流式计算", desc: "执行聚合统计", status: "success" },
+        { name: "结果输出", desc: "写入目标系统", status: "success" },
       ];
-      this.realtimeMetrics = [
-        { name: "总处理量", value: totalRecords.toLocaleString() + " 条", status: "success" },
-        { name: "成功率", value: successRate, status: "success" },
-        { name: "平均延迟", value: latency + " ms", status: latency > 100 ? "warning" : "success" },
-        { name: "处理耗时", value: pick(["2分35秒", "4分12秒", "6分48秒", "12分03秒"], 7, S), status: "success" },
-        { name: "峰值吞吐", value: throughput + " 条/秒", status: "success" },
-        { name: "异常记录", value: pick([0, 2, 5, 12], 8, S) + " 条", status: pick([0, 2, 5, 12], 8, S) > 0 ? "warning" : "success" },
-      ];
-      this.realtimeResult = {
-        summary: "实时计算任务已完成，共处理 " + totalRecords.toLocaleString() + " 条数据",
-        data: [
-          { field: "处理总数", value: totalRecords.toLocaleString() + " 条" },
-          { field: "成功数", value: Math.round(totalRecords * 0.998).toLocaleString() + " 条" },
-          { field: "失败数", value: Math.round(totalRecords * 0.002).toLocaleString() + " 条" },
-          { field: "平均延迟", value: latency + " ms" },
-          { field: "峰值吞吐", value: throughput + " 条/秒" },
-          { field: "数据源", value: this.realtimeSource },
-          { field: "输出目标", value: this.realtimeTarget },
-          { field: "完成时间", value: now },
-        ],
-      };
       this.realtimeLog = [
-        { time: now, level: "INFO", msg: "实时计算任务启动，数据源: " + this.realtimeSource },
-        { time: now, level: "INFO", msg: "窗口大小: " + pick(["5秒", "10秒", "30秒", "1分钟"], 9, S) + ", 滑动步长: " + pick(["1秒", "2秒", "5秒"], 10, S) },
-        { time: now, level: "INFO", msg: "计算完成，共处理 " + totalRecords.toLocaleString() + " 条记录" },
-        { time: now, level: "INFO", msg: "结果已写入 " + this.realtimeTarget + "，成功率: " + successRate },
+        { time: now, level: "INFO", msg: functionName + " 实时计算任务启动" },
+        { time: now, level: "INFO", msg: "计算完成，任务执行成功" },
       ];
       this.realtimeVisible = true;
     },
